@@ -44,6 +44,9 @@ actors-own
   price-emission-limit         ; this is the limit over which actor cannot emit any more activity
   sociable                     ; how sociable actor is
   popularity                   ; how popular actor is in general/global terms, used for standard models for comparesment
+  calculation_actor_1                ; callculations relative to each actor that we want to save and later export to Gephi etc ...
+  calculation_actor_2                ; --||--
+  calculation_actor_3                ; --||--
 ]
 
 ; describes friendships (in other words: connections, links, relations) between actors in the network
@@ -55,6 +58,15 @@ friendships-own
   thicknes-end2
   manual-attractiveness-end1
   manual-attractiveness-end2
+  calculation_fs_1                ; callculations relative to each actor that we want to save and later export to Gephi etc ...
+  calculation_fs_1-end1           ; --||--
+  calculation_fs_1-end2           ; --||--
+  calculation_fs_2                ; --||--
+  calculation_fs_2-end1           ; --||--
+  calculation_fs_2-end2           ; --||--
+  calculation_fs_3                ; --||--
+  calculation_fs_3-end1           ; --||--
+  calculation_fs_3-end2           ; --||--
 ]
 
 ; ========================================================================================

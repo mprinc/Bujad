@@ -5,7 +5,7 @@ extensions [nw]
 
 ; http://stackoverflow.com/questions/5830045/including-a-netlogo-source-file-into-another
 
-__includes["friendship_model.nls" "friendship_manager_setup.nls" "friendship_model_activities_diffusion.nls" "friendship_dynamics.nls" "visualization.nls"]
+__includes["friendship_model.nls" "friendship_manager_setup.nls" "friendship_model_activities_diffusion.nls" "friendship_dynamics.nls" "visualization.nls" "friendship_measures.nls"]
 
 ; from the interface
 ;------------------------------------------
@@ -35,7 +35,7 @@ to setup
   if(Random-generator-initial != 0)[random-seed Random-generator-initial]
   
   ask patches[
-    set pcolor white
+    ;set pcolor white
   ]
   
   setup-start-sasha
@@ -55,6 +55,9 @@ end
 
 ; responsible for executing one time tick in the model
 to do-tick
+  do-tick-sasha-start
+  do-tick-sinisha-start
+
   ; type "\n\nDifussing activities:\n"
   let activities-per-tick (count actors) * Activities-number-per-tick
   repeat activities-per-tick[
@@ -78,6 +81,9 @@ to do-tick
   ]
   display
   recover-energies
+
+  do-tick-sasha-end
+  do-tick-sinisha-end
 end
 
 ; This function recovers (heals) system (network) members

@@ -2,7 +2,6 @@
 
 globals[
   activities-list
-  user_no
 ]
 
 to load-activity-types
@@ -100,13 +99,7 @@ to setup-actors-and-friendships
   setup-actor-iamwhats
 end
 
-to-report actor-name
-  set user_no user_no + 1
-  report word "actor" user_no
-end
- 
 to setup-actors
-  set user_no 0
   set-default-shape actors "face neutral"; "face happy", "face neutral", "face sad", "person", "outlined circle"
 
   ;; setup actors
@@ -125,9 +118,9 @@ to setup-actors
 
       ;show price-absorption-limit
       set effect-left 0
-      set color blue + 2
-      set label-color red
-      set label actor-name
+      set color blue - 2
+      set label-color white
+      set label word "actor-" who
       set sociable random 3
     ]
   

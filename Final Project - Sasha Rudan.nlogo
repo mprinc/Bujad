@@ -28,10 +28,10 @@ ticks
 30.0
 
 SLIDER
-288
-47
-321
-197
+5
+11
+177
+44
 actors-num
 actors-num
 0
@@ -40,7 +40,7 @@ actors-num
 1
 1
 NIL
-VERTICAL
+HORIZONTAL
 
 SLIDER
 12
@@ -58,10 +58,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-6
-47
-122
-80
+202
+99
+318
+132
 Reset History
 rest-history
 NIL
@@ -75,10 +75,10 @@ NIL
 1
 
 BUTTON
-7
-94
-123
-127
+13
+139
+129
+172
 One Tick
 do-tick
 NIL
@@ -92,10 +92,10 @@ NIL
 1
 
 BUTTON
-129
-94
-246
-127
+133
+139
+250
+172
 Continue Ticks
 do-tick
 T
@@ -109,10 +109,10 @@ NIL
 1
 
 BUTTON
-170
-134
-246
-167
+8
+98
+84
+131
 layout
 do-layout\ndisplay
 T
@@ -126,10 +126,10 @@ NIL
 1
 
 BUTTON
-6
-10
-321
-43
+7
+59
+322
+92
 Setup Actors, Friendships, Activities, IAmWhat
 setup
 NIL
@@ -248,23 +248,6 @@ actor-price-emission-limit
 1
 NIL
 HORIZONTAL
-
-BUTTON
-954
-257
-1077
-290
-dispatch-activity
-dispatch-activity
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
 
 SLIDER
 9
@@ -453,7 +436,7 @@ Popularity-random-mean
 Popularity-random-mean
 0
 1
-0.98
+0.56
 0.02
 1
 NIL
@@ -468,11 +451,38 @@ Popularity-random-standard-deviation
 Popularity-random-standard-deviation
 0
 1
-0.5
+0.4
 0.02
 1
 NIL
 HORIZONTAL
+
+CHOOSER
+188
+10
+323
+55
+Friendships_generator
+Friendships_generator
+"ER" "Attractiveness"
+0
+
+BUTTON
+337
+616
+421
+649
+Actions/node
+measure-actions-per-node
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?

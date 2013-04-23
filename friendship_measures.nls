@@ -1,0 +1,48 @@
+; per friendship commands
+; ========================================================================================
+
+to-report activities-number-for-friendship [actorSelected]
+  report (activities-in-number-for-actor actorSelected) + (activities-out-number-for-actor actorSelected)
+end
+
+to-report activities-in-number-for-friendship [actorSelected]
+  let activitiesNum 0
+  ask actorSelected[
+    ; equivalent to command in-<breed>-neighbors
+    set activitiesNum count in-activity-actor-neighbors
+  ]
+  report activitiesNum
+end
+
+to-report activities-out-number-for-friendship [actorSelected]
+  let activitiesNum 0
+  ask actorSelected[
+    ; equivalent to command out-<breed>-neighbors
+    set activitiesNum count out-activity-actor-neighbors
+  ]
+  report activitiesNum
+end
+; per actor commands
+; ========================================================================================
+
+to-report activities-number-for-actor [actorSelected]
+  report (activities-in-number-for-actor actorSelected) + (activities-out-number-for-actor actorSelected)
+end
+
+to-report activities-in-number-for-actor [actorSelected]
+  let activitiesNum 0
+  ask actorSelected[
+    ; equivalent to command in-<breed>-neighbors
+    set activitiesNum count in-activity-actor-neighbors
+  ]
+  report activitiesNum
+end
+
+to-report activities-out-number-for-actor [actorSelected]
+  let activitiesNum 0
+  ask actorSelected[
+    ; equivalent to command out-<breed>-neighbors
+    set activitiesNum count out-activity-actor-neighbors
+  ]
+  report activitiesNum
+end
