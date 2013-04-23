@@ -23,7 +23,7 @@ to-report diffuse-activity
       set actor-difuser self
       actor-diffuse-activity-from activity-current
     ][
-      type "actor : " type self type "rejected to diffuse activity\n"
+      ; type "actor : " type self type "rejected to diffuse activity\n"
     ]
   ]
 
@@ -35,7 +35,7 @@ to-report diffuse-activity
     ; we add 1 since we will put overflowed activities on the first position
     let activity-y (max-pycor - 5 * (1 + length activities-list))
   
-    type "activity-y = " type activity-y type ", min-pycor = " type min-pycor type "\n"
+    ; type "activity-y = " type activity-y type ", min-pycor = " type min-pycor type "\n"
     if(activity-y < min-pycor + 5)[
       ask activities with [ycor < (max-pycor - 5)][
         set ycor ycor + 5;
@@ -66,7 +66,7 @@ end
 
 ; chosen actor-difuser will send activity activity-current to one (soon more) other actors that didn't reach absorption limit
 to actor-diffuse-activity-from [activity-current]
-  type "actor : " type self type "is diffusing activity\n"
+  ; type "actor : " type self type "is diffusing activity\n"
 
   actor-populate-activity activity-current
 

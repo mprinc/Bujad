@@ -37,11 +37,15 @@ end
 ; responsible for executing one time tick in the model
 to do-tick
   type "\n\nDifussing activities:\n"
-  set last-activity diffuse-activity
-  if last-activity != nobody [
-    ;affect-relatinships-by-activity last-activity
-  ]
-  
+  let activities-per-tick (count actors) * Activities-number-per-tick
+  repeat activities-per-tick[
+    set last-activity diffuse-activity
+    if last-activity != nobody [
+      ;affect-relatinships-by-activity last-activity
+    ]
+  ]  
+
+  ; testing purpose
   ask actors  with [effect-left > 0 ][
     set effect-left effect-left - 1
   ]
