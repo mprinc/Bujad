@@ -50,8 +50,10 @@ actors-own
 undirected-link-breed [friendships friendship]
 friendships-own
 [
-  e12_thicknes
-  e21_thicknes
+  thicknes-end1
+  thicknes-end2
+  manual-attractiveness-end1
+  manual-attractiveness-end2
 ]
 
 ; ========================================================================================

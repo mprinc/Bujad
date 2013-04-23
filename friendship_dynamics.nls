@@ -12,16 +12,7 @@ to-report actors-attractiveness [actorFrom actorTo]
   type word "actors-attractiveness(" (word [label] of actorFrom (word " " (word [label] of actorTo ")\n") ))
   let attractiveness 0
   
-  ;calculating shared IamWhats/interests:
-  let actorFromIamWhats [] ; IamWhats connected to actorFrom
-  let actorToIamWhats [] ; IamWhats connected to actorTo
-  let actorIamWhatsBetween [] ; IamWhats connected to both actorFrom and actorTo
-  
-  ask actorFrom [set actorFromIamWhats iamwhat-actor-neighbors]
-  ask actorTo [set actorToIamWhats iamwhat-actor-neighbors]
-  ; http://stackoverflow.com/questions/8425518/netlogo-two-agentsets-operations
-  set actorIamWhatsBetween iamwhats with [member? self actorFromIamWhats and member? self actorToIamWhats]
-  
+  let actorIamWhatsBetween get-shared-iamwhats actorFrom actorTo
   ask actorIamWhatsBetween[
     set attractiveness attractiveness + Attractiveness-IAmWhats-Ponder * ([level] of (iamwhat-actor-with actorFrom)) * ([level] of (iamwhat-actor-with actorTo))
   ]
@@ -55,6 +46,33 @@ to-report calculate-activity-objective-payoff [activity]
   set payoff payoff + intensity
   report payoff
   
+end
+
+to-report calculate-activity-payoff [activity]
+  let payoff 0
+  set payoff payoff + calculate-activity-objective-payoff activity
+  report payoff  
+end
+
+;calculating shared IamWhats/interests:
+; n1, n2 can be of breed actor or activity
+to-report get-shared-iamwhats [n1 n2]
+  let shared_iamwhats []
+     
+  let n1IamWhats [] ; IamWhats connected to n1
+  let n2IamWhats [] ; IamWhats connected to n2
+  
+  ifelse(is-actor? n1)
+  [ask n1 [set n1IamWhats iamwhat-actor-neighbors]]
+  [ask n1 [set n1IamWhats iamwhat-activity-neighbors]]
+  
+  ifelse(is-actor? n2)
+  [ask n2 [set n2IamWhats iamwhat-actor-neighbors]]
+  [ask n2 [set n2IamWhats iamwhat-activity-neighbors]]
+  ; http://stackoverflow.com/questions/8425518/netlogo-two-agentsets-operations
+  set shared_iamwhats iamwhats with [member? self n1IamWhats and member? self n2IamWhats]
+  
+  report shared_iamwhats
 end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

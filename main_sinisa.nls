@@ -29,5 +29,6 @@ to test-sinisa
   ask a1[set fr (friendship-with a2)]
   if(fr != nobody)[
     show [link-length] of fr
+    ; ask fr[set link-length 2]
   ]
 end
