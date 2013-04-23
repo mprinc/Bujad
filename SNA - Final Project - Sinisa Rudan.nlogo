@@ -131,7 +131,7 @@ BUTTON
 321
 43
 Setup Actors, Friendships, Activities, IAmWhat
-setup-actors-and-friendships
+setup
 NIL
 1
 T
@@ -165,23 +165,6 @@ T
 OBSERVER
 NIL
 I
-NIL
-NIL
-1
-
-BUTTON
-8
-136
-122
-169
-Load Activities
-load-activity-types
-NIL
-1
-T
-OBSERVER
-NIL
-A
 NIL
 NIL
 1
@@ -434,18 +417,11 @@ Relationships:
 0.0
 1
 
-OUTPUT
-942
-462
-1192
-628
-12
-
 INPUTBOX
-239
-711
-458
-771
+282
+697
+437
+757
 Random-generator-initial
 100
 1
