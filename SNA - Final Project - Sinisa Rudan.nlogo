@@ -496,6 +496,32 @@ Actor-price-emission-restitution
 NIL
 HORIZONTAL
 
+SLIDER
+37
+643
+225
+676
+Actor-iamwhat-num
+Actor-iamwhat-num
+0
+5
+2
+1
+1
+WHATs
+HORIZONTAL
+
+SWITCH
+24
+702
+174
+735
+Links-show-extra
+Links-show-extra
+1
+1
+-1000
+
 @#$#@#$#@
 ## WHAT IS IT?
 
