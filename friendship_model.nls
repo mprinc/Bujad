@@ -22,7 +22,6 @@ globals
   INTERESTS_LIST              ;; list of all possible interests
 
   actor-types-list            ; list of all actor types in the system (not used yet?)
-  activities-list             ; list of all activity types in the system
   iamwhats-list               ; list of all IAmWhats in the system
 ]
 

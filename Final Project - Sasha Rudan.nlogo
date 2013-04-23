@@ -392,6 +392,17 @@ Activities-number-per-tick
 NIL
 HORIZONTAL
 
+MONITOR
+1024
+198
+1126
+243
+Activities Num
+activities-num-emitted
+0
+1
+11
+
 @#$#@#$#@
 ## WHAT IS IT?
 

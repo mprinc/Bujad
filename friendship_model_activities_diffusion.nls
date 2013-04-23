@@ -1,5 +1,10 @@
 ; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
 
+globals[
+    activities-list             ; list of all activity types in the system
+    activities-num-emitted   ; total number of activities emitted in the system from all actors cumullatively
+]
+
 to-report diffuse-activity
   let activity-current nobody
   let actor-difuser nobody
@@ -64,22 +69,27 @@ to-report diffuse-activity
   report activity-current
 end
 
-; chosen actor-difuser will send activity activity-current to one (soon more) other actors that didn't reach absorption limit
+; the chosen actor-difuser will send activity activity-current to one (soon more) other actors that didn't reach absorption limit
 to actor-diffuse-activity-from [activity-current]
   ; type "actor : " type self type "is diffusing activity\n"
 
   actor-populate-activity activity-current
+  let activity-type-current nobody
+  ; no need for one-of (there has to be only one link) except for de-agentseting to breed
+  ask activity-current[set activity-type-current one-of activity-type-activity-neighbors]
 
+  ; create a link between actor emitter and activity
   create-activity-actor-to activity-current [
     set shape "default"
     set color yellow
     if(Links-show-extra = false)[set hidden? true]
   ]
   
+  ; find (if any) actor that will absorb activity
   let actor-absorbers one-of other actors with [price-absorbed < price-absorption-limit]
   if(actor-absorbers != nobody)[
-    ask one-of other actors with [price-absorbed < price-absorption-limit] [
-      set price-absorbed price-absorbed + 1
+    ask actor-absorbers [
+      set price-absorbed price-absorbed + [price-to-absorb] of activity-type-current
       
       create-activity-actor-from activity-current [
         set shape "default"
@@ -92,21 +102,22 @@ end
 
 ; it populates activity
 to actor-populate-activity [activity-current]
-   let selected-iamwhat one-of iamwhat-actor-neighbors;
-   let selected-activity-type one-of activity-types;
-
-   ; create a link between activity and iamwhat
-   ask activity-current[
-     set intensity ([intensity] of selected-activity-type)
-     create-iamwhat-activity-with selected-iamwhat [
-       set shape "default"
-       set color brown
-       if(Links-show-extra = false)[set hidden? true]
-     ]
-     create-activity-type-activity-with selected-activity-type [
-       set shape "default"
-       set color brown
-       if(Links-show-extra = false)[set hidden? true]
-     ]
-   ]
+  set activities-num-emitted activities-num-emitted + 1
+  let selected-iamwhat one-of iamwhat-actor-neighbors;
+  let selected-activity-type one-of activity-types;
+  
+                                                  ; create a link between activity and iamwhat
+  ask activity-current[
+    set intensity ([intensity] of selected-activity-type)
+    create-iamwhat-activity-with selected-iamwhat [
+      set shape "default"
+      set color brown
+      if(Links-show-extra = false)[set hidden? true]
+    ]
+    create-activity-type-activity-with selected-activity-type [
+      set shape "default"
+      set color brown
+      if(Links-show-extra = false)[set hidden? true]
+    ]
+  ]
 end
