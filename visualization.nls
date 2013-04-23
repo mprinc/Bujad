@@ -1,5 +1,5 @@
 to select-actor [actor]
-  
+  ask actor[set label-color black]
 end
 
 
@@ -52,8 +52,17 @@ to display-friendship-of-actor
       set color color + 2
       set hidden? false
     ]
+    type-actor self
   ]
 end
+
+to type-actor [actor]
+  ask actor[
+    type word "** Selected: " (word label ":\n")
+    type word "sociable: " (word sociable "\n")
+  ]
+end
+
 
 ; displays all links to selected iamwhat
 ; it displays links to actors that are interested in it, but it will display later activities also, etc

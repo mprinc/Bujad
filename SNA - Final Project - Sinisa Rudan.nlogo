@@ -394,6 +394,21 @@ Attractiveness-Preference-Ponder
 NIL
 HORIZONTAL
 
+SLIDER
+38
+768
+230
+801
+Activities-number-per-tick
+Activities-number-per-tick
+0
+5
+5
+1
+1
+NIL
+HORIZONTAL
+
 @#$#@#$#@
 ## WHAT IS IT?
 

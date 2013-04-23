@@ -5,6 +5,10 @@ to test-sinisa
   ; let ac2 sort n-of 2 actors
   ; type ac2
   ; let attractivness actors-attractiveness (last ac2) (first ac2)
-  let attractivness actors-attractiveness (first sort actors) (last sort actors)
+  let a1 (first sort actors) 
+  let a2 (last sort actors)
+  let attractivness actors-attractiveness a1 a2
   type word attractivness "\n"
+  select-actor a1
+  select-actor a2
 end
