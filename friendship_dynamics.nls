@@ -88,3 +88,14 @@ to affect-relatinships-by-activity [activity]
   ] 
   
 end
+
+to decay_relationsips
+  ask friendships[
+    set thicknes-end1 thicknes-end1 - Relationship-Decay
+    if(thicknes-end1 < Relationship-Treshold-Connected)[set thicknes-end1 Relationship-Treshold-Connected]
+ 
+    set thicknes-end2 thicknes-end2 - Relationship-Decay
+    if(thicknes-end2 < Relationship-Treshold-Connected)[set thicknes-end2 Relationship-Treshold-Connected]
+
+  ]
+end

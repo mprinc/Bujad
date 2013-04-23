@@ -331,7 +331,7 @@ Attractiveness-IAmWhats-Ponder
 Attractiveness-IAmWhats-Ponder
 0
 1
-0
+1
 .05
 1
 NIL
@@ -371,7 +371,7 @@ Attractiveness-Preference-Ponder
 Attractiveness-Preference-Ponder
 0
 1
-0
+0.2
 0.05
 1
 NIL
@@ -467,6 +467,54 @@ Friendships_generator
 Friendships_generator
 "ER" "Attractiveness"
 1
+
+PLOT
+707
+637
+962
+787
+friendships-thicknes-plot
+time
+mean thicknes
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"thicknes" 1.0 0 -3844592 true "" ""
+
+SLIDER
+927
+427
+1160
+460
+Relationship-Treshold-Connected
+Relationship-Treshold-Connected
+0
+1
+0.1
+.05
+1
+NIL
+HORIZONTAL
+
+SLIDER
+928
+469
+1100
+502
+Relationship-Decay
+Relationship-Decay
+0
+1
+0.04
+0.02
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

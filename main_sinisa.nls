@@ -12,6 +12,8 @@ to do-tick-sasha-end
 end
 
 to do-tick-sinisha-end
+  decay_relationsips
+  do-plotting
 end
 
 

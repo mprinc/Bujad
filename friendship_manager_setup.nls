@@ -153,12 +153,29 @@ to setup-friendships
         let attractiveness (actors-attractiveness-IamWhats myself self)
         ; show attractiveness
         if(attractiveness > 0)[ ;if actors share interests
-          create-friendship-with myself [
-            ;set thicknes-end1
+          ; show word myself self
+          set attractiveness attractiveness + actor-attractiveness-preference self
+          ifelse(friendship-neighbor? myself)
+          [
+            let frl friendship-with myself;
+           ; print "already exists:"
+            ask frl[
+              set thicknes-end2 attractiveness
+              show word "thicknes-end1:" (word thicknes-end1 (word "; thicknes-end2:" thicknes-end2))              
+            ]
+           ; show [end1] of frl = self
           ]
-        ]        
+          [
+            ask myself [
+              create-friendship-with myself[
+                set thicknes-end1 attractiveness
+              ]
+            ]
+          ]
+        ]      
       ]
     ]
+    display-friendships-weight
   ]
 end
 

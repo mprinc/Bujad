@@ -12,8 +12,28 @@ to unselect-actor [actor]
 end
 
 to display_relationship_strength_statistics
-  ;max-one-of agentset [reporter] 
+  ;histogram [1 2 45 3 45 45]
+  ;histogram [thicknes-end2] of friendships
+  ;plot friendships-thicknes-plot
+  ;;print word "min % max thicknes-end1:" word max-one-of friendships [thicknes-end1]
+ ; print word "max thicknes-end2:" max-one-of friendships [thicknes-end2]
   ;show count patches with-max [pxcor]
+end
+
+
+to do-plotting
+     ;; plot the number of infected individuals at each step
+     set-current-plot "friendships-thicknes-plot"
+     set-current-plot-pen "thicknes"
+     let thicnkesses [thicknes-end1] of friendships
+     let mean_thicnkesses (mean thicnkesses)
+     print mean_thicnkesses
+     plot mean_thicnkesses
+end
+
+
+to display-friendships-weight
+  display_relationship_strength_statistics
 end
 
 
