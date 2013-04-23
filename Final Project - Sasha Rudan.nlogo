@@ -318,7 +318,7 @@ SWITCH
 88
 Links-show-extra
 Links-show-extra
-0
+1
 1
 -1000
 

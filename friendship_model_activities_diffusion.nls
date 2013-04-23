@@ -16,18 +16,18 @@ to-report diffuse-activity
     set shape "flower"
   ]
   
-  ; ask actor (actor-difuser) that is not in emittion saturation to emit an action
+  ; ask actor (actor-difuser) that is not in emittion saturation to emit an activity
   ; it will decide if it will emit it in according to emission probability
   ask one-of actors with [price-emitted < price-emission-limit] [
     ifelse (random-float 1 <= activity-emission-probability)[
       set actor-difuser self
       actor-diffuse-activity-from activity-current
     ][
-      type "actor : " type self type "rejected to diffuse action\n"
+      type "actor : " type self type "rejected to diffuse activity\n"
     ]
   ]
 
-  ; if actor 'refused' to difuse action we have to revoke activity
+  ; if actor 'refused' to difuse activity we have to revoke activity
   ifelse (actor-difuser = nobody)[
     ask activity-current [die]
     set activities-list but-last activities-list
@@ -66,8 +66,10 @@ end
 
 ; chosen actor-difuser will send activity activity-current to one (soon more) other actors that didn't reach absorption limit
 to actor-diffuse-activity-from [activity-current]
-  type "actor : " type self type "is diffusing action\n"
-  
+  type "actor : " type self type "is diffusing activity\n"
+
+  actor-populate-activity activity-current
+
   create-activity-actor-to activity-current [
     set shape "default"
     set color yellow
@@ -86,4 +88,25 @@ to actor-diffuse-activity-from [activity-current]
       ]
     ]
   ] 
+end
+
+; it populates activity
+to actor-populate-activity [activity-current]
+   let selected-iamwhat one-of iamwhat-actor-neighbors;
+   let selected-activity-type one-of activity-types;
+
+   ; create a link between activity and iamwhat
+   ask activity-current[
+     set intensity ([intensity] of selected-activity-type)
+     create-iamwhat-activity-with selected-iamwhat [
+       set shape "default"
+       set color brown
+       if(Links-show-extra = false)[set hidden? true]
+     ]
+     create-activity-type-activity-with selected-activity-type [
+       set shape "default"
+       set color brown
+       if(Links-show-extra = false)[set hidden? true]
+     ]
+   ]
 end

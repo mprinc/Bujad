@@ -104,7 +104,7 @@ to inspect-system
       [
         ask one-of nearest-activities
         [
-          display-actors-of-activity
+          display-selected-activity
         ]
         display
       ]
@@ -141,6 +141,15 @@ to display-friendship-of-actor
         ; friendships are always visible
         ;if(Links-show-extra = false)[set hidden? true]
       ]
+      ; links to iamwhats
+      ask iamwhat-actor-neighbors[
+        set color color - 2
+        set size size - 2
+      ]
+      ask my-iamwhat-actors [
+        set color color - 2
+        if(Links-show-extra = false)[set hidden? true]
+      ]
     ]
   ]
   ifelse(actor-inspection-selected = self)[
@@ -157,11 +166,20 @@ to display-friendship-of-actor
       set color color + 2
       set hidden? false
     ]
+    ; links to iamwhats
+    ask iamwhat-actor-neighbors[
+      set color color + 2
+      set size size + 2
+    ]
+    ask my-iamwhat-actors [
+      set color color + 2
+      set hidden? false
+    ]
   ]
 end
 
 ; displays the friendship of an actor
-to display-actors-of-activity
+to display-selected-activity
   if(activity-inspection-selected = 0) [set activity-inspection-selected nobody]
   if(activity-inspection-selected != nobody)[
     ask activity-inspection-selected[
@@ -173,10 +191,12 @@ to display-actors-of-activity
       ; equivalent to command in-<breed>-neighbors
       ask in-activity-actor-neighbors[
         set color color - 2
+        set size size - 2
       ]
       ; equivalent to command out-<breed>-neighbors
       ask out-activity-actor-neighbors[
         set color color - 2
+        set size size - 2
       ]
       ; equivalent to command my-out-<breeds>
       ask my-out-activity-actors [
@@ -185,6 +205,26 @@ to display-actors-of-activity
       ]
       ; equivalent to command my-in-<breeds>
       ask my-in-activity-actors [
+        set color color - 2
+        if(Links-show-extra = false)[set hidden? true]
+      ]
+
+      ; links to iamwhats
+      ask iamwhat-activity-neighbors[
+        set color color - 2
+        set size size - 2
+      ]
+      ask my-iamwhat-activities [
+        set color color - 2
+        if(Links-show-extra = false)[set hidden? true]
+      ]
+
+      ; links to activity-types
+      ask activity-type-activity-neighbors[
+        set color color - 2
+        set size size - 2
+      ]
+      ask my-activity-type-activities [
         set color color - 2
         if(Links-show-extra = false)[set hidden? true]
       ]
@@ -203,10 +243,12 @@ to display-actors-of-activity
     ; equivalent to command in-<breed>-neighbors
     ask in-activity-actor-neighbors[
       set color color + 2
+      set size size + 2
     ]
     ; equivalent to command out-<breed>-neighbors
     ask out-activity-actor-neighbors[
       set color color + 2
+      set size size + 2
     ]
     ; equivalent to command my-out-<breeds>
     ask my-out-activity-actors [
@@ -215,6 +257,26 @@ to display-actors-of-activity
     ]
     ; equivalent to command my-in-<breeds>
     ask my-in-activity-actors [
+      set color color + 2
+      set hidden? false
+    ]
+
+    ; links to activities
+    ask iamwhat-activity-neighbors[
+      set color color + 2
+      set size size + 2
+    ]
+    ask my-iamwhat-activities [
+      set color color + 2
+      set hidden? false
+    ]
+
+    ; links to activity-types
+    ask activity-type-activity-neighbors[
+      set color color + 2
+      set size size + 2
+    ]
+    ask my-activity-type-activities [
       set color color + 2
       set hidden? false
     ]
@@ -235,11 +297,12 @@ to display-links-of-iamwhat
       set size size - 2
       ask iamwhat-actor-neighbors[
         set color color - 2
+        set size size - 2
       ]
       ask my-iamwhat-actors [
         set color color - 2
         if(Links-show-extra = false)[set hidden? true]
-      ]
+      ]      
     ]
   ]
   
@@ -253,6 +316,7 @@ to display-links-of-iamwhat
     set size size + 2
     ask iamwhat-actor-neighbors[
       set color color + 2
+      set size size + 2
     ]
     ask my-iamwhat-actors [
     set color color + 2

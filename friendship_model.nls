@@ -43,6 +43,7 @@ actors-own
   price-absorption-limit       ; this is the limit over which actor cannot absorb any more activity
   price-emitted                ; [roce of emitted activities over time (note, each tick this get reduced by healing factor)
   price-emission-limit         ; this is the limit over which actor cannot emit any more activity
+  sociabile                    ; how sociable actor is
 ]
 
 ; describes friendships (in other words: connections, links, relations) between actors in the network
@@ -67,7 +68,7 @@ activity-types-own
   id
   a-type
   name
-  activity-pay-off
+  intensity
   price-to-diffuse
   price-to-absorb
   appearance-probability
@@ -78,6 +79,14 @@ activity-types-own
 ; each activity that happenes (mostly initiatd by actors) is represented by one activity, even if it is multi-actor activity
 breed [activities activity]
 activities-own
+[
+  intensity
+]
+
+
+; describes link between activity and its activity-type
+undirected-link-breed [activity-type-activities activity-type-activity]
+activity-type-activities-own
 [
 ]
 
@@ -110,6 +119,20 @@ iamwhat-actors-own
   level
 ]
 
+; describes to what IAmWhat(s) activity belongs to
+; it is a link between iamwhat (breed) and activity (breed)
+undirected-link-breed [iamwhat-activities iamwhat-activity]
+iamwhat-activities-own
+[
+  iamhow
+  level
+]
+
+
+; ========================================================================================
+; Setup Code
+; ========================================================================================
+
 to friendship_model_setup
   ; "constants"  
   set ACTOR_SIZE_NEUTRAL 5
@@ -120,6 +143,10 @@ to friendship_model_setup
   
   set INTERESTS_LIST (list "salsa" "capoeira" "SNA" "guitar" "poetry")
 end
+
+; ========================================================================================
+; CSV support
+; ========================================================================================
 
 ; this function reads CSV file
 ; any string with spaces as a part of field should be encapsulated wih DOBULE-QUOTES
