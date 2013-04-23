@@ -63,7 +63,7 @@ to load-iamwhats
     create-iamwhats 1
     [
       set iamwhats-list lput self iamwhats-list
-      setxy (min-pxcor + 20 * (length iamwhats-list)) (max-pxcor - 5)
+      setxy (min-pxcor + 15 * (length iamwhats-list)) (max-pxcor - 5)
       set size 5
       ;set hidden? true
       ; adding parameters from CSV table
