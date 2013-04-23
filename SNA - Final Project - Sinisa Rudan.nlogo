@@ -441,6 +441,17 @@ OUTPUT
 628
 12
 
+INPUTBOX
+239
+711
+458
+771
+Random-generator-initial
+100
+1
+0
+Number
+
 @#$#@#$#@
 ## WHAT IS IT?
 

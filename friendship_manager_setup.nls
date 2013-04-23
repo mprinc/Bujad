@@ -88,7 +88,7 @@ to setup-actors-and-friendships
   ;clear-all-plots
   clear-all
   reset-ticks
-  set random-generator-initial
+  set Random-generator-initial 100
   
   ask patches[
     set pcolor white
