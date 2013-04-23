@@ -43,7 +43,7 @@ actors-own
   price-absorption-limit       ; this is the limit over which actor cannot absorb any more activity
   price-emitted                ; [roce of emitted activities over time (note, each tick this get reduced by healing factor)
   price-emission-limit         ; this is the limit over which actor cannot emit any more activity
-  sociabile                    ; how sociable actor is
+  sociable                     ; how sociable actor is
 ]
 
 ; describes friendships (in other words: connections, links, relations) between actors in the network

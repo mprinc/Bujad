@@ -1,5 +1,8 @@
 ; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
 
+globals[
+  user_no
+]
 to load-activity-types
   set actor-types-list []
   let activity-types-filename "activity-types.csv"
@@ -104,10 +107,12 @@ to setup-actors-and-friendships
 end
 
 to-report actor-name
-  report word "actor" " X"
+  set user_no user_no + 1
+  report word "actor" user_no
 end
  
 to setup-actors
+  set user_no 0
   set-default-shape actors "face neutral"; "face happy", "face neutral", "face sad", "person", "outlined circle"
 
   ;; setup actors
@@ -126,7 +131,8 @@ to setup-actors
 
       ;show price-absorption-limit
       set effect-left 0
-      set color blue
+      set color blue + 2
+      set label-color red
       set label actor-name 
     ]
   

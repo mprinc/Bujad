@@ -2,8 +2,9 @@
 
 to test-sinisa
   type "test-sinisa\n"
-  let ac2 sort n-of 2 actors
-  ;type ac2
-  let attractivness actors-attractiveness (last ac2) (first ac2)
+  ; let ac2 sort n-of 2 actors
+  ; type ac2
+  ; let attractivness actors-attractiveness (last ac2) (first ac2)
+  let attractivness actors-attractiveness (first sort actors) (last sort actors)
   type word attractivness "\n"
 end

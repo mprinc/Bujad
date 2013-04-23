@@ -9,6 +9,7 @@ end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  
 to-report actors-attractiveness [actorFrom actorTo]
+  type word "actors-attractiveness(" (word [label] of actorFrom (word [label] of actorTo ")\n" ))
   let attractiveness 0
   let actorFromIamWhats [] ; IamWhats connected to actorFrom
   let actorToIamWhats [] ; IamWhats connected to actorTo
@@ -20,10 +21,16 @@ to-report actors-attractiveness [actorFrom actorTo]
   set actorIamWhatsBetween iamwhats with [member? self actorFromIamWhats and member? self actorToIamWhats]
   
   ask actorIamWhatsBetween[
-    set attractiveness attractiveness + ([level] of (iamwhat-actor-with actorFrom)) * ([level] of (iamwhat-actor-with actorTo))
+    set attractiveness attractiveness + Attractiveness-IAmWhats-Ponder * ([level] of (iamwhat-actor-with actorFrom)) * ([level] of (iamwhat-actor-with actorTo))
   ]
-  ;if(iamwhat-actor-with turtle actorFrom != nobody and link-with turtle actorFrom != nobody )[ ; if this iamwhat is related to both actors   
-    ;]
+  
+  set attractiveness attractiveness + Attractiveness-sociable-Ponder * ([sociable] of actorFrom) * ([sociable] of actorTo)
+  
+  let preference 0
+  ask actorTo[set preference count friendship-neighbors]
+  type word "preference:" (word preference "\n")
+  set attractiveness attractiveness + Attractiveness-Preference-Ponder * preference
+  
   report attractiveness
 end
 
