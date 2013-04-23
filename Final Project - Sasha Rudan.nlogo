@@ -28,10 +28,10 @@ ticks
 30.0
 
 SLIDER
-278
-53
-311
-203
+288
+47
+321
+197
 actors-num
 actors-num
 0
@@ -60,7 +60,7 @@ HORIZONTAL
 BUTTON
 6
 47
-246
+122
 80
 Reset History
 rest-history
@@ -439,10 +439,40 @@ INPUTBOX
 1258
 270
 Random-generator-initial
-100
+0
 1
 0
 Number
+
+SLIDER
+933
+564
+1219
+597
+Popularity-random-mean
+Popularity-random-mean
+0
+1
+0.98
+0.02
+1
+NIL
+HORIZONTAL
+
+SLIDER
+932
+601
+1220
+634
+Popularity-random-standard-deviation
+Popularity-random-standard-deviation
+0
+1
+0.5
+0.02
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -454,7 +484,9 @@ This model is a model of friendship
 
 ## HOW TO USE IT
 
+### Reproducebility
 
+If you want to reproduce your experiment, set the value Random-generator-initial different to  0. If Random-generator-initial == 0 it will be not taken in consideration and you will get random experiment.
 ## THINGS TO NOTICE
 
 ## EXTENDING THE MODEL
@@ -465,11 +497,11 @@ This model is a model of friendship
 
 ## COPYRIGHT AND LICENSE
 
-Copyright 20013 Sasha Rudan, Oslo University.
+Copyright 20013 Sasha Mile Rudan
 
 ![CC BY-NC-SA 3.0](http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png)
 
-This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License.  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative Commons, 559 Nathan Abbott Way, Stanford, California 94305, USA.
+This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 License.  To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/ or send a letter to Creative Commons
 @#$#@#$#@
 default
 true

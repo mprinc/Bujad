@@ -85,15 +85,6 @@ end
 
 ; entry point to the model
 to setup-actors-and-friendships
-  ;clear-all-plots
-  clear-all
-  reset-ticks
-  set Random-generator-initial 100
-  
-  ask patches[
-    set pcolor white
-  ]
-  
   load-activity-types
   load-iamwhats
 

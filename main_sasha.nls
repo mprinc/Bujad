@@ -6,6 +6,7 @@ end
 
 to setup-end-sasha
   setup-manual-attractiveness-between-actors
+  setup-random-popularity-for-actors
 end
 
 to setup-end-sinisha
@@ -25,8 +26,29 @@ to setup-manual-attractiveness-between-actors
         if(manualAtract > 1)[set manualAtract 1]
         
         actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" manualAtract
-        ; let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
-        ; show word "value : " value
+        ;let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
+        ;show word "value : " value
+      ]
+    ]
+  ]
+end
+
+to setup-random-popularity-for-actors
+  show "setup-random-popularity-for-actors"
+  ask actors[
+    let actorsOther other actors
+    foreach sort actorsOther[
+      let actorOther ?
+      let friendshipToOther friendship-with actorOther
+      if(friendshipToOther != nobody)[
+        ; file://localhost/Applications/NetLogo%205.0.3/docs/dictionary.html#random-normal
+        let manualAtract random-normal Attractiveness-manual-mean Attractiveness-manual-standard-deviation
+        if(manualAtract < 0)[set manualAtract 0]
+        if(manualAtract > 1)[set manualAtract 1]
+        
+        actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" manualAtract
+        ;let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
+        ;show word "value : " value
       ]
     ]
   ]

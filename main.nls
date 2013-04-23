@@ -28,6 +28,16 @@ globals
 ;;;;;;;;;;;;;;;;;;;;;;;
 
 to setup
+  ;clear-all-plots
+  clear-all
+  reset-ticks
+  ; random-seed Random-generator-initial 47822
+  if(Random-generator-initial != 0)[random-seed Random-generator-initial]
+  
+  ask patches[
+    set pcolor white
+  ]
+  
   setup-start-sasha
   setup-start-sinisha
   
