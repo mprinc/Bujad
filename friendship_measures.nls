@@ -1,3 +1,13 @@
+to finalize-report
+  ask activity-types[die]
+  ask activities[die]
+  ask activity-type-activities[die]
+  ask activity-actors[die]
+  ask iamwhats[die]
+  ask iamwhat-actors[die]
+  ask iamwhat-activities[die]
+end
+
 ; per friendship commands
 ; ========================================================================================
 

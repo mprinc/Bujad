@@ -149,7 +149,7 @@ end
 to setup-actor-iamwhats
   ask actors[
     let iamwhat-num round random-normal Actor-iamwhat-mean Actor-iamwhat--standard-deviation
-    if(iamwhat-num < 0)[set iamwhat-num 0]
+    if(iamwhat-num < 1)[set iamwhat-num 1]
     if(iamwhat-num > count iamwhats)[set iamwhat-num count iamwhats]
     ask n-of iamwhat-num iamwhats[
       ; myself = actor
