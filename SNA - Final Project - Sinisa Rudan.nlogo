@@ -373,7 +373,7 @@ Attractiveness-Sociable-Ponder
 Attractiveness-Sociable-Ponder
 0
 1
-0
+1
 0.05
 1
 NIL
@@ -388,7 +388,7 @@ Attractiveness-Preference-Ponder
 Attractiveness-Preference-Ponder
 0
 1
-0.7
+0
 0.05
 1
 NIL

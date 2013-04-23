@@ -4,13 +4,15 @@ to change-relationship-through-time [actor1 actor2]
    
 end
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; calculates  preferential-   ;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; calculates  attractiveness  - how attractive is actorTo seen by actorFrom      ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
  
 to-report actors-attractiveness [actorFrom actorTo]
-  type word "actors-attractiveness(" (word [label] of actorFrom (word [label] of actorTo ")\n" ))
+  type word "actors-attractiveness(" (word [label] of actorFrom (word " " (word [label] of actorTo ")\n") ))
   let attractiveness 0
+  
+  ;calculating shared IamWhats/interests:
   let actorFromIamWhats [] ; IamWhats connected to actorFrom
   let actorToIamWhats [] ; IamWhats connected to actorTo
   let actorIamWhatsBetween [] ; IamWhats connected to both actorFrom and actorTo
@@ -24,12 +26,20 @@ to-report actors-attractiveness [actorFrom actorTo]
     set attractiveness attractiveness + Attractiveness-IAmWhats-Ponder * ([level] of (iamwhat-actor-with actorFrom)) * ([level] of (iamwhat-actor-with actorTo))
   ]
   
+  ;how sociable are both actors:
   set attractiveness attractiveness + Attractiveness-sociable-Ponder * ([sociable] of actorFrom) * ([sociable] of actorTo)
   
+  ; what is "objective" preference of actorTo? we consider its friendship-degree:
   let preference 0
   ask actorTo[set preference count friendship-neighbors]
-  type word "preference:" (word preference "\n")
+  ; type word "preference:" (word preference "\n")
   set attractiveness attractiveness + Attractiveness-Preference-Ponder * preference
+  
+  ;how many friends share actorFrom actorTo:
+  ask actors with [friendship-neighbor? actorFrom and friendship-neighbor? actorTo]
+  [
+    type [label] of self
+  ]
   
   report attractiveness
 end

@@ -134,6 +134,8 @@ to setup-actors
       set color blue + 2
       set label-color red
       set label actor-name 
+      
+      set sociable random 3
     ]
   
   ;; Layout actors:
