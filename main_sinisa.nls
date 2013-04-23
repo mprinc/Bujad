@@ -32,3 +32,18 @@ to test-sinisa
     ; ask fr[set link-length 2]
   ]
 end
+
+to setup-start-sasha
+end
+
+to setup-start-sinisha
+end
+
+to setup-actors-and-friendships
+end
+
+to setup-end-sasha
+end
+
+to setup-end-sinisha
+end

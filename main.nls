@@ -27,6 +27,15 @@ globals
 ;;; Main Procedures ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;
 
+to setup
+  setup-start-sasha
+  setup-start-sinisha
+  
+  setup-actors-and-friendships
+  
+  setup-end-sasha
+  setup-end-sinisha
+end
 
 ;; spring layout of infection tree while in tree mode
 ;; otherwise, layout all nodes and friendships

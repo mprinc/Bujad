@@ -131,7 +131,7 @@ BUTTON
 321
 43
 Setup Actors, Friendships, Activities, IAmWhat
-setup-actors-and-friendships
+setup
 NIL
 1
 T
@@ -439,7 +439,7 @@ INPUTBOX
 1258
 270
 Random-generator-initial
-0
+100
 1
 0
 Number

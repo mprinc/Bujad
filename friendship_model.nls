@@ -145,6 +145,53 @@ to friendship_model_setup
   set INTERESTS_LIST (list "salsa" "capoeira" "SNA" "guitar" "poetry")
 end
 
+
+; ========================================================================================
+; Accessing XXX-end1 XXX-end2 parameters of undirected links
+; ========================================================================================
+
+; called from the context of master turtle
+; this reporter returns value of parameter stored in the link between master turtle and slave turtle, but from perspective of master turtle
+; therefore in link we should have two variables starting with value of variable parameter-prefix but ending with "-end1" and "-end2"
+to-report actor-get-turtle-link-endpoint-value [linkContainer parameter-prefix]
+  let commandStr ""
+  let value 0
+  if(linkContainer != nobody)[
+    ;show word "end1: " word [end1] of linkContainer word ", end2: " [end2] of linkContainer
+    ;show word "manual-attractiveness-end1: " word [manual-attractiveness-end1] of linkContainer word ", manual-attractiveness-end2: " [manual-attractiveness-end2] of linkContainer
+    ifelse(([end1] of linkContainer) = self)[
+      set commandStr word " [" word parameter-prefix "-end1] of linkContainer"
+      ;show commandStr
+    ][
+      set commandStr word " [" word parameter-prefix "-end2] of linkContainer"
+      ;show commandStr
+    ]
+  ]
+  ;show commandStr
+  set value runresult commandStr
+  ;show word "value=" value
+  report value
+end
+
+; called from the context of master turtle
+; this command sets the value of parameter stored in the link between master turtle and slave turtle, but from perspective of master turtle
+; therefore in link we should have two variables starting with value of variable parameter-prefix but ending with "-end1" and "-end2"
+to actor-set-turtle-link-endpoint-value [linkContainer parameter-prefix value]
+  let commandStr ""
+  if(linkContainer != nobody)[
+    ;show word "end1: " word [end1] of linkContainer word ", end2: " [end2] of linkContainer
+    ifelse(([end1] of linkContainer) = self)[
+      set commandStr word "set " word parameter-prefix word "-end1 " value
+    ][
+      set commandStr word "set " word parameter-prefix word "-end2 " value
+    ]
+    ask linkContainer[
+      ;show commandStr
+      run commandStr
+    ]
+  ]
+end
+
 ; ========================================================================================
 ; CSV support
 ; ========================================================================================
