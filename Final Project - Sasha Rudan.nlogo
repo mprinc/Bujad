@@ -1,4 +1,4 @@
-__includes["main.nls" "main-sasha.nls"]
+__includes["main.nls" "main_sasha.nls"]
 @#$#@#$#@
 GRAPHICS-WINDOW
 336
@@ -169,23 +169,6 @@ NIL
 NIL
 1
 
-BUTTON
-8
-136
-122
-169
-Load Activities
-load-activity-types
-NIL
-1
-T
-OBSERVER
-NIL
-A
-NIL
-NIL
-1
-
 SLIDER
 11
 533
@@ -335,7 +318,7 @@ SWITCH
 88
 Links-show-extra
 Links-show-extra
-1
+0
 1
 -1000
 
