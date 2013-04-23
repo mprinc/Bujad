@@ -1,0 +1,51 @@
+; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
+
+to change-relationship-through-time [actor1 actor2]
+   
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; calculates  preferential-   ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
+to-report actors-attractiveness [actorFrom actorTo]
+  let attractiveness 0
+  let actorFromIanwhats [] ; IamWhats connected to actorFrom
+  let actorToIanwhats [] ; IamWhats connected to actorTo
+  let actorIanwhatsBetween [] ; IamWhats connected to both actorFrom and actorTo
+  
+  ask actorFrom [set actorFromIanwhats iamwhat-actor-neighbors]
+  ask actorTo [set actorToIanwhats iamwhat-actor-neighbors]
+  ; http://stackoverflow.com/questions/8425518/netlogo-two-agentsets-operations
+  set actorIanwhatsBetween iamwhats with [member? self actorFromIanwhats and member? self actorToIanwhats]
+  
+  ; -----------
+  foreach (iamwhats-list)[
+    ask ?[
+      if(link-with turtle actorFrom != nobody and link-with turtle actorFrom != nobody )[ ; if this iamwhat is related to both actors      
+        
+      ]
+    ]
+  ]
+  report attractiveness
+end
+
+to change-relationships-by-activity-for-actor [actor]
+   
+end
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; changes closeness of al actors that took part in the activity    ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+to affect-relatinships-by-activity [activity]
+  ; in this version of model we check if there is link between actors, we don't create new ones 
+  ask activity[
+    type "actors in activity:\n"
+    ask in-activity-actor-neighbors[ ; all actors that participated in this activity
+      type (word "-" label "\n")
+    ]
+  ] 
+  
+end

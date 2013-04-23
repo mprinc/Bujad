@@ -1,0 +1,4 @@
+"label", "shape", "probability"
+"capoeira", "sheep", 0.1
+"writing", "person", 0.3
+"dancing", "person", 0.6

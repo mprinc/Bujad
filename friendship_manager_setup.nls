@@ -1,0 +1,164 @@
+; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
+
+to load-activity-types
+  set actor-types-list []
+  let activity-types-filename "activity-types.csv"
+  type "\n\nLoading activity-type descriptions from file " type activity-types-filename type "\n"
+
+  ;let activity-typesCsvList load-csv-to-list activity-types-filename
+  ;type "activity-typesCsvList (" type (length activity-typesCsvList) type "): " type activity-typesCsvList type "\n"
+
+  let activity-typesCsvHash load-csv-to-hash activity-types-filename
+  type "activity-typesCsvHash (" type (length activity-typesCsvHash) type "): " type activity-typesCsvHash type "\n"
+  
+  ; run "show \"Hello from run!\""
+  foreach activity-typesCsvHash[
+    let rowHash ?
+    type "iterating: " type rowHash type "\n"
+    
+    ;; setup activity-type
+    create-activity-types 1
+    [
+      set actor-types-list lput self actor-types-list
+      setxy (min-pxcor + 5) (min-pycor + 5 * (length actor-types-list))
+      set size 5
+      ;set hidden? true
+      ; adding parameters from CSV table
+      foreach (table:keys rowHash)[
+        let columnName ?
+        let columnValue table:get rowHash columnName
+        let commandStr word "set " word columnName word " " columnValue
+        ;show commandStr
+        run commandStr
+      ]
+    ]
+
+
+    ;show table:keys rowHash
+          ;print table:length rowHash
+      ;print table:get rowHash "leopard"
+      ;print table:keys rowHash
+
+  ]
+  
+end
+
+to load-iamwhats
+  set iamwhats-list []
+  let iamwhats-filename "iamwhats.csv"
+  type "\n\nLoading iamwhat descriptions from file " type iamwhats-filename type "\n"
+
+  let iamwhatsCsvHash load-csv-to-hash iamwhats-filename
+  type "iamwhatsCsvHash (" type (length iamwhatsCsvHash) type "): " type iamwhatsCsvHash type "\n"
+  
+  foreach iamwhatsCsvHash[
+    let rowHash ?
+    type "iterating: " type rowHash type "\n"
+    
+    ;; setup activity-type
+    create-iamwhats 1
+    [
+      set iamwhats-list lput self iamwhats-list
+      setxy (min-pxcor + 20 * (length iamwhats-list)) (max-pxcor - 5)
+      set size 5
+      ;set hidden? true
+      ; adding parameters from CSV table
+      foreach (table:keys rowHash)[
+        let columnName ?
+        let columnValue table:get rowHash columnName
+        let commandStr word "set " word columnName word " " columnValue
+        ;show commandStr
+        run commandStr
+      ]
+    ]
+  ]  
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Setup Procedures ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;
+
+; entry point to the model
+to setup-actors-and-friendships
+  ;clear-all-plots
+  clear-all
+  reset-ticks
+  
+  ask patches[
+    set pcolor white
+  ]
+  
+  load-activity-types
+  load-iamwhats
+
+  friendship_model_setup
+
+  ; globals
+  set actor-inspection-selected nobody
+  set mouse-was-up? true
+  
+  set activities-list []
+  setup-actors 
+  setup-friendships
+  setup-actor-iamwhats
+end
+
+to-report actor-name
+  report word "actor" " X"
+end
+ 
+to setup-actors
+  set-default-shape actors "face neutral"; "face happy", "face neutral", "face sad", "person", "outlined circle"
+
+  ;; setup actors
+  create-actors actors-num
+    [
+      let actorX random-xcor
+      let actorY random-ycor
+      if(actorX < min-pxcor + 10)[set actorX min-pxcor + 10]
+      if(actorX > max-pxcor - 10)[set actorX max-pxcor - 10]
+      if(actorY < min-pycor + 10)[set actorY min-pycor + 10]
+      if(actorY > max-pycor - 10)[set actorY max-pycor - 10]
+      setxy actorX actorY
+      set size ACTOR_SIZE_NEUTRAL
+      set price-absorption-limit actor-price-absorption-limit
+      set price-emission-limit actor-price-emission-limit  
+
+      ;show price-absorption-limit
+      set effect-left 0
+      set color blue
+      set label actor-name 
+    ]
+  
+  ;; Layout actors:
+  ;repeat 15 [do-layout]
+  ;repeat 55 [do-layout display]
+  display
+end
+
+to setup-friendships
+  ;; generate erdos-renyi random graph
+  let num-friendships ceiling (actors-num * friendship-avg-degree / 2)
+  while [count friendships < num-friendships]
+  [
+    ask one-of actors [
+      create-friendship-with one-of other actors[
+        set color blue
+        set thickness 1
+      ]
+    ]
+  ]
+end
+
+to setup-actor-iamwhats
+  ask actors[
+    ask n-of Actor-iamwhat-num iamwhats[
+      ; myself = actor
+      create-iamwhat-actor-with myself[
+        set color brown
+        set thickness 0.5
+        if(Links-show-extra = false)[set hidden? true]
+      ]      
+    ]
+  ]
+end

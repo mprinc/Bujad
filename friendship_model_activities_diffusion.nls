@@ -1,0 +1,89 @@
+; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
+
+to-report diffuse-activity
+  let activity-current nobody
+  let actor-difuser nobody
+
+  ;; create activity breed that will represent the activity that just happened
+  create-activities 1
+  [
+    set activities-list lput self activities-list
+    set activity-current self
+    
+    setxy (max-pxcor - 5) 0 ; we need to update it AFTER we se if activity DID happen in the ind
+    set size 5
+    ;set hidden? true
+    set shape "flower"
+  ]
+  
+  ; ask actor (actor-difuser) that is not in emittion saturation to emit an action
+  ; it will decide if it will emit it in according to emission probability
+  ask one-of actors with [price-emitted < price-emission-limit] [
+    ifelse (random-float 1 <= activity-emission-probability)[
+      set actor-difuser self
+      actor-diffuse-activity-from activity-current
+    ][
+      type "actor : " type self type "rejected to diffuse action\n"
+    ]
+  ]
+
+  ; if actor 'refused' to difuse action we have to revoke activity
+  ifelse (actor-difuser = nobody)[
+    ask activity-current [die]
+    set activities-list but-last activities-list
+  ][
+    ; we add 1 since we will put overflowed activities on the first position
+    let activity-y (max-pycor - 5 * (1 + length activities-list))
+  
+    type "activity-y = " type activity-y type ", min-pycor = " type min-pycor type "\n"
+    if(activity-y < min-pycor + 5)[
+      ask activities with [ycor < (max-pycor - 5)][
+        set ycor ycor + 5;
+      ]
+      set activity-y min-pycor + 5
+    ]
+
+    ; all overflowed activites should be hidden together with their activity-actors links
+    ask activities with [ycor >= (max-pycor - 5)][
+      set hidden? true;
+
+      ; equivalent to command my-out-<breeds>
+      ask my-out-activity-actors [
+        set hidden? true;
+      ]
+      ; equivalent to command my-in-<breeds>
+      ask my-in-activity-actors [
+        set hidden? true;
+      ]
+    ]
+
+    ask activity-current[
+      set ycor activity-y
+    ]
+  ]
+  report activity-current
+end
+
+; chosen actor-difuser will send activity activity-current to one (soon more) other actors that didn't reach absorption limit
+to actor-diffuse-activity-from [activity-current]
+  type "actor : " type self type "is diffusing action\n"
+  
+  create-activity-actor-to activity-current [
+    set shape "default"
+    set color yellow
+    if(Links-show-extra = false)[set hidden? true]
+  ]
+  
+  let actor-absorbers one-of other actors with [price-absorbed < price-absorption-limit]
+  if(actor-absorbers != nobody)[
+    ask one-of other actors with [price-absorbed < price-absorption-limit] [
+      set price-absorbed price-absorbed + 1
+      
+      create-activity-actor-from activity-current [
+        set shape "default"
+        set color red
+        if(Links-show-extra = false)[set hidden? true]
+      ]
+    ]
+  ] 
+end
