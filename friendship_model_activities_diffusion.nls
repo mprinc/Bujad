@@ -23,19 +23,24 @@ to-report diffuse-activity
   
   ; ask actor (actor-difuser) that is not in emittion saturation to emit an activity
   ; it will decide if it will emit it in according to emission probability
-  ask one-of actors with [price-emitted < price-emission-limit] [
-    ifelse (random-float 1 <= activity-emission-probability)[
-      set actor-difuser self
-      actor-diffuse-activity-from activity-current
-    ][
+  let actor-difuser-potential one-of actors with [price-emitted < price-emission-limit]
+
+  if(actor-difuser-potential != nobody)[
+    ask actor-difuser-potential [
+      ifelse (random-float 1 <= activity-emission-probability)[
+        set actor-difuser self
+        actor-diffuse-activity-from activity-current
+      ][
       ; type "actor : " type self type "rejected to diffuse activity\n"
+      ]
     ]
   ]
-
+  
   ; if actor 'refused' to difuse activity we have to revoke activity
   ifelse (actor-difuser = nobody)[
     ask activity-current [die]
     set activities-list but-last activities-list
+
   ][
     ; we add 1 since we will put overflowed activities on the first position
     let activity-y (max-pycor - 5 * (1 + length activities-list))
