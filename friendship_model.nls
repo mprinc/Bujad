@@ -107,7 +107,7 @@ undirected-link-breed [iamwhat-actors iamwhat-actor]
 iamwhat-actors-own
 [
   iamhow
-  iamlevel
+  level
 ]
 
 to friendship_model_setup

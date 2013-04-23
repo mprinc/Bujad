@@ -19,7 +19,11 @@ to-report actors-attractiveness [actorFrom actorTo]
   ; http://stackoverflow.com/questions/8425518/netlogo-two-agentsets-operations
   set actorIamWhatsBetween iamwhats with [member? self actorFromIamWhats and member? self actorToIamWhats]
   
-  
+  foreach(actorIamWhatsBetween)[
+    ;attractiveness = attractiveness + ask [iamwhat-actor-with actorFrom] * 
+      ;if(iamwhat-actor-with turtle actorFrom != nobody and link-with turtle actorFrom != nobody )[ ; if this iamwhat is related to both actors   
+    ;]
+  ]
   report attractiveness
 end
 

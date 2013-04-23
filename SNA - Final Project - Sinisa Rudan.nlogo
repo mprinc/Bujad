@@ -1,170 +1,4 @@
-extensions [nw]
-
-;  actors-num                 ;; number of actors existing in system, used for the initalization of model
-;  friendship-avg-degree      ;; average degree of friendships for actors
-
-; http://stackoverflow.com/questions/5830045/including-a-netlogo-source-file-into-another
-
-__includes["friendship_model.nls" "friendship_manager_setup.nls" "friendship_model_activities_diffusion.nls" "friendship_dynamics.nls"]
-
-; from the interface
-;------------------------------------------
-; Actor-price-absorption-restitution              ; amount of absorption price that actor gains over each tick
-; Actor-price-emission-restitution                ; amount of emission price that actor gains over each tick
-
-globals
-[
-  actor-inspection-selected
-  activity-inspection-selected
-  mouse-was-up? 
-  last-activity
- ]
-
-;;;;;;;;;;;;;;;;;;;;;;;
-;;; Main Procedures ;;;
-;;;;;;;;;;;;;;;;;;;;;;;
-
-
-;; spring layout of infection tree while in tree mode
-;; otherwise, layout all nodes and friendships
-to do-layout
-    repeat 5 [layout-spring actors friendships 0.03 20 20]
-end
-
-; responsible for executing one time tick in the model
-to do-tick
-  type "\n\nDifussing activities:\n"
-  set last-activity diffuse-activity
-  if last-activity != nobody [
-    affect-relatinships-by-activity last-activity
-  ]
-  
-  ask actors  with [effect-left > 0 ][
-    set effect-left effect-left - 1
-  ]
-
-  reset-actors
-  ask n-of 3 actors[
-    set shape "face happy"
-    set size ACTOR_SIZE_ACTIVE
-    set effect-left 5
-    set color blue + 2
-  ]
-  display
-end
-
-; This function recovers (heals) system (network) members
-; in this case it includes only actors:
-;   - they get reduced price on both absorption and emittion of activities for specified amount over the system tick
-to recover-energies
-  ask actors[
-    set price-absorbed (price-absorbed - Actor-price-absorption-restitution)
-    set price-emitted (price-emitted - Actor-price-emission-restitution)
-  ]
-end
-
-to reset-actors
-  ask actors  with [effect-left <= 0 ][
-    set shape ACTOR_SHAPE_NEUTRAL
-    set size ACTOR_SIZE_NEUTRAL
-    set color blue
-  ]
-end
-
-to dispatch-activity
-  
-end
-
-; this function resets the history of the model and starts everything from the beginning but without changin structure or any randomly choosen initial parameters
-to rest-history
-end
-
-; displays the friendship of an actor
-to display-friendship-of-actor
-  set color white
-  ask friendship-neighbors[
-    set color color + 2
-  ]
-  ask my-friendships [
-    set color color + 2
-    ;set length "4"
-    ;set thickness 4
-  ]
-end
-
-; This is a on-mouse-click function (we add extra guarding variable to switch mouse-down? into mouse-click behaviour
-; It checks what actor did we click on and then it shows info about it
-to inspect-actor
-  ifelse (mouse-down?)
-  [
-    if (mouse-was-up?)[
-      let nearest-actors actors with [distancexy-nowrap mouse-xcor mouse-ycor < 5]
-      ifelse any? nearest-actors
-      [
-        ask one-of nearest-actors
-        [
-          set actor-inspection-selected self
-          display-friendship-of-actor
-        ]
-        display
-      ][
-        set actor-inspection-selected nobody      
-      ]
-    ]
-    set mouse-was-up? false
-  ][
-    set mouse-was-up? true
-  ]  
-end
-
-; displays the friendship of an actor
-to display-actors-of-activity
-  set color white
-  ; equivalent to command link-neighbors
-  ; Reports the agentset of all (actors) turtles found at the other end of undirected links connected to this turtle.
-
-  ; equivalent to command in-<breed>-neighbors
-  ask in-activity-actor-neighbors[
-    set color color + 2
-  ]
-  ; equivalent to command out-<breed>-neighbors
-  ask out-activity-actor-neighbors[
-    set color color + 2
-  ]
-  ; equivalent to command my-out-<breeds>
-  ask my-out-activity-actors [
-    set color color + 2
-  ]
-  ; equivalent to command my-in-<breeds>
-  ask my-in-activity-actors [
-    set color color + 2
-  ]
-end
-
-; This is a on-mouse-click function (we add extra guarding variable to switch mouse-down? into mouse-click behaviour
-; It checks what actor did we click on and then it shows info about it
-to inspect-activity
-  ifelse (mouse-down?)
-  [
-    if (mouse-was-up?)[
-      let nearest-activities activities with [distancexy-nowrap mouse-xcor mouse-ycor < 5]
-      ifelse any? nearest-activities
-      [
-        ask one-of nearest-activities
-        [
-          set activity-inspection-selected self
-          display-actors-of-activity
-        ]
-        display
-      ][
-        set activity-inspection-selected nobody      
-      ]
-    ]
-    set mouse-was-up? false
-  ][
-    set mouse-was-up? true
-  ]  
-end
+__includes["main.nls" "main_sinisa.nls"]
 @#$#@#$#@
 GRAPHICS-WINDOW
 336
@@ -450,18 +284,18 @@ NIL
 1
 
 BUTTON
-954
-257
-1077
-290
-dispatch-activity
-dispatch-activity
+927
+126
+1050
+159
+test-sinisa
+test-sinisa
 NIL
 1
 T
 OBSERVER
 NIL
-NIL
+T
 NIL
 NIL
 1

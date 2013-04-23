@@ -1,0 +1,5 @@
+; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
+
+to test-sinisa
+
+end

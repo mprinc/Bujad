@@ -157,6 +157,7 @@ to setup-actor-iamwhats
       create-iamwhat-actor-with myself[
         set color brown
         set thickness 0.5
+        set level 1
         if(Links-show-extra = false)[set hidden? true]
       ]      
     ]
