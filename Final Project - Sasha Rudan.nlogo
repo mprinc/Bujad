@@ -89,41 +89,35 @@ to inspect-system
     if (mouse-was-up?)[
       ; It checks what actor did we click on and then it shows info about it
       let nearest-actors actors with [distancexy-nowrap mouse-xcor mouse-ycor < 5]
-      ifelse any? nearest-actors
+      if any? nearest-actors
       [
         ask one-of nearest-actors
         [
           display-friendship-of-actor
         ]
         display
-      ][
-        set actor-inspection-selected nobody      
       ]
 
       ; It checks what activity did we click on and then it shows info about it
       let nearest-activities activities with [distancexy-nowrap mouse-xcor mouse-ycor < 5]
-      ifelse any? nearest-activities
+      if any? nearest-activities
       [
         ask one-of nearest-activities
         [
           display-actors-of-activity
         ]
         display
-      ][
-        set activity-inspection-selected nobody      
       ]
 
       ; It checks what iamwhat did we click on and then it shows info about it
       let nearest-iamwhats iamwhats with [distancexy-nowrap mouse-xcor mouse-ycor < 5]
-      ifelse any? nearest-iamwhats
+      if any? nearest-iamwhats
       [
         ask one-of nearest-iamwhats
         [
           display-links-of-iamwhat
         ]
         display
-      ][
-        set iamwhat-inspection-selected nobody      
       ]
     ]
     set mouse-was-up? false
@@ -134,84 +128,96 @@ end
 
 ; displays the friendship of an actor
 to display-friendship-of-actor
+  if(actor-inspection-selected = 0) [set actor-inspection-selected nobody]
   if(actor-inspection-selected != nobody)[
-    set color color - 2
-    set size size - 2
-    ask friendship-neighbors[
+    ask actor-inspection-selected[
       set color color - 2
+      set size size - 2
+      ask friendship-neighbors[
+        set color color - 2
+      ]
+      ask my-friendships [
+        set color color - 2
+        ; friendships are always visible
+        ;if(Links-show-extra = false)[set hidden? true]
+      ]
+    ]
+  ]
+  ifelse(actor-inspection-selected = self)[
+    set actor-inspection-selected nobody
+  ][
+    set actor-inspection-selected self
+    
+    set color color + 2
+    set size size + 2
+    ask friendship-neighbors[
+      set color color + 2
     ]
     ask my-friendships [
-      set color color - 2
-      ; friendships are always visible
-      ;if(Links-show-extra = false)[set hidden? true]
+      set color color + 2
+      set hidden? false
     ]
-  ]
-
-  set actor-inspection-selected self
-
-  set color color + 2
-  set size size + 2
-  ask friendship-neighbors[
-    set color color + 2
-  ]
-  ask my-friendships [
-    set color color + 2
-    set hidden? false
   ]
 end
 
 ; displays the friendship of an actor
 to display-actors-of-activity
+  if(activity-inspection-selected = 0) [set activity-inspection-selected nobody]
   if(activity-inspection-selected != nobody)[
-    set color color - 2
-    set size size - 2
+    ask activity-inspection-selected[
+      set color color - 2
+      set size size - 2
+      ; equivalent to command link-neighbors
+      ; Reports the agentset of all (actors) turtles found at the other end of undirected links connected to this turtle.
+      
+      ; equivalent to command in-<breed>-neighbors
+      ask in-activity-actor-neighbors[
+        set color color - 2
+      ]
+      ; equivalent to command out-<breed>-neighbors
+      ask out-activity-actor-neighbors[
+        set color color - 2
+      ]
+      ; equivalent to command my-out-<breeds>
+      ask my-out-activity-actors [
+        set color color - 2
+        if(Links-show-extra = false)[set hidden? true]
+      ]
+      ; equivalent to command my-in-<breeds>
+      ask my-in-activity-actors [
+        set color color - 2
+        if(Links-show-extra = false)[set hidden? true]
+      ]
+    ]
+  ]
+  
+  ifelse(activity-inspection-selected = self)[
+    set activity-inspection-selected nobody
+  ][
+    set activity-inspection-selected self
+    set color color + 2
+    set size size + 2
     ; equivalent to command link-neighbors
     ; Reports the agentset of all (actors) turtles found at the other end of undirected links connected to this turtle.
     
     ; equivalent to command in-<breed>-neighbors
     ask in-activity-actor-neighbors[
-      set color color - 2
+      set color color + 2
     ]
     ; equivalent to command out-<breed>-neighbors
     ask out-activity-actor-neighbors[
-      set color color - 2
+      set color color + 2
     ]
     ; equivalent to command my-out-<breeds>
     ask my-out-activity-actors [
-      set color color - 2
-      if(Links-show-extra = false)[set hidden? true]
+      set color color + 2
+      set hidden? false
     ]
     ; equivalent to command my-in-<breeds>
     ask my-in-activity-actors [
-      set color color - 2
-      if(Links-show-extra = false)[set hidden? true]
+      set color color + 2
+      set hidden? false
     ]
-  ]
-
-  set activity-inspection-selected self
- 
-  set color color + 2
-  set size size + 2
-  ; equivalent to command link-neighbors
-  ; Reports the agentset of all (actors) turtles found at the other end of undirected links connected to this turtle.
-
-  ; equivalent to command in-<breed>-neighbors
-  ask in-activity-actor-neighbors[
-    set color color + 2
-  ]
-  ; equivalent to command out-<breed>-neighbors
-  ask out-activity-actor-neighbors[
-    set color color + 2
-  ]
-  ; equivalent to command my-out-<breeds>
-  ask my-out-activity-actors [
-    set color color + 2
-    set hidden? false
-  ]
-  ; equivalent to command my-in-<breeds>
-  ask my-in-activity-actors [
-    set color color + 2
-    set hidden? false
   ]
 end
 
@@ -219,7 +225,11 @@ end
 ; it displays links to actors that are interested in it, but it will display later activities also, etc
 to display-links-of-iamwhat
   type "iamwhat-inspection-selected = " type iamwhat-inspection-selected type "\n"
-  if(iamwhat-inspection-selected != 0 or member? iamwhat-inspection-selected iamwhats)[
+  if(iamwhat-inspection-selected = 0) [set iamwhat-inspection-selected nobody]
+
+  type "checking if iamwhat-inspection-selected is nobody. It is " type iamwhat-inspection-selected type "\n"
+  if(iamwhat-inspection-selected != nobody)[
+    type "restoring  iamwhat-inspection-selected = " type iamwhat-inspection-selected type "\n"
     ask iamwhat-inspection-selected[
       set color color - 2
       set size size - 2
@@ -234,8 +244,11 @@ to display-links-of-iamwhat
   ]
   
   ifelse(iamwhat-inspection-selected = self)[
+    type "resetting iamwhat-inspection-selected = " type iamwhat-inspection-selected type " to nobody\n"
     set iamwhat-inspection-selected nobody
   ][
+    type "setting iamwhat-inspection-selected = " type self type "\n"
+    set iamwhat-inspection-selected self
     set color color + 2
     set size size + 2
     ask iamwhat-actor-neighbors[
@@ -251,8 +264,8 @@ end
 GRAPHICS-WINDOW
 336
 10
-916
-611
+914
+609
 80
 80
 3.5404
@@ -564,7 +577,7 @@ HORIZONTAL
 SLIDER
 11
 369
-170
+196
 402
 Actor-iamwhat-num
 Actor-iamwhat-num
