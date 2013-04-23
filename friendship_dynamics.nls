@@ -36,11 +36,12 @@ to-report actors-attractiveness [actorFrom actorTo]
   set attractiveness attractiveness + Attractiveness-Preference-Ponder * preference
   
   ;how many friends share actorFrom actorTo:
+  type "Mutual friends:"
   ask actors with [friendship-neighbor? actorFrom and friendship-neighbor? actorTo]
   [
     type [label] of self
   ]
-  
+   type "END - Mutual friends\n"
   report attractiveness
 end
 
@@ -48,6 +49,10 @@ to change-relationships-by-activity-for-actor [actor]
    
 end
 
+
+to-report calculate-activity-objective-payoff [activity]
+  
+end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; changes closeness of al actors that took part in the activity    ;;;

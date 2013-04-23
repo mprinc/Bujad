@@ -1,5 +1,14 @@
+globals[
+  selected_last
+  selected_next2last
+]
+
 to select-actor [actor]
   ask actor[set label-color black]
+end
+
+to unselect-actor [actor]
+  ask actor[set label-color red]
 end
 
 
@@ -31,7 +40,11 @@ to display-friendship-of-actor
   ]
   ifelse(actor-inspection-selected = self)[
     set actor-inspection-selected nobody
-  ][
+  ]
+  [    
+    set selected_next2last selected_last
+    set selected_last self
+    
     set actor-inspection-selected self
     
     set color color + 2
@@ -160,7 +173,11 @@ to display-selected-activity
   
   ifelse(activity-inspection-selected = self)[
     set activity-inspection-selected nobody
-  ][
+  ]
+  [
+    set selected_next2last selected_last
+    set selected_last self
+    
     set activity-inspection-selected self
     set color color + 2
     set size size + 2

@@ -1,13 +1,13 @@
 __includes["main.nls" "main_sinisa.nls"]
 @#$#@#$#@
 GRAPHICS-WINDOW
-336
+322
 10
-984
-679
+921
+630
 80
 80
-3.963
+3.66
 1
 10
 1
@@ -365,25 +365,25 @@ Attractiveness pondering:
 1
 
 SLIDER
-934
-251
-1167
-284
+926
+250
+1159
+283
 Attractiveness-Sociable-Ponder
 Attractiveness-Sociable-Ponder
 0
 1
-1
+0.6
 0.05
 1
 NIL
 HORIZONTAL
 
 SLIDER
-943
-305
-1183
-338
+926
+303
+1166
+336
 Attractiveness-Preference-Ponder
 Attractiveness-Preference-Ponder
 0
@@ -408,6 +408,31 @@ Activities-number-per-tick
 1
 NIL
 HORIZONTAL
+
+SLIDER
+927
+385
+1135
+418
+Relationship-Treshold-Friend
+Relationship-Treshold-Friend
+0
+1
+0.8
+.1
+1
+NIL
+HORIZONTAL
+
+TEXTBOX
+929
+360
+1079
+378
+Relationships:
+11
+0.0
+1
 
 @#$#@#$#@
 ## WHAT IS IT?

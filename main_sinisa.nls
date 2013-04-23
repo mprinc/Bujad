@@ -2,13 +2,22 @@
 
 to test-sinisa
   type "test-sinisa\n"
+  let a1 nobody
+  let a2 nobody
   ; let ac2 sort n-of 2 actors
   ; type ac2
   ; let attractivness actors-attractiveness (last ac2) (first ac2)
-  let a1 (first sort actors) 
-  let a2 (last sort actors)
+  ifelse (selected_next2last = 0 or selected_next2last = nobody)
+  [set a1  (first sort actors)]
+  [set a1 selected_next2last]
+  
+  ifelse (selected_last = 0 or selected_last = nobody)
+  [set a2  (last sort actors)]
+  [set a2 selected_last]
+    
   let attractivness actors-attractiveness a1 a2
-  type word attractivness "\n"
+  type word "attractivness: " (word attractivness "\n")
+  ask actors [unselect-actor self]
   select-actor a1
   select-actor a2
 end
