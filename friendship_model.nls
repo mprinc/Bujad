@@ -23,7 +23,7 @@ globals
 
   actor-types-list            ; list of all actor types in the system (not used yet?)
   activities-list             ; list of all activity types in the system
-  iamwhats-list           ; list of all IAmWhat types in the system
+  iamwhats-list               ; list of all IAmWhats in the system
 ]
 
 ; http://modelingcommons.org/browse/one_model/2284#model_tabs_browse_procedures

@@ -10,23 +10,16 @@ end
  
 to-report actors-attractiveness [actorFrom actorTo]
   let attractiveness 0
-  let actorFromIanwhats [] ; IamWhats connected to actorFrom
-  let actorToIanwhats [] ; IamWhats connected to actorTo
-  let actorIanwhatsBetween [] ; IamWhats connected to both actorFrom and actorTo
+  let actorFromIamWhats [] ; IamWhats connected to actorFrom
+  let actorToIamWhats [] ; IamWhats connected to actorTo
+  let actorIamWhatsBetween [] ; IamWhats connected to both actorFrom and actorTo
   
-  ask actorFrom [set actorFromIanwhats iamwhat-actor-neighbors]
-  ask actorTo [set actorToIanwhats iamwhat-actor-neighbors]
+  ask actorFrom [set actorFromIamWhats iamwhat-actor-neighbors]
+  ask actorTo [set actorToIamWhats iamwhat-actor-neighbors]
   ; http://stackoverflow.com/questions/8425518/netlogo-two-agentsets-operations
-  set actorIanwhatsBetween iamwhats with [member? self actorFromIanwhats and member? self actorToIanwhats]
+  set actorIamWhatsBetween iamwhats with [member? self actorFromIamWhats and member? self actorToIamWhats]
   
-  ; -----------
-  foreach (iamwhats-list)[
-    ask ?[
-      if(link-with turtle actorFrom != nobody and link-with turtle actorFrom != nobody )[ ; if this iamwhat is related to both actors      
-        
-      ]
-    ]
-  ]
+  
   report attractiveness
 end
 
