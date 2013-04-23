@@ -155,10 +155,10 @@ Friendships:
 BUTTON
 928
 13
-1042
+1045
 46
-Inspect Actor
-inspect-actor
+Inspect System
+inspect-system
 T
 1
 T
@@ -265,23 +265,6 @@ actor-price-emission-limit
 1
 NIL
 HORIZONTAL
-
-BUTTON
-927
-51
-1043
-84
-Inspect Activity
-inspect-activity
-T
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
 
 BUTTON
 927
