@@ -136,13 +136,9 @@ to setup-actors
       set effect-left 0
       set color blue + 2
       set label-color red
-<<<<<<< HEAD
       set label actor-name
       
       set sociable random 3
-=======
-      set label actor-name 
->>>>>>> 7b4162ea3ab059865c8c76c7a1091facf65c49c2
     ]
   
   ;; Layout actors:
