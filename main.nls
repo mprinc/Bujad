@@ -36,7 +36,7 @@ end
 
 ; responsible for executing one time tick in the model
 to do-tick
-  type "\n\nDifussing activities:\n"
+  ; type "\n\nDifussing activities:\n"
   let activities-per-tick (count actors) * Activities-number-per-tick
   repeat activities-per-tick[
     set last-activity diffuse-activity
@@ -58,6 +58,7 @@ to do-tick
     set color blue + 2
   ]
   display
+  recover-energies
 end
 
 ; This function recovers (heals) system (network) members

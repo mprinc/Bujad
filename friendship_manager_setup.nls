@@ -1,8 +1,10 @@
 ; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
 
 globals[
+  activities-list
   user_no
 ]
+
 to load-activity-types
   set actor-types-list []
   let activity-types-filename "activity-types.csv"
@@ -86,6 +88,7 @@ to setup-actors-and-friendships
   ;clear-all-plots
   clear-all
   reset-ticks
+  set random-generator-initial
   
   ask patches[
     set pcolor white
@@ -166,6 +169,7 @@ to setup-friendships
 end
 
 to setup-manual-attractiveness-between-actors
+  show "setup-manual-attractiveness-between-actors"
   ask actors[
     let actorsOther other actors
     foreach sort actorsOther[

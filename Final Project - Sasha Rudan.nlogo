@@ -433,6 +433,17 @@ Attractiveness-manual-standard-deviation
 NIL
 HORIZONTAL
 
+INPUTBOX
+1103
+210
+1258
+270
+random-generator-initial
+0
+1
+0
+Number
+
 @#$#@#$#@
 ## WHAT IS IT?
 
