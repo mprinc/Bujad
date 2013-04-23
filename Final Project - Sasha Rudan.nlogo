@@ -170,10 +170,10 @@ NIL
 1
 
 SLIDER
-11
-533
-319
-566
+8
+558
+316
+591
 activity-emission-probability
 activity-emission-probability
 0
@@ -185,20 +185,20 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-22
-512
-172
-530
+19
+537
+169
+555
 Activities:
 11
 44.0
 1
 
 SLIDER
-11
-573
-319
-606
+8
+598
+316
+631
 activity-acceptance-probability
 activity-acceptance-probability
 0
@@ -378,10 +378,10 @@ Attractiveness:
 1
 
 SLIDER
-11
-613
-319
-646
+8
+638
+316
+671
 Activities-number-per-tick
 Activities-number-per-tick
 0
@@ -393,15 +393,45 @@ NIL
 HORIZONTAL
 
 MONITOR
-1024
-198
-1126
-243
+954
+202
+1056
+247
 Activities Num
 activities-num-emitted
 0
 1
 11
+
+SLIDER
+931
+488
+1218
+521
+Attractiveness-manual-mean
+Attractiveness-manual-mean
+0
+1
+0.6
+0.02
+1
+NIL
+HORIZONTAL
+
+SLIDER
+932
+528
+1219
+561
+Attractiveness-manual-standard-deviation
+Attractiveness-manual-standard-deviation
+0
+1
+0.28
+0.02
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -134,8 +134,6 @@ to setup-actors
       set color blue + 2
       set label-color red
       set label actor-name 
-      
-      set sociable random 3
     ]
   
   ;; Layout actors:
@@ -153,7 +151,72 @@ to setup-friendships
       create-friendship-with one-of other actors[
         set color blue
         set thickness 1
+        set manual-attractiveness-end1 1
+        set manual-attractiveness-end2 2
       ]
+    ]
+  ]
+  setup-manual-attractiveness-between-actors
+end
+
+to setup-manual-attractiveness-between-actors
+  ask actors[
+    let actorsOther other actors
+    foreach sort actorsOther[
+      let actorOther ?
+      let friendshipToOther friendship-with actorOther
+      if(friendshipToOther != nobody)[
+        ; file://localhost/Applications/NetLogo%205.0.3/docs/dictionary.html#random-normal
+        let manualAtract random-normal Attractiveness-manual-mean Attractiveness-manual-standard-deviation
+        if(manualAtract < 0)[set manualAtract 0]
+        if(manualAtract > 1)[set manualAtract 1]
+        
+        actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" manualAtract
+        ; let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
+        ; show word "value : " value
+      ]
+    ]
+  ]
+end
+
+; called from the context of master turtle
+; this reporter returns value of parameter stored in the link between master turtle and slave turtle, but from perspective of master turtle
+; therefore in link we should have two variables starting with value of variable parameter-prefix but ending with "-end1" and "-end2"
+to-report actor-get-turtle-link-endpoint-value [linkContainer parameter-prefix]
+  let commandStr ""
+  let value 0
+  if(linkContainer != nobody)[
+    ;show word "end1: " word [end1] of linkContainer word ", end2: " [end2] of linkContainer
+    ;show word "manual-attractiveness-end1: " word [manual-attractiveness-end1] of linkContainer word ", manual-attractiveness-end2: " [manual-attractiveness-end2] of linkContainer
+    ifelse(([end1] of linkContainer) = self)[
+      set commandStr word " [" word parameter-prefix "-end1] of linkContainer"
+      ;show commandStr
+    ][
+      set commandStr word " [" word parameter-prefix "-end2] of linkContainer"
+      ;show commandStr
+    ]
+  ]
+  ;show commandStr
+  set value runresult commandStr
+  ;show word "value=" value
+  report value
+end
+
+; called from the context of master turtle
+; this command sets the value of parameter stored in the link between master turtle and slave turtle, but from perspective of master turtle
+; therefore in link we should have two variables starting with value of variable parameter-prefix but ending with "-end1" and "-end2"
+to actor-set-turtle-link-endpoint-value [linkContainer parameter-prefix value]
+  let commandStr ""
+  if(linkContainer != nobody)[
+    ;show word "end1: " word [end1] of linkContainer word ", end2: " [end2] of linkContainer
+    ifelse(([end1] of linkContainer) = self)[
+      set commandStr word "set " word parameter-prefix word "-end1 " value
+    ][
+      set commandStr word "set " word parameter-prefix word "-end2 " value
+    ]
+    ask linkContainer[
+      ;show commandStr
+      run commandStr
     ]
   ]
 end
