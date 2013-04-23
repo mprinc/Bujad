@@ -78,6 +78,9 @@ to actor-diffuse-activity-from [activity-current]
   ; no need for one-of (there has to be only one link) except for de-agentseting to breed
   ask activity-current[set activity-type-current one-of activity-type-activity-neighbors]
 
+  ; consider emitting price
+  set price-emitted price-emitted + [price-to-diffuse] of activity-type-current
+
   ; create a link between actor emitter and activity
   create-activity-actor-to activity-current [
     set shape "default"
@@ -89,6 +92,7 @@ to actor-diffuse-activity-from [activity-current]
   let actor-absorbers one-of other actors with [price-absorbed < price-absorption-limit]
   if(actor-absorbers != nobody)[
     ask actor-absorbers [
+      ; consider absorbtion price
       set price-absorbed price-absorbed + [price-to-absorb] of activity-type-current
       
       create-activity-actor-from activity-current [
