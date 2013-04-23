@@ -43,6 +43,7 @@ actors-own
   price-emitted                ; [roce of emitted activities over time (note, each tick this get reduced by healing factor)
   price-emission-limit         ; this is the limit over which actor cannot emit any more activity
   sociable                     ; how sociable actor is
+  popularity                   ; how popular actor is in general/global terms, used for standard models for comparesment
 ]
 
 ; describes friendships (in other words: connections, links, relations) between actors in the network
