@@ -438,7 +438,7 @@ INPUTBOX
 210
 1258
 270
-random-generator-initial
+Random-generator-initial
 0
 1
 0
