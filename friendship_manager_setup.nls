@@ -148,7 +148,10 @@ end
 
 to setup-actor-iamwhats
   ask actors[
-    ask n-of Actor-iamwhat-num iamwhats[
+    let iamwhat-num round random-normal Actor-iamwhat-mean Actor-iamwhat--standard-deviation
+    if(iamwhat-num < 0)[set iamwhat-num 0]
+    if(iamwhat-num > count iamwhats)[set iamwhat-num count iamwhats]
+    ask n-of iamwhat-num iamwhats[
       ; myself = actor
       create-iamwhat-actor-with myself[
         set color brown

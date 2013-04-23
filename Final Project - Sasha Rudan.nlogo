@@ -43,10 +43,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-12
-442
-317
-475
+10
+474
+315
+507
 friendship-avg-degree
 friendship-avg-degree
 0.25
@@ -143,10 +143,10 @@ NIL
 1
 
 TEXTBOX
-14
-421
-164
-439
+12
+453
+162
+471
 Friendships:
 11
 23.0
@@ -282,14 +282,14 @@ HORIZONTAL
 SLIDER
 11
 369
-196
+314
 402
-Actor-iamwhat-num
-Actor-iamwhat-num
+Actor-iamwhat-mean
+Actor-iamwhat-mean
 0
 5
-2
 1
+0.5
 1
 WHATs
 HORIZONTAL
@@ -483,6 +483,21 @@ NIL
 NIL
 NIL
 1
+
+SLIDER
+11
+410
+313
+443
+Actor-iamwhat--standard-deviation
+Actor-iamwhat--standard-deviation
+0
+5
+4
+0.5
+1
+WHATs
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
