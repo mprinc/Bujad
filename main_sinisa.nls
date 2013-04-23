@@ -20,4 +20,14 @@ to test-sinisa
   ask actors [unselect-actor self]
   select-actor a1
   select-actor a2
+  ask friendships with [(end1 = a1 and end2 = a1) or (end1 = a2 and end2 = a1)][
+    show link-length 
+    ;set link-length  2
+  ]
+  
+  let fr nobody
+  ask a1[set fr (friendship-with a2)]
+  if(fr != nobody)[
+    show [link-length] of fr
+  ]
 end

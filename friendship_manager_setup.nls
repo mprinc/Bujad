@@ -133,7 +133,7 @@ to setup-actors
       set effect-left 0
       set color blue + 2
       set label-color red
-      set label actor-name 
+      set label actor-name
       
       set sociable random 3
     ]

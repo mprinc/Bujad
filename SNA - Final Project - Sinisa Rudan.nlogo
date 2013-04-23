@@ -434,6 +434,13 @@ Relationships:
 0.0
 1
 
+OUTPUT
+942
+462
+1192
+628
+12
+
 @#$#@#$#@
 ## WHAT IS IT?
 

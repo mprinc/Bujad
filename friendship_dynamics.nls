@@ -51,6 +51,9 @@ end
 
 
 to-report calculate-activity-objective-payoff [activity]
+  let payoff 0
+  set payoff payoff + intensity
+  report payoff
   
 end
 
