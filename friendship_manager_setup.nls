@@ -94,9 +94,9 @@ to setup-actors-and-friendships
   set mouse-was-up? true
   
   set activities-list []
-  setup-actors 
-  setup-friendships
+  setup-actors
   setup-actor-iamwhats
+  setup-friendships
 end
 
 to setup-actors
@@ -131,20 +131,37 @@ to setup-actors
 end
 
 to setup-friendships
-  ;; generate erdos-renyi random graph
-  let num-friendships ceiling (actors-num * friendship-avg-degree / 2)
-  while [count friendships < num-friendships]
-  [
-    ask one-of actors [
-      create-friendship-with one-of other actors[
-        set color blue
-        set thickness 1
-        set manual-attractiveness-end1 1
-        set manual-attractiveness-end2 2
+  ifelse(Friendships_generator = "ER")[ ;; generate erdos-renyi random graph  
+    let num-friendships ceiling (actors-num * friendship-avg-degree / 2)
+    while [count friendships < num-friendships]
+    [
+      ask one-of actors [
+        create-friendship-with one-of other actors[
+          set color blue
+          set thickness 1
+          set manual-attractiveness-end1 1
+          set manual-attractiveness-end2 2
+        ]
+      ]
+    ]
+  ]
+  [     ;"Attractiveness"
+    ask actors [
+      ask other actors[
+        ;show word myself self
+        ;if(myself = self) [show word myself (word " = " self)]
+        let attractiveness (actors-attractiveness-IamWhats myself self)
+        ; show attractiveness
+        if(attractiveness > 0)[ ;if actors share interests
+          create-friendship-with myself [
+            ;set thicknes-end1
+          ]
+        ]        
       ]
     ]
   ]
 end
+
 
 to setup-actor-iamwhats
   ask actors[

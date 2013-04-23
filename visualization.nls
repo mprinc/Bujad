@@ -4,11 +4,16 @@ globals[
 ]
 
 to select-actor [actor]
-  ask actor[set label-color black]
+  ask actor[set label-color white]
 end
 
 to unselect-actor [actor]
   ask actor[set label-color red]
+end
+
+to display_relationship_strength_statistics
+  ;max-one-of agentset [reporter] 
+  ;show count patches with-max [pxcor]
 end
 
 
@@ -73,6 +78,11 @@ to type-actor [actor]
   ask actor[
     type word "** Selected: " (word label ":\n")
     type word "sociable: " (word sociable "\n")
+    print "linked-IamWhats:"
+    foreach (sort get-linked-IamWhats actor)
+    [
+      print [label] of ?
+    ]
   ]
 end
 

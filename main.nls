@@ -5,7 +5,7 @@ extensions [nw]
 
 ; http://stackoverflow.com/questions/5830045/including-a-netlogo-source-file-into-another
 
-__includes["friendship_model.nls" "friendship_manager_setup.nls" "friendship_model_activities_diffusion.nls" "friendship_dynamics.nls" "visualization.nls" "friendship_measures.nls"]
+__includes["friendship_model.nls" "friendship_manager_setup.nls" "friendship_model_activities_diffusion.nls" "friendship_dynamics.nls" "visualization.nls" "friendship_measures.nls" "iamwhats.nls"]
 
 ; from the interface
 ;------------------------------------------

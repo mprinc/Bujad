@@ -1,4 +1,35 @@
-; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
+; ========================================================================================
+; do-tick personal commands
+; ========================================================================================
+
+to do-tick-sasha-start
+end
+
+to do-tick-sinisha-start
+end
+
+to do-tick-sasha-end
+end
+
+to do-tick-sinisha-end
+end
+
+
+; ========================================================================================
+; setup personal commands
+; ========================================================================================
+
+to setup-start-sasha
+end
+
+to setup-start-sinisha
+end
+
+to setup-end-sasha
+end
+
+to setup-end-sinisha
+end
 
 to test-sinisa
   type "test-sinisa\n"
@@ -31,16 +62,4 @@ to test-sinisa
     show [link-length] of fr
     ; ask fr[set link-length 2]
   ]
-end
-
-to setup-start-sasha
-end
-
-to setup-start-sinisha
-end
-
-to setup-end-sasha
-end
-
-to setup-end-sinisha
 end
