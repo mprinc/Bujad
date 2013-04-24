@@ -95,6 +95,7 @@ breed [activities activity]
 activities-own
 [
   intensity
+  time
 ]
 
 
