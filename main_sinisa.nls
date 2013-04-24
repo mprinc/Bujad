@@ -14,6 +14,7 @@ end
 to do-tick-sinisha-end
   decay_relationsips
   do-plotting
+  let ar mean_attractiveness_realization
 end
 
 

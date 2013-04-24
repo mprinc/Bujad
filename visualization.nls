@@ -28,8 +28,13 @@ to do-plotting
      set-current-plot-pen "thicknes"
      let thicnkesses [thicknes-end1] of friendships
      let mean_thicnkesses (mean thicnkesses)
-     print mean_thicnkesses
+     ; print mean_thicnkesses
      plot mean_thicnkesses
+     
+     set-current-plot "attractiveness realization"
+     set-current-plot-pen "ar"     
+     ; print word "mean_attractiveness_realization: " mean_attractiveness_realization
+     plot mean_attractiveness_realization
 end
 
 

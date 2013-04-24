@@ -185,9 +185,9 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-23
+10
 448
-173
+160
 466
 Activities:
 11
@@ -297,10 +297,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-37
-643
-225
-676
+454
+698
+642
+731
 Actor-iamwhat-num
 Actor-iamwhat-num
 0
@@ -429,10 +429,10 @@ Random-generator-initial
 Number
 
 SLIDER
-269
-658
-441
-691
+454
+735
+626
+768
 Actor-iamwhat-mean
 Actor-iamwhat-mean
 0
@@ -524,7 +524,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-0
+1
 
 CHOOSER
 179
@@ -535,6 +535,39 @@ Chooser-whom-to-receive
 Chooser-whom-to-receive
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
 0
+
+SLIDER
+10
+637
+256
+670
+Activity-atract-relationship-ponder
+Activity-atract-relationship-ponder
+0
+1
+0.2
+0.01
+1
+NIL
+HORIZONTAL
+
+PLOT
+996
+579
+1196
+790
+attractiveness realization
+time
+attractiveness realization
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"ar" 1.0 0 -16777216 true "" ""
 
 @#$#@#$#@
 ## WHAT IS IT?

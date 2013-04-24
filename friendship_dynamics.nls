@@ -1,15 +1,15 @@
 ; In order to rise error (to make it possible for this file to be loaded inside of NetLogo environment) just keep this line uncommented. There are too many error to NetLogo not notice them ;) :x. Comment it while you are running code. You need it only on loading model in NetLogo
 
 to change-relationship-through-time [actor1 actor2]
-   
+  
 end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; calculates  attractiveness  - how attractive is actorTo seen by actorFrom      ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 
+
 to-report actors-attractiveness [actorFrom actorTo]
-  type word "actors-attractiveness(" (word [label] of actorFrom (word " " (word [label] of actorTo ")\n") ))
+  ; type word "actors-attractiveness(" (word [label] of actorFrom (word " " (word [label] of actorTo ")\n") ))
   let attractiveness 0
   
   set attractiveness attractiveness + (actors-attractiveness-IamWhats actorFrom actorTo)
@@ -20,12 +20,12 @@ to-report actors-attractiveness [actorFrom actorTo]
   set attractiveness attractiveness + (actor-attractiveness-preference actorTo)
   
   ;how many friends share actorFrom actorTo:
-  type "Mutual friends:"
-  ask actors with [friendship-neighbor? actorFrom and friendship-neighbor? actorTo]
-  [
-    type [label] of self
-  ]
-   type "END - Mutual friends\n"
+  ; type "Mutual friends:"
+  ; ask actors with [friendship-neighbor? actorFrom and friendship-neighbor? actorTo]
+  ; [
+  ;   type [label] of self
+  ; ]
+  ; type "END - Mutual friends\n"
   report attractiveness
 end
 
@@ -51,7 +51,7 @@ to-report actor-attractiveness-preference [actor]
 end
 
 to change-relationships-by-activity-for-actor [actor]
-   
+  
 end
 
 to-report calculate-activity-objective-payoff [activity]
@@ -84,7 +84,7 @@ to affect-relatinships-by-activity [activity]
   ;getting activity actors
   let activity_actors []
   ask activity[
-    type "actors in activity:\n"
+    ; type "actors in activity:\n"
     ask in-activity-actor-neighbors[ ; all actors that participated in this activity
       set activity_actors lput self activity_actors
     ]
@@ -98,23 +98,23 @@ to affect-relatinships-by-activity [activity]
     foreach activity_actors [
       if(? != actorFrom)[
         let actorTo ?
-        print (word [label] of actorFrom (word " -> " [label] of actorTo))
-        let activity_attract (actors-attractiveness actorFrom actorTo) * calculate-activity-payoff activity
+       ;  print (word [label] of actorFrom (word " -> " [label] of actorTo))
+        let activity_attract Activity-atract-relationship-ponder * (actors-attractiveness actorFrom actorTo) * calculate-activity-payoff activity
         
         let f nobody
         ask actorFrom[
           set f friendship-with actorTo
         ]
         if(f != nobody)[
-          type word "f:" f;
+         ;  type word "f:" f;
           ask actorFrom[
             ;get old thickness
             let f_thickness actor-get-turtle-link-endpoint-value f "thicknes"          
-            show word "old_thickness: " f_thickness
+            ; show word "old_thickness: " f_thickness
             
             set f_thickness f_thickness + activity_attract
             actor-set-turtle-link-endpoint-value f "thicknes" f_thickness          
-            show word "new_thickness: " f_thickness
+            ; show word "new_thickness: " f_thickness
           ]
         ]
       ]
@@ -122,13 +122,48 @@ to affect-relatinships-by-activity [activity]
   ]
 end
 
+to-report attractiveness_realization [actor]
+  let ar 0
+  ; print word [label] of actor " attractivenesses:"
+  ask actors with [friendship-neighbor? myself]
+  [
+    let actorTo self
+    let f nobody
+    ask actor[
+      set f friendship-with actorTo
+    ]
+    if(f != nobody)[
+      ; type word "f:" f;
+      ask actor[
+        ;get old thickness
+        let f_thickness actor-get-turtle-link-endpoint-value f "thicknes"          
+        ; show word "f_thickness: " f_thickness
+        
+        set ar (actors-attractiveness actor self) * f_thickness
+        
+        ; show word " - " ar
+      ]
+    ]   
+  ]
+  report ar
+end
+
+to-report mean_attractiveness_realization
+  let ar 0
+  ask actors[
+    set ar ar + attractiveness_realization self
+  ]
+  set ar ar / count actors
+  report ar
+end
+
 to decay_relationsips
   ask friendships[
     set thicknes-end1 thicknes-end1 - Relationship-Decay
     if(thicknes-end1 < Relationship-Treshold-Connected)[set thicknes-end1 Relationship-Treshold-Connected]
- 
+    
     set thicknes-end2 thicknes-end2 - Relationship-Decay
     if(thicknes-end2 < Relationship-Treshold-Connected)[set thicknes-end2 Relationship-Treshold-Connected]
-
+    
   ]
 end
