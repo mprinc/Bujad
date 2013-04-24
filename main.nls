@@ -19,7 +19,7 @@ globals
   actor-inspection-selected
   activity-inspection-selected
   iamwhat-inspection-selected
-  mouse-was-up? 
+  mouse-was-up?
   last-activity
  ]
 

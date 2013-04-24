@@ -93,7 +93,7 @@ to actor-diffuse-activity-from [activity-current]
   ]
   
   ; find (if any) actor that will absorb activity
-  let actor-absorbers one-of other actors with [price-absorbed < price-absorption-limit]
+  let actor-absorbers actor-sender-choses-receiver-for-emitting-activity [activity-current]
   if(actor-absorbers != nobody)[
     ask actor-absorbers [
       ; consider absorbtion price
@@ -108,10 +108,52 @@ to actor-diffuse-activity-from [activity-current]
   ] 
 end
 
+; in the context of actor-sender
+; it returns the most appropriate actor
+to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
+  let actorReceiver nobody
+  if(Chooser-whom-to-send = "anyone")[ ; IMPLEMENTED!
+    set actorReceiver one-of other actors with [price-absorbed < price-absorption-limit];
+  ]
+  if(Chooser-whom-to-send = "friends")[ ; IMPLEMENTED!
+    set actorReceiver one-of friendship-neighbors with [price-absorbed < price-absorption-limit];
+  ]
+  if(Chooser-whom-to-send = "popularity")[
+  ]
+  if(Chooser-whom-to-send = "attractiveness_manual")[
+  ]
+  if(Chooser-whom-to-send = "shared_interest")[
+  ]
+  if(Chooser-whom-to-send = "environmental")[
+  ]
+  report actorReceiver
+end
+
+to actor-receiver-decides-on-absorption-of-activity [actorSender actorReceiver activity-current]
+  let shouldAccept false
+  
+  if([price-absorbed] of actorReceiver >= [price-absorption-limit] of actorReceiver) report false
+  
+  if(Chooser-whom-to-receive = "anyone")[
+    set shouldAccept one-of other actors with [price-absorbed < price-absorption-limit];
+  ]
+  if(Chooser-whom-to-receive = "friends")[
+  ]
+  if(Chooser-whom-to-receive = "popularity")[
+  ]
+  if(Chooser-whom-to-receive = "attractiveness_manual")[
+  ]
+  if(Chooser-whom-to-receive = "shared_interest")[
+  ]
+  if(Chooser-whom-to-receive = "environmental")[
+  ]
+end
+
 ; it populates activity
 to actor-populate-activity [activity-current]
   set activities-num-emitted activities-num-emitted + 1
-  let selected-iamwhat one-of iamwhat-actor-neighbors;
+  ; select one iamwhat from actor's iamwhats
+  let selected-iamwhat one-of iamwhat-actor-neighbors
   let selected-activity-type one-of activity-types;
   
                                                   ; create a link between activity and iamwhat

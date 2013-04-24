@@ -288,17 +288,17 @@ Actor-iamwhat-mean
 Actor-iamwhat-mean
 0
 5
-1
+0.5
 0.5
 1
 WHATs
 HORIZONTAL
 
 SWITCH
-929
-55
-1096
-88
+1067
+14
+1234
+47
 Links-show-extra
 Links-show-extra
 1
@@ -465,7 +465,7 @@ CHOOSER
 Friendships_generator
 Friendships_generator
 "ER" "Attractiveness"
-0
+1
 
 BUTTON
 337
@@ -493,17 +493,17 @@ Actor-iamwhat--standard-deviation
 Actor-iamwhat--standard-deviation
 0
 5
-4
+0.5
 0.5
 1
 WHATs
 HORIZONTAL
 
 BUTTON
-802
-631
-923
-664
+794
+616
+915
+649
 Finalize report
 finalize-report
 NIL
@@ -515,6 +515,26 @@ NIL
 NIL
 NIL
 1
+
+CHOOSER
+928
+67
+1072
+112
+Chooser-whom-to-send
+Chooser-whom-to-send
+"anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
+0
+
+CHOOSER
+1081
+67
+1237
+112
+Chooser-whom-to-receive
+Chooser-whom-to-receive
+"anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
