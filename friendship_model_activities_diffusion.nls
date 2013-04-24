@@ -95,17 +95,21 @@ to actor-diffuse-activity-from [activity-current]
   ; find (if any) actor that emitter is emitting activity toward
   let actor-absorbers actor-sender-choses-receiver-for-emitting-activity activity-current
   if(actor-absorbers != nobody)[
+
+    ; ask absorber if he is willing to absorb
+    let actorReceiverAccepted actor-receiver-decides-on-absorption-of-activity self actor-absorbers activity-current
+
     ; connect activity with absorber
     ask actor-absorbers[
       create-activity-actor-from activity-current [
         set shape "default"
-        set color red
+        
+        ifelse(actorReceiverAccepted)[set color red][set color blue]
+
         if(Links-show-extra = false)[set hidden? true]
       ]
     ]
     
-    ; ask absorber if he is willing to absorb
-    let actorReceiverAccepted actor-receiver-decides-on-absorption-of-activity self actor-absorbers activity-current
     if(actorReceiverAccepted)[
       ask actor-absorbers [
         ; consider absorbtion price
@@ -131,17 +135,61 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
     foreach actorsSorted[
       set popularitySum popularitySum + [popularity] of ?
     ]
+
     let probabilityAdopted random-float popularitySum
+    ;show word "popularitySum : " word popularitySum word ", probabilityAdopted = " probabilityAdopted
+
+    set popularitySum 0
     foreach actorsSorted[
       set popularitySum popularitySum + [popularity] of ?
-      if(actorReceiver != nobody and popularitySum > probabilityAdopted)[
+      if(actorReceiver = nobody and popularitySum > probabilityAdopted)[
         set actorReceiver ?
+        ;show word "actorReceiver : " actorReceiver
       ]
     ]
   ]
   if(Chooser-whom-to-send = "attractiveness_manual")[
+    let actorsSorted sort friendship-neighbors
+    let attractivenessManualSum 0
+    foreach actorsSorted[
+      let friendshipToOther friendship-with ?
+      let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
+      set attractivenessManualSum attractivenessManualSum + value 
+    ]
+    
+    let probabilityAdopted random-float attractivenessManualSum
+    show word "attractivenessManualSum : " word attractivenessManualSum word ", probabilityAdopted = " probabilityAdopted
+
+    set attractivenessManualSum 0
+    foreach actorsSorted[
+      let friendshipToOther friendship-with ?
+      let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
+      set attractivenessManualSum attractivenessManualSum + value 
+
+      if(actorReceiver = nobody and attractivenessManualSum > probabilityAdopted)[
+        set actorReceiver ?
+        show word "actorReceiver : " actorReceiver
+      ]
+    ]
   ]
   if(Chooser-whom-to-send = "shared_interest")[
+    let actorsSorted sort actors
+    let sharedInterestSum 0
+    foreach actorsSorted[
+      set sharedInterestSum sharedInterestSum + count get-shared-iamwhats self ?
+    ]
+
+    let probabilityAdopted random-float sharedInterestSum
+    ;show word "sharedInterestSum : " word sharedInterestSum word ", probabilityAdopted = " probabilityAdopted
+
+    set sharedInterestSum 0
+    foreach actorsSorted[
+      set sharedInterestSum sharedInterestSum + count get-shared-iamwhats self ?
+      if(actorReceiver = nobody and sharedInterestSum > probabilityAdopted)[
+        set actorReceiver ?
+        ;show word "actorReceiver : " actorReceiver
+      ]
+    ]
   ]
   if(Chooser-whom-to-send = "environmental")[
   ]

@@ -21,27 +21,6 @@ end
 
 
 ; ========================================================================================
-; measures
-; ========================================================================================
-
-to measure-activities-per-node
-  ask actors[
-    let activities-num activities-number-for-actor self
-    set label word "actor-" word who word ":" activities-num
-    set calculation_actor_1 activities-num
-  ]  
-end
-
-; callculate and show activities num for each actor
-to show-actor-activites-num
-  show "show-actor-activites-num"
-  ask actors[
-    let activities-num activities-number-for-actor self
-    set label word "actor-" word who word ":" activities-num
-  ]  
-end
-
-; ========================================================================================
 ; setup personal commands
 ; ========================================================================================
 
