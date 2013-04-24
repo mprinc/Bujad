@@ -622,10 +622,25 @@ INPUTBOX
 1155
 198
 Max-activities-num
-10600
+10000
 1
 0
 Number
+
+SLIDER
+5
+736
+313
+769
+Activity-atract-relationship-ponder
+Activity-atract-relationship-ponder
+0
+1
+0.21
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
