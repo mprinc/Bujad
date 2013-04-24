@@ -110,6 +110,7 @@ activity-type-activities-own
 directed-link-breed [activity-actors activity-actor]
 activity-actors-own
 [
+  happened ; true if activity happened (for example: if absorber absorbed activity sent to him by emitter)
   pay-off
 ]
  

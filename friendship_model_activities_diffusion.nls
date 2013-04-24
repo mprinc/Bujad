@@ -126,6 +126,18 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
     set actorReceiver one-of friendship-neighbors with [price-absorbed < price-absorption-limit];
   ]
   if(Chooser-whom-to-send = "popularity")[
+    let actorsSorted sort actors
+    let popularitySum 0
+    foreach actorsSorted[
+      set popularitySum popularitySum + [popularity] of ?
+    ]
+    let probabilityAdopted random-float popularitySum
+    foreach actorsSorted[
+      set popularitySum popularitySum + [popularity] of ?
+      if(actorReceiver != nobody and popularitySum > probabilityAdopted)[
+        set actorReceiver ?
+      ]
+    ]
   ]
   if(Chooser-whom-to-send = "attractiveness_manual")[
   ]

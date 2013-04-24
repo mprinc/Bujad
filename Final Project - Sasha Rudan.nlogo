@@ -376,10 +376,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-954
-202
-1056
-247
+935
+138
+1037
+183
 Activities Num
 activities-num-emitted
 0
@@ -524,7 +524,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-0
+2
 
 CHOOSER
 1081
