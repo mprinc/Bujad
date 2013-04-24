@@ -12,6 +12,7 @@ to unselect-actor [actor]
 end
 
 to display_relationship_strength_statistics
+  ;to put in "pen update commands" histogram [count link-neighbors] of turtles
   ;histogram [1 2 45 3 45 45]
   ;histogram [thicknes-end2] of friendships
   ;plot friendships-thicknes-plot
@@ -23,7 +24,7 @@ end
 
 to do-plotting
      ;; plot the number of infected individuals at each step
-     set-current-plot "friendships-thicknes-plot"
+     set-current-plot "friendships strength"
      set-current-plot-pen "thicknes"
      let thicnkesses [thicknes-end1] of friendships
      let mean_thicnkesses (mean thicnkesses)

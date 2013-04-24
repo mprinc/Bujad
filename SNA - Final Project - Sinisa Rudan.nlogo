@@ -43,10 +43,10 @@ NIL
 VERTICAL
 
 SLIDER
-12
-411
-317
-444
+11
+407
+316
+440
 friendship-avg-degree
 friendship-avg-degree
 0.25
@@ -170,10 +170,10 @@ NIL
 1
 
 SLIDER
-11
-533
-319
-566
+9
+465
+317
+498
 activity-emission-probability
 activity-emission-probability
 0
@@ -185,22 +185,22 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-22
-512
-172
-530
+23
+448
+173
+466
 Activities:
 11
 44.0
 1
 
 SLIDER
-11
-573
-319
-606
-activity-acceptance-probability
-activity-acceptance-probability
+9
+505
+317
+538
+Activity-absorption-probability
+Activity-absorption-probability
 0
 1
 0.2
@@ -338,10 +338,10 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-957
-171
-1107
-189
+927
+180
+1077
+198
 Attractiveness pondering:
 11
 44.0
@@ -349,24 +349,24 @@ Attractiveness pondering:
 
 SLIDER
 926
-250
+236
 1159
-283
+269
 Attractiveness-Sociable-Ponder
 Attractiveness-Sociable-Ponder
 0
 1
-0.6
+0.55
 0.05
 1
 NIL
 HORIZONTAL
 
 SLIDER
-926
-303
-1166
-336
+927
+275
+1167
+308
 Attractiveness-Preference-Ponder
 Attractiveness-Preference-Ponder
 0
@@ -378,10 +378,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-38
-768
-230
-801
+9
+597
+201
+630
 Activities-number-per-tick
 Activities-number-per-tick
 0
@@ -452,7 +452,7 @@ Actor-iamwhat--standard-deviation
 Actor-iamwhat--standard-deviation
 0
 5
-2
+0.5
 0.5
 1
 NIL
@@ -473,9 +473,9 @@ PLOT
 637
 962
 787
-friendships-thicknes-plot
+friendships strength
 time
-mean thicknes
+mean strength
 0.0
 10.0
 0.0
@@ -495,7 +495,7 @@ Relationship-Treshold-Connected
 Relationship-Treshold-Connected
 0
 1
-0.1
+0.4
 .05
 1
 NIL
@@ -510,11 +510,31 @@ Relationship-Decay
 Relationship-Decay
 0
 1
-0.04
+0.06
 0.02
 1
 NIL
 HORIZONTAL
+
+CHOOSER
+10
+546
+137
+591
+Chooser-whom-to-send
+Chooser-whom-to-send
+"anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
+0
+
+CHOOSER
+179
+546
+315
+591
+Chooser-whom-to-receive
+Chooser-whom-to-receive
+"anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -161,7 +161,7 @@ to setup-friendships
            ; print "already exists:"
             ask frl[
               set thicknes-end2 attractiveness
-              show word "thicknes-end1:" (word thicknes-end1 (word "; thicknes-end2:" thicknes-end2))              
+             ; show word "thicknes-end1:" (word thicknes-end1 (word "; thicknes-end2:" thicknes-end2))              
             ]
            ; show [end1] of frl = self
           ]

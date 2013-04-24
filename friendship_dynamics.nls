@@ -56,7 +56,7 @@ end
 
 to-report calculate-activity-objective-payoff [activity]
   let payoff 0
-  set payoff payoff + intensity
+  set payoff payoff + [intensity] of activity
   report payoff
   
 end
@@ -80,13 +80,46 @@ end
 
 to affect-relatinships-by-activity [activity]
   ; in this version of model we check if there is link between actors, we don't create new ones 
+  
+  ;getting activity actors
+  let activity_actors []
   ask activity[
     type "actors in activity:\n"
     ask in-activity-actor-neighbors[ ; all actors that participated in this activity
-      type (word "-" label "\n")
+      set activity_actors lput self activity_actors
+    ]
+    ask out-activity-actor-neighbors[ ; all actors that participated in this activity
+      set activity_actors lput self activity_actors
     ]
   ] 
   
+  foreach activity_actors [
+    let actorFrom ?
+    foreach activity_actors [
+      if(? != actorFrom)[
+        let actorTo ?
+        print (word [label] of actorFrom (word " -> " [label] of actorTo))
+        let activity_attract (actors-attractiveness actorFrom actorTo) * calculate-activity-payoff activity
+        
+        let f nobody
+        ask actorFrom[
+          set f friendship-with actorTo
+        ]
+        if(f != nobody)[
+          type word "f:" f;
+          ask actorFrom[
+            ;get old thickness
+            let f_thickness actor-get-turtle-link-endpoint-value f "thicknes"          
+            show word "old_thickness: " f_thickness
+            
+            set f_thickness f_thickness + activity_attract
+            actor-set-turtle-link-endpoint-value f "thicknes" f_thickness          
+            show word "new_thickness: " f_thickness
+          ]
+        ]
+      ]
+    ]    
+  ]
 end
 
 to decay_relationsips

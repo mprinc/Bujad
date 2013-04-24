@@ -115,6 +115,7 @@ to actor-diffuse-activity-from [activity-current]
         ; consider absorbtion price
         set price-absorbed price-absorbed + [price-to-absorb] of activity-type-current
       ]
+      affect-relatinships-by-activity activity-current
     ]
   ]
 end
