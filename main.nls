@@ -55,35 +55,39 @@ end
 
 ; responsible for executing one time tick in the model
 to do-tick
-  do-tick-sasha-start
-  do-tick-sinisha-start
-
-  ; type "\n\nDifussing activities:\n"
-  let activities-per-tick (count actors) * Activities-number-per-tick
-  repeat activities-per-tick[
-    set last-activity diffuse-activity
-    if last-activity != nobody [
-      ;affect-relatinships-by-activity last-activity
+  ; random-seed Random-generator-initial 47822
+  ;show word Max-activities-num word ", " activities-num-emitted
+  if((Max-activities-num = 0) or (Max-activities-num > activities-num-emitted))[
+    do-tick-sasha-start
+    do-tick-sinisha-start
+    
+    ; type "\n\nDifussing activities:\n"
+    let activities-per-tick (count actors) * Activities-number-per-tick
+    repeat activities-per-tick[
+      set last-activity diffuse-activity
+      if last-activity != nobody [
+        ;affect-relatinships-by-activity last-activity
+      ]
+    ]  
+    
+    ; testing purpose
+    ask actors  with [effect-left > 0 ][
+      set effect-left effect-left - 1
     ]
-  ]  
-
-  ; testing purpose
-  ask actors  with [effect-left > 0 ][
-    set effect-left effect-left - 1
+    
+    reset-actors
+    ask n-of 3 actors[
+      set shape "face happy"
+      set size ACTOR_SIZE_ACTIVE
+      set effect-left 5
+      set color blue + 2
+    ]
+    display
+    recover-energies
+    
+    do-tick-sasha-end
+    do-tick-sinisha-end
   ]
-  
-  reset-actors
-  ask n-of 3 actors[
-    set shape "face happy"
-    set size ACTOR_SIZE_ACTIVE
-    set effect-left 5
-    set color blue + 2
-  ]
-  display
-  recover-energies
-
-  do-tick-sasha-end
-  do-tick-sinisha-end
 end
 
 ; This function recovers (heals) system (network) members
@@ -106,6 +110,12 @@ end
 
 ; this function resets the history of the model and starts everything from the beginning but without changin structure or any randomly choosen initial parameters
 to rest-history
+  ask activities[die]
+  ask activity-type-activities[die]
+  ask activity-actors[die]
+  ask iamwhat-activities[die]
+  set activities-num-emitted 0
+  set actor-types-list []
 end
 
 ; This is a on-mouse-click function (we add extra guarding variable to switch mouse-down? into mouse-click behaviour

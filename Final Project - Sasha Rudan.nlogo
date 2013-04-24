@@ -417,10 +417,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-1084
-122
-1229
-182
+1171
+138
+1316
+198
 Random-generator-initial
 0
 1
@@ -524,7 +524,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-4
+3
 
 CHOOSER
 1081
@@ -565,6 +565,67 @@ Relationship-Treshold-Connected
 1
 NIL
 HORIZONTAL
+
+BUTTON
+468
+616
+602
+649
+Happiness/node
+measure-happiness-per-node
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+MONITOR
+925
+240
+1019
+285
+Calculation 1
+global_calculation_1
+17
+1
+11
+
+MONITOR
+1025
+240
+1124
+285
+Calculation 2
+global_calculation_2
+17
+1
+11
+
+MONITOR
+1130
+240
+1233
+285
+Calculation 3
+global_calculation_3
+17
+1
+11
+
+INPUTBOX
+1038
+138
+1155
+198
+Max-activities-num
+10600
+1
+0
+Number
 
 @#$#@#$#@
 ## WHAT IS IT?

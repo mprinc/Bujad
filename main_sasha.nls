@@ -51,6 +51,14 @@ to setup-manual-attractiveness-between-actors
         actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" manualAtract
         ;let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
         ;show word "value : " value
+        
+        ; we want bot friends have similar atractiveness
+        let manualAtractOther manualAtract + random 0.1 - 0.05
+        if(manualAtractOther < 0)[set manualAtractOther 0]
+        if(manualAtractOther > 1)[set manualAtractOther 1]
+        ask actorOther[
+          actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" manualAtract
+        ]
       ]
     ]
   ]

@@ -1,3 +1,9 @@
+globals[
+  global_calculation_1
+  global_calculation_2
+  global_calculation_3
+]
+
 to finalize-report
   ask activity-types[die]
   ask activities[die]
@@ -21,6 +27,28 @@ to measure-activities-per-node
   ]  
 end
 
+to measure-happiness-per-node
+  let globalHappiness 0
+  ask actors[
+    ; link-neighbors
+    ; find all actors that are friends of self actor
+    let actorFriendships sort friendship-neighbors
+    show word "actor: " word self word ", actorFriendships: " actorFriendships
+    let actorHappiness 0
+    foreach actorFriendships[
+      let activitiesIn activities-in-number-for-friendship self ?
+      let activitiesOut activities-out-number-for-friendship self ?
+      if(activitiesOut = 0)[set activitiesOut 1]
+      set actorHappiness actorHappiness + activitiesIn / activitiesOut
+      show word "actorHappiness = " word actorHappiness word ", activitiesIn = " word activitiesIn word ", activitiesOut " activitiesOut
+    ]
+    set label word "actor-" word who word ":" actorHappiness
+    set calculation_actor_1 actorHappiness
+    set globalHappiness globalHappiness + actorHappiness
+    set global_calculation_1 globalHappiness
+  ]
+end
+
 ; callculate and show activities num for each actor
 to show-actor-activites-num
   show "show-actor-activites-num"
@@ -34,24 +62,40 @@ end
 ; per friendship commands
 ; ========================================================================================
 
-to-report activities-number-for-friendship [actorSelected]
-  report (activities-in-number-for-actor actorSelected) + (activities-out-number-for-actor actorSelected)
-end
-
-to-report activities-in-number-for-friendship [actorSelected]
+to-report activities-in-number-for-friendship [actorMaster actorSlave]
   let activitiesNum 0
-  ask actorSelected[
-    ; equivalent to command in-<breed>-neighbors
-    set activitiesNum count in-activity-actor-neighbors
+  ask actorMaster[
+    ; all links for actorMaster
+    ; my-in-links ; Reports an agentset of all the directed links coming in from other nodes to the caller.
+    let activityLinksIn sort my-in-activity-actors with [happened = true]
+    foreach activityLinksIn[
+      let activityIn [end1] of ?
+      if(activityIn = actorMaster)[set activityIn [end2] of ?]
+      ask activityIn[
+        ; in-link-from
+        let activityLinkIn in-activity-actor-from actorSlave
+        if((activityLinkIn != nobody) and ([happened] of activityLinkIn) = true) [set activitiesNum activitiesNum + 1]
+      ]
+    ]
   ]
   report activitiesNum
 end
 
-to-report activities-out-number-for-friendship [actorSelected]
+to-report activities-out-number-for-friendship [actorMaster actorSlave]
   let activitiesNum 0
-  ask actorSelected[
-    ; equivalent to command out-<breed>-neighbors
-    set activitiesNum count out-activity-actor-neighbors
+  ask actorMaster[
+    ; all links for actorMaster
+    ;my-in-links ; Reports an agentset of all the directed links coming in from other nodes to the caller.
+    let activityLinksOut sort my-out-activity-actors with [happened = true]
+    foreach activityLinksOut[
+      let activityOut [end1] of ?
+      if(activityOut = actorMaster)[set activityOut [end2] of ?]
+      ask activityOut[
+        ; in-link-from
+        let activityLinkOut out-activity-actor-to actorSlave
+        if((activityLinkOut != nobody) and ([happened] of activityLinkOut) = true) [set activitiesNum activitiesNum + 1]
+      ]
+    ]
   ]
   report activitiesNum
 end
@@ -66,7 +110,7 @@ to-report activities-in-number-for-actor [actorSelected]
   let activitiesNum 0
   ask actorSelected[
     ; equivalent to command in-<breed>-neighbors
-    set activitiesNum count in-activity-actor-neighbors
+    set activitiesNum count my-in-activity-actors with [happened = true]
   ]
   report activitiesNum
 end
@@ -75,7 +119,7 @@ to-report activities-out-number-for-actor [actorSelected]
   let activitiesNum 0
   ask actorSelected[
     ; equivalent to command out-<breed>-neighbors
-    set activitiesNum count out-activity-actor-neighbors
+    set activitiesNum count my-out-activity-actors with [happened = true]
   ]
   report activitiesNum
 end

@@ -89,6 +89,7 @@ to actor-diffuse-activity-from [activity-current]
   create-activity-actor-to activity-current [
     set shape "default"
     set color yellow
+    set happened true
     if(Links-show-extra = false)[set hidden? true]
   ]
   
@@ -104,7 +105,13 @@ to actor-diffuse-activity-from [activity-current]
       create-activity-actor-from activity-current [
         set shape "default"
         
-        ifelse(actorReceiverAccepted)[set color red][set color blue]
+        ifelse(actorReceiverAccepted)[
+          set color red
+          set happened true
+        ][
+          set color blue
+          set happened false
+        ]
 
         if(Links-show-extra = false)[set hidden? true]
       ]
@@ -159,7 +166,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
     ]
     
     let probabilityAdopted random-float attractivenessManualSum
-    show word "attractivenessManualSum : " word attractivenessManualSum word ", probabilityAdopted = " probabilityAdopted
+    ;show word "attractivenessManualSum : " word attractivenessManualSum word ", probabilityAdopted = " probabilityAdopted
 
     set attractivenessManualSum 0
     foreach actorsSorted[
@@ -169,7 +176,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
 
       if(actorReceiver = nobody and attractivenessManualSum > probabilityAdopted)[
         set actorReceiver ?
-        show word "actorReceiver : " actorReceiver
+        ;show word "actorReceiver : " actorReceiver
       ]
     ]
   ]
