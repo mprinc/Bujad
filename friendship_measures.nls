@@ -28,28 +28,65 @@ to measure-activities-per-node
 end
 
 to measure-happiness-per-node
+  set global_calculation_1 happinessForSystem
+end
+
+; calcullates happiness for the whole system
+; it calculates hapiness as a sum of happiness of each node
+; it is normalized to the [0,1] interval
+to-report happinessForSystem
+; callculate and show activities num for each actor
   let globalHappiness 0
   ask actors[
+    let actorHappiness happinessForActor self
+
+    set label word "actor-" word who word ":" actorHappiness
+    set calculation_actor_1 actorHappiness
+
+    set globalHappiness globalHappiness + actorHappiness
+      show word "globalHappiness = " word globalHappiness word ", actorHappiness = " actorHappiness
+  ]
+  set globalHappiness globalHappiness / (count actors)
+  report globalHappiness
+end
+
+; callculate happiness for actor
+; it calulates happiness as a sum of happiness of all friendships of a specified actor
+; note, it doesn't calculate happiness toward ALL actors in the system but only friends
+; however, happiness depends on balance of activities exchanged and any two nodes that exchanged activities have to be friends (at least because they become friends through that eaction exchange)
+; it is normalized to the [0,1] interval
+to-report happinessForActor [actorSelected]
+  let actorHappiness 0
+  ask actorSelected[
     ; link-neighbors
     ; find all actors that are friends of self actor
     let actorFriendships sort friendship-neighbors
     show word "actor: " word self word ", actorFriendships: " actorFriendships
-    let actorHappiness 0
     foreach actorFriendships[
-      let activitiesIn activities-in-number-for-friendship self ?
-      let activitiesOut activities-out-number-for-friendship self ?
-      if(activitiesOut = 0)[set activitiesOut 1]
-      set actorHappiness actorHappiness + activitiesIn / activitiesOut
-      show word "actorHappiness = " word actorHappiness word ", activitiesIn = " word activitiesIn word ", activitiesOut " activitiesOut
+      let friendshipHappiness happinessForFriendship self ?
+      set actorHappiness actorHappiness + friendshipHappiness
+      show word "actorHappiness = " word actorHappiness word ", friendshipHappiness = " friendshipHappiness
     ]
-    set label word "actor-" word who word ":" actorHappiness
-    set calculation_actor_1 actorHappiness
-    set globalHappiness globalHappiness + actorHappiness
-    set global_calculation_1 globalHappiness
+    if(length actorFriendships > 0)[
+      set actorHappiness actorHappiness / (length actorFriendships)
+    ]
   ]
+  report actorHappiness
 end
 
-; callculate and show activities num for each actor
+; calculates happiness for speciffic friendship betwwn actorFrom and actorTo
+; it is normalized to the [0,1] interval
+to-report happinessForFriendship [actorFrom actorTo]
+  let friendshipHappiness 0
+  let activitiesIn activities-in-number-for-friendship actorFrom actorTo
+  let activitiesOut activities-out-number-for-friendship actorFrom actorTo
+  if(activitiesIn != 0 or activitiesOut != 0)[
+    set friendshipHappiness 1 - (abs(activitiesIn - activitiesOut) / (activitiesIn + activitiesOut))
+  ]
+  show word "friendshipHappiness = " word friendshipHappiness word ", activitiesIn = " word activitiesIn word ", activitiesOut " activitiesOut
+  report friendshipHappiness
+end
+
 to show-actor-activites-num
   show "show-actor-activites-num"
   ask actors[
