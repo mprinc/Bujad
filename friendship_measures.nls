@@ -40,7 +40,7 @@ to-report happinessForSystem
   ask actors[
     let actorHappiness happinessForActor self
 
-    set label word "actor-" word who word ":" actorHappiness
+    set label word "actor-" word who word ":" precision actorHappiness 2
     set calculation_actor_1 actorHappiness
 
     set globalHappiness globalHappiness + actorHappiness
