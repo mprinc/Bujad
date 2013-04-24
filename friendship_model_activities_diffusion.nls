@@ -26,7 +26,7 @@ to-report diffuse-activity
 
   if(actor-difuser-potential != nobody)[
     ask actor-difuser-potential [
-      ifelse (random-float 1 <= activity-emission-probability)[
+      ifelse (random-float 1 <= Activity-emission-probability)[
         set actor-difuser self
         actor-diffuse-activity-from activity-current
       ][
@@ -92,20 +92,27 @@ to actor-diffuse-activity-from [activity-current]
     if(Links-show-extra = false)[set hidden? true]
   ]
   
-  ; find (if any) actor that will absorb activity
-  let actor-absorbers actor-sender-choses-receiver-for-emitting-activity [activity-current]
+  ; find (if any) actor that emitter is emitting activity toward
+  let actor-absorbers actor-sender-choses-receiver-for-emitting-activity activity-current
   if(actor-absorbers != nobody)[
-    ask actor-absorbers [
-      ; consider absorbtion price
-      set price-absorbed price-absorbed + [price-to-absorb] of activity-type-current
-      
+    ; connect activity with absorber
+    ask actor-absorbers[
       create-activity-actor-from activity-current [
         set shape "default"
         set color red
         if(Links-show-extra = false)[set hidden? true]
       ]
     ]
-  ] 
+    
+    ; ask absorber if he is willing to absorb
+    let actorReceiverAccepted actor-receiver-decides-on-absorption-of-activity self actor-absorbers activity-current
+    if(actorReceiverAccepted)[
+      ask actor-absorbers [
+        ; consider absorbtion price
+        set price-absorbed price-absorbed + [price-to-absorb] of activity-type-current
+      ]
+    ]
+  ]
 end
 
 ; in the context of actor-sender
@@ -129,15 +136,20 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
   report actorReceiver
 end
 
-to actor-receiver-decides-on-absorption-of-activity [actorSender actorReceiver activity-current]
+to-report actor-receiver-decides-on-absorption-of-activity [actorSender actorReceiver activity-current]
   let shouldAccept false
   
-  if([price-absorbed] of actorReceiver >= [price-absorption-limit] of actorReceiver) report false
-  
-  if(Chooser-whom-to-receive = "anyone")[
-    set shouldAccept one-of other actors with [price-absorbed < price-absorption-limit];
+  if([price-absorbed] of actorReceiver >= [price-absorption-limit] of actorReceiver) [report false]
+
+  if(random-float 1 > Activity-absorption-probability) [report false]
+
+  if(Chooser-whom-to-receive = "anyone")[ ; IMPLEMENTED!
+    set shouldAccept true
   ]
-  if(Chooser-whom-to-receive = "friends")[
+  if(Chooser-whom-to-receive = "friends")[ ; IMPLEMENTED!
+    ask actorReceiver[
+      set shouldAccept member? actorSender friendship-neighbors
+    ]
   ]
   if(Chooser-whom-to-receive = "popularity")[
   ]
@@ -147,6 +159,7 @@ to actor-receiver-decides-on-absorption-of-activity [actorSender actorReceiver a
   ]
   if(Chooser-whom-to-receive = "environmental")[
   ]
+  report shouldAccept
 end
 
 ; it populates activity

@@ -1,3 +1,5 @@
 "id", "a-type", "name", "intensity", "price-to-diffuse", "price-to-absorb", "lifetime", "shape", "appearance-probability"
 1, "online", "like", 1, 0.3, 1, 1, "sheep", 0.3
-1, "online" , "comment", 10, 5, 3, 3, "person", 0.7
+2, "online" , "comment", 10, 5, 3, 3, "person", 0.7
+3, "real" , "meet", 10, 5, 3, 3, "flag", 0.7
+4, "real" , "talk", 10, 5, 3, 3, "flower", 0.7

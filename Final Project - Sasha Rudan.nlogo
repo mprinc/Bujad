@@ -170,12 +170,12 @@ NIL
 1
 
 SLIDER
-8
-558
-316
-591
-activity-emission-probability
-activity-emission-probability
+6
+616
+314
+649
+Activity-emission-probability
+Activity-emission-probability
 0
 1
 0.14
@@ -185,22 +185,22 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-19
-537
-169
-555
+17
+595
+167
+613
 Activities:
 11
 44.0
 1
 
 SLIDER
-8
-598
-316
-631
-activity-acceptance-probability
-activity-acceptance-probability
+6
+656
+314
+689
+Activity-absorption-probability
+Activity-absorption-probability
 0
 1
 0.2
@@ -361,10 +361,10 @@ Attractiveness:
 1
 
 SLIDER
-8
-638
-316
-671
+6
+696
+314
+729
 Activities-number-per-tick
 Activities-number-per-tick
 0
@@ -417,10 +417,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-1103
-210
-1258
-270
+1084
+122
+1229
+182
 Random-generator-initial
 0
 1
@@ -465,7 +465,7 @@ CHOOSER
 Friendships_generator
 Friendships_generator
 "ER" "Attractiveness"
-1
+0
 
 BUTTON
 337
@@ -535,6 +535,36 @@ Chooser-whom-to-receive
 Chooser-whom-to-receive
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
 0
+
+SLIDER
+11
+510
+313
+543
+Relationship-Decay
+Relationship-Decay
+0
+5
+2
+0.2
+1
+NIL
+HORIZONTAL
+
+SLIDER
+11
+548
+310
+581
+Relationship-Treshold-Connected
+Relationship-Treshold-Connected
+0
+100
+50
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
