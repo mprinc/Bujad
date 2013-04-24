@@ -1,7 +1,10 @@
 ; ========================================================================================
 ; do-tick personal commands
 ; ========================================================================================
-
+globals[
+  plot-for-each-number-of-activities
+  ploted-on-activity-number
+]
 
 to do-tick-sasha-start
 end
@@ -9,20 +12,52 @@ end
 to do-tick-sinisha-start
 end
 
-to setup-start-sasha
-end
-
 to do-tick-sasha-end
-  ;show-actor-activites-num
+  ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
+  ; every 100 activities
+  if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
+    show word "Plotting, activities-num-emitted = " activities-num-emitted
+    set ploted-on-activity-number activities-num-emitted
+
+    measure-happiness-per-node
+  ]
+  do-plotting-sasha  
 end
 
 to do-tick-sinisha-end
+end
+
+; ========================================================================================
+; reset-history
+; ========================================================================================
+
+to rest-history-sasha
+  set ploted-on-activity-number 0
+end
+
+to rest-history-sinisha
+end
+
+; ========================================================================================
+; Visualization of calculations
+; ========================================================================================
+to do-plotting-sasha
+     ;; plot the number of infected individuals at each step
+     set-current-plot "Calc 1"
+     set-current-plot-pen "default"
+     ;set-plot-pen-interval
+     plotxy activities-num-emitted global_calculation_1
 end
 
 
 ; ========================================================================================
 ; setup personal commands
 ; ========================================================================================
+
+to setup-start-sasha
+  set plot-for-each-number-of-activities 100
+  set ploted-on-activity-number 0
+end
 
 to setup-start-sinisha
 end

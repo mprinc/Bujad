@@ -569,6 +569,17 @@ false
 PENS
 "ar" 1.0 0 -16777216 true "" ""
 
+INPUTBOX
+281
+761
+436
+821
+Max-activities-num
+10000
+1
+0
+Number
+
 @#$#@#$#@
 ## WHAT IS IT?
 

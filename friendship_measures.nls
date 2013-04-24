@@ -44,9 +44,10 @@ to-report happinessForSystem
     set calculation_actor_1 actorHappiness
 
     set globalHappiness globalHappiness + actorHappiness
-      show word "globalHappiness = " word globalHappiness word ", actorHappiness = " actorHappiness
+    ;show word "globalHappiness = " word globalHappiness word ", actorHappiness = " actorHappiness
   ]
   set globalHappiness globalHappiness / (count actors)
+  show word "globalHappiness = " globalHappiness
   report globalHappiness
 end
 
@@ -61,11 +62,11 @@ to-report happinessForActor [actorSelected]
     ; link-neighbors
     ; find all actors that are friends of self actor
     let actorFriendships sort friendship-neighbors
-    show word "actor: " word self word ", actorFriendships: " actorFriendships
+    ;show word "actor: " word self word ", actorFriendships: " actorFriendships
     foreach actorFriendships[
       let friendshipHappiness happinessForFriendship self ?
       set actorHappiness actorHappiness + friendshipHappiness
-      show word "actorHappiness = " word actorHappiness word ", friendshipHappiness = " friendshipHappiness
+      ;show word "actorHappiness = " word actorHappiness word ", friendshipHappiness = " friendshipHappiness
     ]
     if(length actorFriendships > 0)[
       set actorHappiness actorHappiness / (length actorFriendships)
@@ -83,7 +84,7 @@ to-report happinessForFriendship [actorFrom actorTo]
   if(activitiesIn != 0 or activitiesOut != 0)[
     set friendshipHappiness 1 - (abs(activitiesIn - activitiesOut) / (activitiesIn + activitiesOut))
   ]
-  show word "friendshipHappiness = " word friendshipHappiness word ", activitiesIn = " word activitiesIn word ", activitiesOut " activitiesOut
+  ;show word "friendshipHappiness = " word friendshipHappiness word ", activitiesIn = " word activitiesIn word ", activitiesOut " activitiesOut
   report friendshipHappiness
 end
 

@@ -36,22 +36,22 @@ actors-num
 actors-num
 0
 100
-27
+50
 1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-9
-467
-314
-500
+8
+433
+313
+466
 friendship-avg-degree
 friendship-avg-degree
 0.25
 5.0
-2.2
+2.5
 0.05
 1
 NIL
@@ -75,11 +75,11 @@ NIL
 1
 
 BUTTON
-68
-139
-131
-172
-One Tick
+72
+96
+127
+129
+1 Tick
 do-tick
 NIL
 1
@@ -92,10 +92,10 @@ NIL
 1
 
 BUTTON
-133
-139
-239
-172
+129
+96
+235
+129
 Continue Ticks
 do-tick
 T
@@ -110,9 +110,9 @@ NIL
 
 BUTTON
 8
-97
+96
 70
-130
+129
 layout
 do-layout\ndisplay
 T
@@ -143,20 +143,20 @@ NIL
 1
 
 TEXTBOX
-12
-453
-162
-471
+9
+410
+159
+430
 Friendships:
-11
+16
 23.0
 1
 
 BUTTON
-928
-13
-1052
-46
+921
+12
+1045
+45
 Inspect System
 inspect-system
 T
@@ -170,10 +170,10 @@ NIL
 1
 
 SLIDER
-6
-616
-314
-649
+5
+582
+313
+615
 Activity-emission-probability
 Activity-emission-probability
 0
@@ -185,120 +185,120 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-17
-595
-167
-613
+8
+560
+158
+580
 Activities:
-11
+16
 44.0
 1
 
 SLIDER
-6
-656
-314
-689
+5
+618
+313
+651
 Activity-absorption-probability
 Activity-absorption-probability
 0
 1
-0.2
+0.5
 0.01
 1
 NIL
 HORIZONTAL
 
 SLIDER
-9
-199
-314
-232
+8
+165
+313
+198
 actor-price-absorption-limit
 actor-price-absorption-limit
 0
 5
-4.7
+5
 0.1
 1
 NIL
 HORIZONTAL
 
 TEXTBOX
-20
-179
-170
-197
-Actors:
 11
-0.0
+145
+161
+165
+Actors:
+16
+105.0
 1
 
 SLIDER
-10
-275
-315
-308
+9
+241
+314
+274
 actor-price-emission-limit
 actor-price-emission-limit
 0
 5
-2.8
+5
 0.1
 1
 NIL
 HORIZONTAL
 
 SLIDER
-9
-233
-314
-266
+8
+199
+313
+232
 Actor-price-absorption-restitution
 Actor-price-absorption-restitution
 0
 10
-9
+2.5
 0.02
 1
 NIL
 HORIZONTAL
 
 SLIDER
-11
-310
-315
-343
+10
+276
+314
+309
 Actor-price-emission-restitution
 Actor-price-emission-restitution
 0
 10
-1.42
+2.5
 0.02
 1
 NIL
 HORIZONTAL
 
 SLIDER
-11
-354
-314
-387
+10
+320
+313
+353
 Actor-iamwhat-mean
 Actor-iamwhat-mean
 0
 5
-0.5
+1
 0.5
 1
 WHATs
 HORIZONTAL
 
 SWITCH
-1067
-14
-1234
-47
+1059
+13
+1226
+46
 Links-show-extra
 Links-show-extra
 1
@@ -306,10 +306,10 @@ Links-show-extra
 -1000
 
 SLIDER
-925
-504
-1186
-537
+921
+490
+1182
+523
 Attractiveness-IAmWhats-Ponder
 Attractiveness-IAmWhats-Ponder
 0
@@ -321,10 +321,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-926
-539
-1187
-572
+922
+525
+1183
+558
 Attractiveness-sociable-Ponder
 Attractiveness-sociable-Ponder
 0
@@ -336,10 +336,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-926
-574
-1187
-607
+922
+560
+1183
+593
 Attractiveness-Preference-Ponder
 Attractiveness-Preference-Ponder
 0
@@ -351,20 +351,20 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-925
-485
-1075
-503
+723
+444
+873
+462
 Attractiveness:
 11
 104.0
 1
 
 SLIDER
-6
-696
-314
-729
+5
+654
+313
+687
 Activities-number-per-tick
 Activities-number-per-tick
 0
@@ -376,10 +376,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-934
-138
-1036
-183
+1600
+16
+1702
+61
 Activities Num
 activities-num-emitted
 0
@@ -387,10 +387,10 @@ activities-num-emitted
 11
 
 SLIDER
-926
-618
-1213
-651
+922
+604
+1184
+637
 Attractiveness-manual-mean
 Attractiveness-manual-mean
 0
@@ -402,25 +402,25 @@ NIL
 HORIZONTAL
 
 SLIDER
-926
-653
-1213
-686
+922
+639
+1185
+672
 Attractiveness-manual-standard-deviation
 Attractiveness-manual-standard-deviation
 0
 1
-0.28
+0.3
 0.02
 1
 NIL
 HORIZONTAL
 
 INPUTBOX
-1157
-138
-1302
-198
+1242
+15
+1387
+75
 Random-generator-initial
 0
 1
@@ -428,25 +428,25 @@ Random-generator-initial
 Number
 
 SLIDER
-927
-695
-1213
-728
+923
+681
+1186
+714
 Popularity-random-mean
 Popularity-random-mean
 0
 1
-0.56
+0.6
 0.02
 1
 NIL
 HORIZONTAL
 
 SLIDER
-927
-729
-1213
-762
+923
+715
+1186
+748
 Popularity-random-standard-deviation
 Popularity-random-standard-deviation
 0
@@ -485,15 +485,15 @@ NIL
 1
 
 SLIDER
-12
-389
-314
-422
+11
+355
+313
+388
 Actor-iamwhat--standard-deviation
 Actor-iamwhat--standard-deviation
 0
 5
-0.5
+1
 0.5
 1
 WHATs
@@ -517,30 +517,30 @@ NIL
 1
 
 CHOOSER
-928
-67
-1072
-112
+920
+51
+1064
+96
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-3
+2
 
 CHOOSER
-1073
-67
-1229
-112
+1065
+51
+1221
+96
 Chooser-whom-to-receive
 Chooser-whom-to-receive
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
 0
 
 SLIDER
-10
-509
-312
-542
+9
+475
+311
+508
 Relationship-Decay
 Relationship-Decay
 0
@@ -552,10 +552,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-544
-312
-577
+9
+510
+311
+543
 Relationship-Treshold-Connected
 Relationship-Treshold-Connected
 0
@@ -584,10 +584,10 @@ NIL
 1
 
 MONITOR
-927
-241
-1021
-286
+1791
+70
+1885
+115
 Calculation 1
 global_calculation_1
 17
@@ -595,10 +595,10 @@ global_calculation_1
 11
 
 MONITOR
-1131
-241
-1230
-286
+922
+255
+1021
+300
 Calculation 2
 global_calculation_2
 17
@@ -606,10 +606,10 @@ global_calculation_2
 11
 
 MONITOR
-1333
-241
-1436
-286
+1024
+255
+1124
+300
 Calculation 3
 global_calculation_3
 17
@@ -617,21 +617,21 @@ global_calculation_3
 11
 
 INPUTBOX
-1038
-138
-1155
-198
+1392
+14
+1509
+74
 Max-activities-num
-10000
+25000
 1
 0
 Number
 
 SLIDER
-5
-731
-313
-764
+6
+696
+314
+729
 Activity-atract-relationship-ponder
 Activity-atract-relationship-ponder
 0
@@ -643,17 +643,17 @@ NIL
 HORIZONTAL
 
 PLOT
-927
-288
-1127
-438
+1192
+117
+1885
+873
 Calc 1
 ticks
 calc 1
 0.0
-10.0
+1.0
 0.0
-10.0
+1.0
 true
 false
 "" ""
@@ -661,17 +661,17 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count turtles"
 
 PLOT
-1131
-288
-1331
-438
+921
+100
+1121
+250
 Calc 2
 ticks
 calc 2
 0.0
-10.0
+1.0
 0.0
-10.0
+1.0
 true
 false
 "" ""
@@ -679,22 +679,43 @@ PENS
 "default" 1.0 0 -16777216 true "" "plot count turtles"
 
 PLOT
-1334
-288
-1534
-438
+922
+304
+1122
+454
 Calc 3
 ticks
 calc 3
 0.0
-10.0
+1.0
 0.0
-10.0
+1.0
 true
 false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" "plot count turtles"
+
+MONITOR
+1513
+16
+1598
+61
+Ticks
+ticks
+17
+1
+11
+
+TEXTBOX
+922
+468
+1072
+488
+Attractiveness:
+16
+15.0
+1
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -55,12 +55,18 @@ end
 
 ; responsible for executing one time tick in the model
 to do-tick
+; =========================
+; initializing tick
+; =========================
   ; random-seed Random-generator-initial 47822
   ;show word Max-activities-num word ", " activities-num-emitted
   if((Max-activities-num = 0) or (Max-activities-num > activities-num-emitted))[
     do-tick-sasha-start
     do-tick-sinisha-start
     
+; =========================
+; sending activities
+; =========================
     ; type "\n\nDifussing activities:\n"
     let activities-per-tick (count actors) * Activities-number-per-tick
     repeat activities-per-tick[
@@ -70,18 +76,24 @@ to do-tick
       ]
     ]  
     
-    ; testing purpose
+; =========================
+; testing purpose
+; =========================
     ask actors  with [effect-left > 0 ][
       set effect-left effect-left - 1
     ]
     
-    reset-actors
+    reset-actors-test
     ask n-of 3 actors[
       set shape "face happy"
       set size ACTOR_SIZE_ACTIVE
       set effect-left 5
       set color blue + 2
     ]
+
+; ========================
+; finalizing tick
+; ========================
     display
     recover-energies
     
@@ -100,7 +112,7 @@ to recover-energies
   ]
 end
 
-to reset-actors
+to reset-actors-test
   ask actors  with [effect-left <= 0 ][
     set shape ACTOR_SHAPE_NEUTRAL
     set size ACTOR_SIZE_NEUTRAL
@@ -115,7 +127,13 @@ to rest-history
   ask activity-actors[die]
   ask iamwhat-activities[die]
   set activities-num-emitted 0
-  set actor-types-list []
+  set activities-list []
+  clear-all-plots
+  set global_calculation_1 0
+  set global_calculation_2 0
+  set global_calculation_3 0
+  rest-history-sasha
+  rest-history-sinisha
 end
 
 ; This is a on-mouse-click function (we add extra guarding variable to switch mouse-down? into mouse-click behaviour
