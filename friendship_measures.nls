@@ -29,6 +29,10 @@ end
 
 to measure-happiness-per-node
   set global_calculation_1 happinessForSystem
+  ask friendships[
+    set calculation_fs_1 ((manual-attractiveness-end1 + manual-attractiveness-end2)/2)
+    set label  precision calculation_fs_1 3
+  ]
 end
 
 ; calcullates happiness for the whole system

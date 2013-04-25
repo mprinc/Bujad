@@ -183,7 +183,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
     ]
   ]
   if(Chooser-whom-to-send = "shared_interest")[
-    let actorsSorted sort actors
+    let actorsSorted sort friendship-neighbors
     let sharedInterestSum 0
     foreach actorsSorted[
       set sharedInterestSum sharedInterestSum + count get-shared-iamwhats self ?
