@@ -84,6 +84,7 @@ to display-friendship-of-actor
       set color color + 2
     ]
     ask my-friendships [
+      ask actor-inspection-selected [show word "Thicnkess:" actor-get-turtle-link-endpoint-value myself "thicknes"]
       set color color + 2
       set hidden? false
     ]

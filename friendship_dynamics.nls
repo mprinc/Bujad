@@ -4,6 +4,48 @@ to change-relationship-through-time [actor1 actor2]
   
 end
 
+to set_strengths_for_actor [actor]
+  print word "set_strengths_for_actor" ticks
+  let friends_list []
+  let non-normalized_strengths []
+  let normalized_strengths []
+  ask actor[
+    ask friendship-neighbors[
+      set friends_list lput self friends_list
+    ]
+    
+    foreach(friends_list)[
+      set non-normalized_strengths lput (non-normalized-strength_for_friendship myself ?) non-normalized_strengths
+    ]
+    
+    set normalized_strengths list_normalizing non-normalized_strengths
+    
+    (foreach friends_list normalized_strengths
+      [
+        let mean_thickness 0;
+        let friend ?1
+        let normalized_strength ?2
+        let thickness_other 0
+        ask friendship-with friend[
+          let friendshipv self
+          ask actor[
+            actor-set-turtle-link-endpoint-value friendshipv "thicknes" normalized_strength
+            ask friend[
+              set thickness_other actor-get-turtle-link-endpoint-value friendshipv "thicknes"
+            ]
+          ]
+        ]
+        set thickness_other (normalized_strength + thickness_other) / 2
+      ])
+  ]
+end
+
+to-report non-normalized-strength_for_friendship [actorMaster actorSlave]
+  ; calculates velocity of price of activities
+  report (price_last_activities actorMaster actorSlave Time-for-activity-velocity) / Time-for-activity-velocity
+end
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; calculates  attractiveness  - how attractive is actorTo seen by actorFrom      ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -74,8 +116,10 @@ to-report calculate-activity-payoff [activity]
   report payoff  
 end
 
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; changes closeness of al actors that took part in the activity    ;;;
+;;; DEPRICATED-USED-BY-OLD-MODEL: changes closeness of al actors that took part in the activity    ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 to affect-relatinships-by-activity [activity]
@@ -98,7 +142,7 @@ to affect-relatinships-by-activity [activity]
     foreach activity_actors [
       if(? != actorFrom)[
         let actorTo ?
-       ;  print (word [label] of actorFrom (word " -> " [label] of actorTo))
+        ;  print (word [label] of actorFrom (word " -> " [label] of actorTo))
         let activity_attract Activity-atract-relationship-ponder * (actors-attractiveness actorFrom actorTo) * calculate-activity-payoff activity
         
         let f nobody
@@ -106,7 +150,7 @@ to affect-relatinships-by-activity [activity]
           set f friendship-with actorTo
         ]
         if(f != nobody)[
-         ;  type word "f:" f;
+          ;  type word "f:" f;
           ask actorFrom[
             ;get old thickness
             let f_thickness actor-get-turtle-link-endpoint-value f "thicknes"          
@@ -122,7 +166,36 @@ to affect-relatinships-by-activity [activity]
   ]
 end
 
+
 to-report attractiveness_realization [actor]
+  let ar 0
+  ; print word [label] of actor " attractivenesses:"
+  ask actors with [friendship-neighbor? myself]
+  [
+    let actorTo self
+    let f nobody
+    ask actor[
+      set f friendship-with actorTo
+    ]
+    if(f != nobody)[
+      ; type word "f:" f;
+      ask actor[
+        ;get old thickness
+        let f_thickness actor-get-turtle-link-endpoint-value f "thicknes"          
+        ; show word "f_thickness: " f_thickness
+        
+        set ar (actors-attractiveness actor self) * f_thickness
+        
+        ; show word " - " ar
+      ]
+    ]   
+  ]
+  report ar
+end
+
+
+
+to-report attractiveness_realization-OLD [actor]
   let ar 0
   ; print word [label] of actor " attractivenesses:"
   ask actors with [friendship-neighbor? myself]
@@ -157,6 +230,7 @@ to-report mean_attractiveness_realization
   report ar
 end
 
+; DEPRECIATED: USED IN OLD MODEL
 to decay_relationsips
   ask friendships[
     set thicknes-end1 thicknes-end1 - Relationship-Decay

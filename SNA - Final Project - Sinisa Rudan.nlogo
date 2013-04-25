@@ -524,7 +524,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-1
+4
 
 CHOOSER
 179
@@ -576,6 +576,17 @@ INPUTBOX
 821
 Max-activities-num
 10000
+1
+0
+Number
+
+INPUTBOX
+25
+745
+160
+805
+Time-for-activity-velocity
+10
 1
 0
 Number

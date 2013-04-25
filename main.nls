@@ -5,7 +5,8 @@ extensions [nw]
 
 ; http://stackoverflow.com/questions/5830045/including-a-netlogo-source-file-into-another
 
-__includes["friendship_model.nls" "friendship_manager_setup.nls" "friendship_model_activities_diffusion.nls" "friendship_dynamics.nls" "visualization.nls" "friendship_measures.nls" "iamwhats.nls"]
+__includes["friendship_model.nls" "friendship_manager_setup.nls" "friendship_model_activities_diffusion.nls" "friendship_dynamics.nls" "visualization.nls" "friendship_measures.nls" "iamwhats.nls"
+  "activity.nls" "util.nls"]
 
 ; from the interface
 ;------------------------------------------
@@ -55,6 +56,7 @@ end
 
 ; responsible for executing one time tick in the model
 to do-tick
+  tick
 ; =========================
 ; initializing tick
 ; =========================

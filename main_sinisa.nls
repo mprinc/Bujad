@@ -22,9 +22,21 @@ to do-tick-sasha-end
 end
 
 to do-tick-sinisha-end
-  decay_relationsips
+  ; decay_relationsips ;USED IN OLD MODEL
   do-plotting
-  let ar mean_attractiveness_realization
+  
+  ifelse( (ticks mod Time-for-activity-velocity) = 0)
+  [  
+    print word "mod:" ticks   
+    ask actors[
+      set_strengths_for_actor self
+    ]
+    let ar mean_attractiveness_realization
+  ]
+  [
+        print word "nonmod:" ticks   
+  ]
+  
 end
 
 
@@ -58,16 +70,16 @@ to test-sinisa
   ifelse (selected_last = 0 or selected_last = nobody)
   [set a2  (last sort actors)]
   [set a2 selected_last]
-    
+  
   let attractivness actors-attractiveness a1 a2
   type word "attractivness: " (word attractivness "\n")
   ask actors [unselect-actor self]
   select-actor a1
   select-actor a2
-  ask friendships with [(end1 = a1 and end2 = a1) or (end1 = a2 and end2 = a1)][
-    show link-length 
-    ;set link-length  2
-  ]
+  ;ask friendships with [(end1 = a1 and end2 = a1) or (end1 = a2 and end2 = a1)][
+  ;  show link-length 
+  ;  ;set link-length  2
+  ;]
   
   let fr nobody
   ask a1[set fr (friendship-with a2)]

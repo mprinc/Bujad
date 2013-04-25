@@ -131,6 +131,7 @@ to setup-actors
 end
 
 to setup-friendships
+  let INITIAL_STRENGTH 0
   ifelse(Friendships_generator = "ER")[ ;; generate erdos-renyi random graph  
     let num-friendships ceiling (actors-num * friendship-avg-degree / 2)
     while [count friendships < num-friendships]
@@ -160,7 +161,7 @@ to setup-friendships
             let frl friendship-with myself;
            ; print "already exists:"
             ask frl[
-              set thicknes-end2 attractiveness
+              set thicknes-end2 INITIAL_STRENGTH; //attractiveness
              ; show word "thicknes-end1:" (word thicknes-end1 (word "; thicknes-end2:" thicknes-end2))              
             ]
            ; show [end1] of frl = self
@@ -168,7 +169,7 @@ to setup-friendships
           [
             ask myself [
               create-friendship-with myself[
-                set thicknes-end1 attractiveness
+                set thicknes-end1 INITIAL_STRENGTH; //attractiveness
               ]
             ]
           ]
