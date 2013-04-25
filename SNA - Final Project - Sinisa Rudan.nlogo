@@ -612,7 +612,7 @@ This model is a model of friendship
 
 ## COPYRIGHT AND LICENSE
 
-Copyright 20013 Sasha Rudan, Oslo University.
+Copyright 20013 Sinisa Rudan and Sasha Rudan, Magic Wand Solutions and Oslo University.
 
 ![CC BY-NC-SA 3.0](http://i.creativecommons.org/l/by-nc-sa/3.0/88x31.png)
 

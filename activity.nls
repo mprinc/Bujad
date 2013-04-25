@@ -32,12 +32,12 @@ to-report activitiesForFriendship [actorMaster actorSlave]
       ]
     ]
   ]
-  print word "activitiesNum:" activitiesNum
-  foreach(sort activities)[
-      print word "activity:" ?
-  ]
+  ;print word "activitiesNum:" activitiesNum
+  ;foreach(sort factivities)[
+  ;    print word "activity:" ?
+  ;]
 
-  report activities  
+  report factivities  
 end
 
 to-report price_last_activities [actorMaster actorSlave period]
@@ -48,8 +48,12 @@ to-report price_last_activities [actorMaster actorSlave period]
   let min_tick ticks - period
   ;set price count filter [ ([time] of ?) > tick ] factivities
   ;set price count (factivities with [ time > tick ])
+  print word "c price_last_activities:" count factivities
+  print word "price_last_activities:" factivities
   foreach(sort factivities)[
-    if(([time] of ?) > min_tick)[
+    let fact ?
+    print [time] of fact
+    if(([time] of fact) > min_tick)[
       set price price + 1
     ]
   ]  
