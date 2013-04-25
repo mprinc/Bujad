@@ -1,10 +1,10 @@
 __includes["main.nls" "main_sasha.nls"]
 @#$#@#$#@
 GRAPHICS-WINDOW
-336
-10
-916
-611
+331
+11
+911
+612
 80
 80
 3.5404
@@ -170,10 +170,10 @@ NIL
 1
 
 SLIDER
-5
-582
-313
-615
+7
+630
+315
+663
 Activity-emission-probability
 Activity-emission-probability
 0
@@ -185,20 +185,20 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-8
-560
-158
-580
+10
+608
+160
+628
 Activities:
 16
 44.0
 1
 
 SLIDER
-5
-618
-313
-651
+7
+666
+315
+699
 Activity-absorption-probability
 Activity-absorption-probability
 0
@@ -350,21 +350,11 @@ Attractiveness-Preference-Ponder
 NIL
 HORIZONTAL
 
-TEXTBOX
-723
-444
-873
-462
-Attractiveness:
-11
-104.0
-1
-
 SLIDER
-5
-654
-313
-687
+7
+702
+315
+735
 Activities-number-per-tick
 Activities-number-per-tick
 0
@@ -628,10 +618,10 @@ Max-activities-num
 Number
 
 SLIDER
-6
-696
-314
-729
+8
+744
+316
+777
 Activity-atract-relationship-ponder
 Activity-atract-relationship-ponder
 0
@@ -716,6 +706,17 @@ Attractiveness:
 16
 15.0
 1
+
+INPUTBOX
+156
+545
+311
+605
+Time-for-activity-velocity
+10
+1
+0
+Number
 
 @#$#@#$#@
 ## WHAT IS IT?
