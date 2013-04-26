@@ -20,23 +20,30 @@ to set_strengths_for_actor [actor]
     
     set normalized_strengths list_normalizing non-normalized_strengths
    ; show word length friends_list (word " vs " length normalized_strengths)
-    (foreach friends_list normalized_strengths
+    (foreach friends_list normalized_strengths non-normalized_strengths
       [
         let mean_thickness 0;
         let friend ?1
         let normalized_strength ?2
+        let non-normalized_strength ?3
         let thickness_other 0
+        let non-normalized_strength_other 0
         ask friendship-with friend[
           let friendshipv self
           ask actor[
             actor-set-turtle-link-endpoint-value friendshipv "thicknes" normalized_strength
+            actor-set-turtle-link-endpoint-value friendshipv "strength_non_normalized" non-normalized_strength
             ask friend[
               set thickness_other actor-get-turtle-link-endpoint-value friendshipv "thicknes"
+              set non-normalized_strength_other actor-get-turtle-link-endpoint-value friendshipv "strength_non_normalized"
             ]
           ]
-          print word "friendshipv" friendshipv
-          print word "friendshipv is-friendship?: " is-friendship? friendshipv
+          ;print word "friendshipv" friendshipv
+          ;print word "friendshipv is-friendship?: " is-friendship? friendshipv
           ask friendshipv[set strength (normalized_strength + thickness_other) / 2]
+          print non-normalized_strength
+          print word "non-normalized_strength_other: " non-normalized_strength_other
+          ask friendshipv[set non-normalized_strength (non-normalized_strength + non-normalized_strength_other) / 2]
         ]        
       ])
   ]

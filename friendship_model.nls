@@ -63,6 +63,9 @@ undirected-link-breed [friendships friendship]
 friendships-own
 [
   strength
+  strength_non_normalized
+  strength_non_normalized-end1
+  strength_non_normalized-end2
   thicknes-end1
   thicknes-end2
   manual-attractiveness-end1
