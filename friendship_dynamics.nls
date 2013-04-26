@@ -34,8 +34,10 @@ to set_strengths_for_actor [actor]
               set thickness_other actor-get-turtle-link-endpoint-value friendshipv "thicknes"
             ]
           ]
-        ]
-        set thickness_other (normalized_strength + thickness_other) / 2
+          print word "friendshipv" friendshipv
+          print word "friendshipv is-friendship?: " is-friendship? friendshipv
+          ask friendshipv[set strength (normalized_strength + thickness_other) / 2]
+        ]        
       ])
   ]
 end
@@ -171,7 +173,9 @@ to affect-relatinships-by-activity [activity]
   ]
 end
 
-
+;;;;;;;;; attractiveness_realization ;;;;;;;;;;;;;;;;;;;;;;;;;;
+; expects that relationship thicknesses are normalized to [0,1]
+;;;;;;;;;
 to-report attractiveness_realization [actor]
   let ar 0
   ; print word [label] of actor " attractivenesses:"
@@ -184,7 +188,7 @@ to-report attractiveness_realization [actor]
     ]
     if(f != nobody)[
       ; type word "f:" f;
-      ask actor[
+      ask actor[ ; we need to be in its context so that 'actor-get-turtle-link-endpoint-value' returns its thickness
         ;get old thickness
         let f_thickness actor-get-turtle-link-endpoint-value f "thicknes"          
         ; show word "f_thickness: " f_thickness

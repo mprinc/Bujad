@@ -62,6 +62,7 @@ actors-own
 undirected-link-breed [friendships friendship]
 friendships-own
 [
+  strength
   thicknes-end1
   thicknes-end2
   manual-attractiveness-end1

@@ -1,9 +1,9 @@
 __includes["main.nls" "main_sinisa.nls"]
 @#$#@#$#@
 GRAPHICS-WINDOW
-322
+273
 10
-921
+872
 630
 80
 80
@@ -28,10 +28,10 @@ ticks
 30.0
 
 SLIDER
-278
-53
-311
-203
+222
+209
+255
+359
 actors-num
 actors-num
 0
@@ -43,10 +43,10 @@ NIL
 VERTICAL
 
 SLIDER
-11
-407
-316
-440
+6
+406
+160
+439
 friendship-avg-degree
 friendship-avg-degree
 0.25
@@ -58,10 +58,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-6
-47
-246
-80
+4
+48
+96
+81
 Reset History
 rest-history
 NIL
@@ -128,7 +128,7 @@ NIL
 BUTTON
 6
 10
-321
+246
 43
 Setup Actors, Friendships, Activities, IAmWhat
 setup
@@ -153,10 +153,10 @@ Friendships:
 1
 
 BUTTON
-928
-13
-1045
-46
+878
+11
+995
+44
 Inspect System
 inspect-system
 T
@@ -170,10 +170,10 @@ NIL
 1
 
 SLIDER
-9
-465
-317
-498
+4
+464
+202
+497
 activity-emission-probability
 activity-emission-probability
 0
@@ -195,10 +195,10 @@ Activities:
 1
 
 SLIDER
-9
-505
-317
-538
+4
+504
+201
+537
 Activity-absorption-probability
 Activity-absorption-probability
 0
@@ -210,10 +210,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-9
-211
-314
-244
+4
+206
+214
+239
 actor-price-absorption-limit
 actor-price-absorption-limit
 0
@@ -235,10 +235,10 @@ Actors:
 1
 
 SLIDER
-9
-289
-314
-322
+4
+284
+213
+317
 actor-price-emission-limit
 actor-price-emission-limit
 0
@@ -250,10 +250,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-927
-126
-1050
-159
+877
+50
+1000
+83
 test-sinisa
 test-sinisa
 NIL
@@ -267,10 +267,10 @@ NIL
 1
 
 SLIDER
-9
-251
-314
-284
+4
+246
+213
+279
 Actor-price-absorption-restitution
 Actor-price-absorption-restitution
 0
@@ -282,10 +282,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-328
-314
-361
+5
+323
+213
+356
 Actor-price-emission-restitution
 Actor-price-emission-restitution
 0
@@ -312,10 +312,10 @@ WHATs
 HORIZONTAL
 
 SWITCH
-165
-365
-315
-398
+64
+358
+214
+391
 Links-show-extra
 Links-show-extra
 1
@@ -323,10 +323,10 @@ Links-show-extra
 -1000
 
 SLIDER
-926
-198
-1162
-231
+877
+105
+1083
+138
 Attractiveness-IAmWhats-Ponder
 Attractiveness-IAmWhats-Ponder
 0
@@ -338,20 +338,20 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-927
-180
-1077
-198
+878
+88
+1028
+106
 Attractiveness pondering:
 11
 44.0
 1
 
 SLIDER
-926
-236
-1159
-269
+877
+143
+1084
+176
 Attractiveness-Sociable-Ponder
 Attractiveness-Sociable-Ponder
 0
@@ -363,10 +363,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-927
-275
-1167
-308
+878
+182
+1085
+215
 Attractiveness-Preference-Ponder
 Attractiveness-Preference-Ponder
 0
@@ -393,10 +393,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-927
-385
-1135
-418
+878
+241
+1082
+274
 Relationship-Treshold-Friend
 Relationship-Treshold-Friend
 0
@@ -408,10 +408,10 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-929
-360
-1079
-378
+880
+223
+1030
+241
 Relationships:
 11
 0.0
@@ -469,10 +469,10 @@ Friendships_generator
 1
 
 PLOT
-707
-637
-962
-787
+879
+580
+1082
+730
 friendships strength
 time
 mean strength
@@ -487,10 +487,10 @@ PENS
 "thicknes" 1.0 0 -3844592 true "" ""
 
 SLIDER
-927
-427
-1160
-460
+878
+283
+1082
+316
 Relationship-Treshold-Connected
 Relationship-Treshold-Connected
 0
@@ -502,10 +502,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-928
-469
-1100
-502
+879
+325
+1051
+358
 Relationship-Decay
 Relationship-Decay
 0
@@ -517,30 +517,30 @@ NIL
 HORIZONTAL
 
 CHOOSER
-10
-546
-137
-591
+4
+544
+131
+589
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
 4
 
 CHOOSER
-179
-546
-315
-591
+134
+544
+270
+589
 Chooser-whom-to-receive
 Chooser-whom-to-receive
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
 0
 
 SLIDER
-10
-637
-256
-670
+7
+636
+223
+669
 Activity-atract-relationship-ponder
 Activity-atract-relationship-ponder
 0
@@ -552,10 +552,10 @@ NIL
 HORIZONTAL
 
 PLOT
-996
-579
-1196
-790
+879
+364
+1079
+575
 attractiveness realization
 time
 attractiveness realization
@@ -596,10 +596,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-495
-787
-717
-820
+479
+789
+701
+822
 Visualization-show-friendship-labels
 Visualization-show-friendship-labels
 0
@@ -607,10 +607,10 @@ Visualization-show-friendship-labels
 -1000
 
 SWITCH
-265
-787
-490
-820
+249
+789
+446
+822
 Visualization-show-actor-labels
 Visualization-show-actor-labels
 0
@@ -631,6 +631,17 @@ Activity-forgetting-time
 1
 NIL
 HORIZONTAL
+
+SWITCH
+3
+788
+244
+821
+Visualization-corelate-actor-to-variables
+Visualization-corelate-actor-to-variables
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
