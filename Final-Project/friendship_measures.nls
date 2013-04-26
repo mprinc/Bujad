@@ -22,7 +22,7 @@ end
 to measure-activities-per-node
   ask actors[
     let activities-num activities-number-for-actor self
-    visualization-set-label-actor self word "actor-" word who word ":" activities-num
+    set label word "actor-" word who word ":" activities-num
     set calculation_actor_1 activities-num
   ]  
 end
@@ -31,7 +31,7 @@ to measure-happiness-per-node
   set global_calculation_1 happinessForSystem
   ask friendships[
     set calculation_fs_1 ((manual-attractiveness-end1 + manual-attractiveness-end2) / 2)
-    visualization-set-label-friendship self precision calculation_fs_1 3
+    set label  precision calculation_fs_1 3
   ]
 end
 
@@ -44,7 +44,7 @@ to-report happinessForSystem
   ask actors[
     let actorHappiness happinessForActor self
 
-    visualization-set-label-actor self word "actor-" word who word ":" precision actorHappiness 2
+    set label word "actor-" word who word ":" precision actorHappiness 2
     set calculation_actor_1 actorHappiness
 
     set globalHappiness globalHappiness + actorHappiness
@@ -96,7 +96,7 @@ to show-actor-activites-num
   show "show-actor-activites-num"
   ask actors[
     let activities-num activities-number-for-actor self
-    visualization-set-label-actor self word "actor-" word who word ":" activities-num
+    set label word "actor-" word who word ":" activities-num
   ]  
 end
 

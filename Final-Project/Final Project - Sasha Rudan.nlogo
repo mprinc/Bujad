@@ -51,7 +51,7 @@ friendship-avg-degree
 friendship-avg-degree
 0.25
 5.0
-2.65
+2.5
 0.05
 1
 NIL
@@ -258,7 +258,7 @@ Actor-price-absorption-restitution
 Actor-price-absorption-restitution
 0
 10
-2.64
+2.5
 0.02
 1
 NIL
@@ -288,7 +288,7 @@ Actor-iamwhat-mean
 Actor-iamwhat-mean
 0
 5
-2
+1
 0.5
 1
 WHATs
@@ -366,11 +366,11 @@ NIL
 HORIZONTAL
 
 MONITOR
-1592
-17
-1685
-62
-Activities Total
+1600
+16
+1702
+61
+Activities Num
 activities-num-emitted
 0
 1
@@ -441,7 +441,7 @@ Popularity-random-standard-deviation
 Popularity-random-standard-deviation
 0
 1
-0.38
+0.4
 0.02
 1
 NIL
@@ -689,7 +689,7 @@ PENS
 MONITOR
 1513
 16
-1590
+1598
 61
 Ticks
 ticks
@@ -717,54 +717,6 @@ Time-for-activity-velocity
 1
 0
 Number
-
-SLIDER
-7
-782
-314
-815
-Activity-forgetting-time
-Activity-forgetting-time
-0
-500
-100
-10
-1
-NIL
-HORIZONTAL
-
-MONITOR
-1687
-17
-1771
-62
-Activities Left
-length activities-list
-17
-1
-11
-
-SWITCH
-335
-667
-591
-700
-Visualization-show-actor-labels
-Visualization-show-actor-labels
-0
-1
--1000
-
-SWITCH
-333
-704
-591
-737
-Visualization-show-friendship-labels
-Visualization-show-friendship-labels
-1
-1
--1000
 
 @#$#@#$#@
 ## WHAT IS IT?

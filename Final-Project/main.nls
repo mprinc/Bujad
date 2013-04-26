@@ -39,13 +39,10 @@ to setup
     ;set pcolor white
   ]
   
-  visualize-test
-
   setup-start-sasha
   setup-start-sinisha
   
   setup-actors-and-friendships
-  visualization-setup
   
   setup-end-sasha
   setup-end-sinisha
@@ -81,8 +78,22 @@ to do-tick
       ]
     ]  
     
-    visualization-update-colors
+; =========================
+; testing purpose
+; =========================
+    ask actors  with [effect-left > 0 ][
+      set effect-left effect-left - 1
+    ]
+    
+    reset-actors-test
+    ask n-of 3 actors[
+      set shape "face happy"
+      set size ACTOR_SIZE_ACTIVE
+      set effect-left 5
+      set color blue + 2
+    ]
 
+; ========================
 ; finalizing tick
 ; ========================
     display
@@ -100,6 +111,14 @@ to recover-energies
   ask actors[
     set price-absorbed (price-absorbed - Actor-price-absorption-restitution)
     set price-emitted (price-emitted - Actor-price-emission-restitution)
+  ]
+end
+
+to reset-actors-test
+  ask actors  with [effect-left <= 0 ][
+    set shape ACTOR_SHAPE_NEUTRAL
+    set size ACTOR_SIZE_NEUTRAL
+    set color blue
   ]
 end
 

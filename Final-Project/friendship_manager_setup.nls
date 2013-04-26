@@ -120,7 +120,7 @@ to setup-actors
       set effect-left 0
       set color blue - 2
       set label-color white
-      visualization-set-label-actor self word "actor-" who
+      set label word "actor-" who
       set sociable random 3
     ]
   

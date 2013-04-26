@@ -1,0 +1,10 @@
+"label", "shape", "probability"
+"capoeira", "footprint human", 0.1
+"reading", "book", 0.1
+"dancing", "person", 0.1
+"salsa", "person lumberjack", 0.1
+"volleyball", "ball baseball", 0.1
+"nature", "tree", 0.1
+"fishing", "fish", 0.1
+"racing", "car", 0.1
+"travel", "airplane", 0.1

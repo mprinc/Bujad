@@ -13,7 +13,6 @@ to do-tick-sinisha-start
 end
 
 to do-tick-sasha-end
-  remove-obsolated-activities
   ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
   ; every 100 activities
   if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
@@ -22,7 +21,7 @@ to do-tick-sasha-end
 
     measure-happiness-per-node
   ]
-  do-plotting-sasha
+  do-plotting-sasha  
 end
 
 to do-tick-sinisha-end
@@ -66,8 +65,6 @@ end
 to setup-end-sasha
   setup-manual-attractiveness-between-actors
   setup-random-popularity-for-actors
-  ; [visualizingParameter observingParameter visualizingRangeType visualizingRange observingRangeMin observingRangeMax]
-  visualization-set-visual-corelation-actor "color" "calculation_actor_1" "rgb-scale" [red blue] 0 1
 end
 
 to setup-end-sinisha

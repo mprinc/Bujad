@@ -47,14 +47,6 @@ actors-own
   calculation_actor_1                ; callculations relative to each actor that we want to save and later export to Gephi etc ...
   calculation_actor_2                ; --||--
   calculation_actor_3                ; --||--
-
-  ; visual parameters for showing i.e. blinking after emiting/absorbing activity, critical state, etc  
-  visual-actor-state
-  visual-actor-timer
-  visual-actor-color-old
-  visual-actor-size-old
-  visual-actor-parameter-followed
-  visual-actor-label
 ]
 
 ; describes friendships (in other words: connections, links, relations) between actors in the network
@@ -75,14 +67,6 @@ friendships-own
   calculation_fs_3                ; --||--
   calculation_fs_3-end1           ; --||--
   calculation_fs_3-end2           ; --||--
-
-  ; visual parameters for showing i.e. blinking after emiting/absorbing activity, critical state, etc  
-  visual-link-state
-  visual-link-timer
-  visual-link-color-old
-  visual-link-thickness-old
-  visual-link-parameter-followed
-  visual-link-label
 ]
 
 ; ========================================================================================

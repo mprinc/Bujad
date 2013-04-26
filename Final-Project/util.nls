@@ -1,0 +1,18 @@
+; negative values not taken in count
+to-report list_normalizing [vlist]
+  let max_val 0
+  let list_nor []
+  
+  foreach(vlist)[
+    if(? > max_val)[
+      set max_val ?
+    ]
+  ]
+  if(max_val != 0)
+  [
+    foreach(vlist)[
+       set list_nor lput (? / max_val) list_nor
+    ]
+  ]   
+  report list_nor 
+end

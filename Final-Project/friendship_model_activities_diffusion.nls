@@ -4,28 +4,6 @@ globals[
     activities-num-emitted   ; total number of activities emitted in the system from all actors cumullatively
 ]
 
-; we iterate through activities and remove obsolated ones together with their links
-to remove-obsolated-activities
-  let activitySelected first activities-list
-  let lastValidTime ticks - Activity-forgetting-time
-
-  while [[time] of activitySelected < lastValidTime][
-    set activities-list but-first activities-list
-    ask activitySelected[
-      ; kill all links
-      
-      ; equivalent to command my-out-<breeds>
-      ask my-out-activity-actors [die]
-      ; equivalent to command my-in-<breeds>
-      ask my-in-activity-actors [die]
-      ask my-iamwhat-activities [die]
-      ask my-activity-type-activities [die] 
-    ]
-    ask activitySelected[die]
-    set activitySelected first activities-list
-  ]
-end
-
 to-report diffuse-activity
   let activity-current nobody
   let actor-difuser nobody
@@ -62,6 +40,7 @@ to-report diffuse-activity
   ifelse (actor-difuser = nobody)[
     ask activity-current [die]
     set activities-list but-last activities-list
+
   ][
     ; we add 1 since we will put overflowed activities on the first position
     let activity-y (max-pycor - 5 * (1 + length activities-list))
@@ -143,8 +122,6 @@ to actor-diffuse-activity-from [activity-current]
       ask actor-absorbers [
         ; consider absorbtion price
         set price-absorbed price-absorbed + [price-to-absorb] of activity-type-current
-        let friendship-absorber friendship-with myself
-        visualization-set-state-friendship friendship-absorber "link:activity:sent"
       ]
       ; affect-relatinships-by-activity activity-current ; DEPRICATED-OLD-MODEL
     ]
@@ -265,7 +242,6 @@ to actor-populate-activity [activity-current]
                                                   ; create a link between activity and iamwhat
   ask activity-current[
     set intensity ([intensity] of selected-activity-type)
-    set shape ([shape] of selected-activity-type)
     create-iamwhat-activity-with selected-iamwhat [
       set shape "default"
       set color brown
