@@ -12,7 +12,7 @@ to-report activitiesForFriendship [actorMaster actorSlave]
         ; in-link-from
         let activityLinkOut out-activity-actor-to actorSlave
         if((activityLinkOut != nobody) and ([happened] of activityLinkOut) = true) [
-          set factivities lput activityLinkOut factivities
+          set factivities lput activityOut factivities
           set activitiesNum activitiesNum + 1
         ]
       ]
@@ -26,7 +26,7 @@ to-report activitiesForFriendship [actorMaster actorSlave]
         ; in-link-from
         let activityLinkIn in-activity-actor-from actorSlave
         if((activityLinkIn != nobody) and ([happened] of activityLinkIn) = true) [
-          set factivities lput activityLinkIn factivities
+          set factivities lput activityIn factivities
           set activitiesNum activitiesNum + 1  
         ]
       ]
@@ -36,7 +36,7 @@ to-report activitiesForFriendship [actorMaster actorSlave]
   ;foreach(sort factivities)[
   ;    print word "activity:" ?
   ;]
-
+  
   report factivities  
 end
 
@@ -48,10 +48,16 @@ to-report price_last_activities [actorMaster actorSlave period]
   let min_tick ticks - period
   ;set price count filter [ ([time] of ?) > tick ] factivities
   ;set price count (factivities with [ time > tick ])
-  print word "c price_last_activities:" count factivities
+  ; print word "c price_last_activities:" count factivities
   print word "price_last_activities:" factivities
   foreach(sort factivities)[
     let fact ?
+    print word "fact:" fact
+    print word "is-turtle?: " is-turtle? fact
+    print word "is-activity?: " is-activity? fact
+    print word "activity-actor?: " is-activity-actor? fact
+    
+    print word "intensity:" [intensity] of fact
     print [time] of fact
     if(([time] of fact) > min_tick)[
       set price price + 1

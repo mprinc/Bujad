@@ -19,7 +19,7 @@ to set_strengths_for_actor [actor]
     ]
     
     set normalized_strengths list_normalizing non-normalized_strengths
-    show word count friends_list (word " vs " normalized_strengths)
+    show word length friends_list (word " vs " length normalized_strengths)
     (foreach friends_list normalized_strengths
       [
         let mean_thickness 0;
