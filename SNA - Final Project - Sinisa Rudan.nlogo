@@ -36,7 +36,7 @@ actors-num
 actors-num
 0
 100
-27
+29
 1
 1
 NIL
@@ -51,7 +51,7 @@ friendship-avg-degree
 friendship-avg-degree
 0.25
 5.0
-2.2
+1.6
 0.05
 1
 NIL
@@ -275,7 +275,7 @@ Actor-price-absorption-restitution
 Actor-price-absorption-restitution
 0
 10
-9
+9.16
 0.02
 1
 NIL
@@ -297,10 +297,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-454
-698
-642
-731
+429
+677
+617
+710
 Actor-iamwhat-num
 Actor-iamwhat-num
 0
@@ -312,10 +312,10 @@ WHATs
 HORIZONTAL
 
 SWITCH
-24
-702
-174
-735
+165
+365
+315
+398
 Links-show-extra
 Links-show-extra
 1
@@ -418,10 +418,10 @@ Relationships:
 1
 
 INPUTBOX
-282
-697
-437
-757
+267
+634
+422
+694
 Random-generator-initial
 100
 1
@@ -429,10 +429,10 @@ Random-generator-initial
 Number
 
 SLIDER
-454
-735
-626
-768
+429
+714
+601
+747
 Actor-iamwhat-mean
 Actor-iamwhat-mean
 0
@@ -444,10 +444,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-454
-659
-698
-692
+429
+638
+673
+671
 Actor-iamwhat--standard-deviation
 Actor-iamwhat--standard-deviation
 0
@@ -570,26 +570,67 @@ PENS
 "ar" 1.0 0 -16777216 true "" ""
 
 INPUTBOX
-281
-761
-436
-821
+268
+698
+423
+758
 Max-activities-num
 10000
 1
 0
 Number
 
-INPUTBOX
-25
-745
-160
-805
-Time-for-activity-velocity
+SLIDER
+10
+676
+189
+709
+Activity-forgetting-time
+Activity-forgetting-time
+0
+500
+500
 10
 1
+NIL
+HORIZONTAL
+
+SWITCH
+495
+787
+717
+820
+Visualization-show-friendship-labels
+Visualization-show-friendship-labels
 0
-Number
+1
+-1000
+
+SWITCH
+265
+787
+490
+820
+Visualization-show-actor-labels
+Visualization-show-actor-labels
+0
+1
+-1000
+
+SLIDER
+11
+714
+199
+747
+Time-for-activity-velocity
+Time-for-activity-velocity
+0
+Activity-forgetting-time
+100
+5
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -603,6 +644,7 @@ This model is a model of friendship
 
 
 ## THINGS TO NOTICE
+Code is divided in several included .nls files
 
 ## EXTENDING THE MODEL
 

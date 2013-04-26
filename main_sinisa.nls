@@ -27,14 +27,14 @@ to do-tick-sinisha-end
   
   ifelse( (ticks mod Time-for-activity-velocity) = 0)
   [  
-    print word "mod:" ticks   
+    print word "calling 'set_strengths_for_actor' at ticks " ticks   
     ask actors[
       set_strengths_for_actor self
     ]
     let ar mean_attractiveness_realization
   ]
   [
-        print word "nonmod:" ticks   
+        ;print word "nonmod:" ticks   
   ]
   
 end

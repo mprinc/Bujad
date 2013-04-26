@@ -19,7 +19,7 @@ to set_strengths_for_actor [actor]
     ]
     
     set normalized_strengths list_normalizing non-normalized_strengths
-    show word length friends_list (word " vs " length normalized_strengths)
+   ; show word length friends_list (word " vs " length normalized_strengths)
     (foreach friends_list normalized_strengths
       [
         let mean_thickness 0;
@@ -42,7 +42,12 @@ end
 
 to-report non-normalized-strength_for_friendship [actorMaster actorSlave]
   ; calculates velocity of price of activities
-  report (price_last_activities actorMaster actorSlave Time-for-activity-velocity) / Time-for-activity-velocity
+  
+  let real_time Time-for-activity-velocity
+  if(Time-for-activity-velocity > ticks)[ ; at the beginning of system work
+    set real_time ticks
+  ]
+  report (price_last_activities actorMaster actorSlave real_time) / real_time
 end
 
 

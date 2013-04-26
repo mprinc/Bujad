@@ -49,16 +49,14 @@ to-report price_last_activities [actorMaster actorSlave period]
   ;set price count filter [ ([time] of ?) > tick ] factivities
   ;set price count (factivities with [ time > tick ])
   ; print word "c price_last_activities:" count factivities
-  print word "price_last_activities:" factivities
+  ;print word "price_last_activities:" factivities
   foreach(sort factivities)[
     let fact ?
-    print word "fact:" fact
-    print word "is-turtle?: " is-turtle? fact
-    print word "is-activity?: " is-activity? fact
-    print word "activity-actor?: " is-activity-actor? fact
+    ;print word "fact:" fact
+    ;print word "is-activity?: " is-activity? fact
     
-    print word "intensity:" [intensity] of fact
-    print [time] of fact
+    ;print word "intensity:" [intensity] of fact
+    ;print [time] of fact
     if(([time] of fact) > min_tick)[
       set price price + 1
     ]

@@ -3,16 +3,23 @@ to-report list_normalizing [vlist]
   let max_val 0
   let list_nor []
   
+  ;print word "vlist L:" length vlist
+  ;print word "vlist:" vlist
   foreach(vlist)[
     if(? > max_val)[
       set max_val ?
     ]
   ]
-  if(max_val != 0)
+  ;print word "max_val:" max_val
+  ifelse(max_val != 0)
   [
     foreach(vlist)[
-       set list_nor lput (? / max_val) list_nor
+      set list_nor lput (? / max_val) list_nor
     ]
-  ]   
-  report list_nor 
+    ;print word "list_nor: " list_nor
+    report list_nor 
+  ]
+  [
+    report vlist
+  ]  
 end
