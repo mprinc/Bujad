@@ -290,42 +290,54 @@ to visualization-setup
   table:put visualization-params "link:friendship:critical" [2 red 2 0.2]
 end
 
-to visualization-set-label-friendship [linkSelected labelNew] 
-  ask linkSelected[
-    set visual-link-label labelNew
-    if(Visualization-show-friendship-labels)[
-      set label labelNew
-    ]
-  ]
-end
-
 to visualization-set-visual-corelation-actor [visualizingParameter observingParameter visualizingRangeType visualizingRange observingRangeMin observingRangeMax]
   set visualization-actor-visualizingParameter visualizingParameter
   set visualization-actor-observingParameter observingParameter
   set visualization-actor-visualizingRangeType visualizingRangeType
-  set visualization-actor-visualizingRange visualizingRange
+  ifelse(visualization-actor-visualizingRangeType = "rgb-scale")[
+    let colorFirst extract-rgb first visualizingRange
+    let colorLast extract-rgb last visualizingRange
+    set visualization-actor-visualizingRange lput colorLast lput colorFirst []
+  ][
+    set visualization-actor-visualizingRange visualizingRange
+  ]
   set visualization-actor-observingRangeMin observingRangeMin
   set visualization-actor-observingRangeMax observingRangeMax
 end
 
 to _visualization-set-visual-corelate-actor
-  if(visualization-actor-visualizingRangeType != 0 and visualization-actor-visualizingRangeType != "" and visualization-actor-visualizingRangeType != "none")[
+  if(Visualization-corelate-actor-to-variables and visualization-actor-visualizingRangeType != 0 and visualization-actor-visualizingRangeType != "" and visualization-actor-visualizingRangeType != "none")[
     let observedValue 0
     let observedValueScaled 0
     let visualizedValue 0
     
     let commandGet "calculation_actor_1"
     let commandSet word "set " word visualization-actor-visualizingParameter " visualizedValue"
-    
+
+    let rMin 0
+    let gMin 0
+    let bMin 0
+    let rMax 0
+    let gMax 0
+    let bMax 0
+    if(visualization-actor-visualizingRangeType = "rgb-scale")[
+      set rMin item 0 (first visualization-actor-visualizingRange)
+      set gMin item 1 (first visualization-actor-visualizingRange)
+      set bMin item 2 (first visualization-actor-visualizingRange)
+      set rMax item 0 (last visualization-actor-visualizingRange)
+      set gMax item 1 (last visualization-actor-visualizingRange)
+      set bMax item 2 (last visualization-actor-visualizingRange)
+    ]
+
     ask actors[
       set observedValue runresult commandGet
-      show word "command: " word commandGet word ", happiness: " calculation_actor_1
-      set observedValueScaled (observedValue - visualization-actor-observingRangeMin) / (visualization-actor-observingRangeMax - visualization-actor-observingRangeMin)
+      ; show word "command: " word commandGet word ", happiness: " calculation_actor_1
+      set observedValueScaled (scale-get-scaled-value observedValue visualization-actor-observingRangeMin visualization-actor-observingRangeMax)
       if(visualization-actor-visualizingRangeType = "numeric-scale")[
-        set visualizedValue first visualization-actor-visualizingRange + (last visualization-actor-visualizingRange - first visualization-actor-visualizingRange) * observedValueScaled
+        set visualizedValue scale-get-unscaled-value observedValueScaled (first visualization-actor-visualizingRange) (last visualization-actor-visualizingRange)
       ]
       if(visualization-actor-visualizingRangeType = "rgb-scale")[
-        set visualizedValue first visualization-actor-visualizingRange + (last visualization-actor-visualizingRange - first visualization-actor-visualizingRange) * observedValueScaled
+        set visualizedValue approximate-rgb (scale-get-unscaled-value observedValueScaled rMin rMax) (scale-get-unscaled-value observedValueScaled gMin gMax) (scale-get-unscaled-value observedValueScaled bMin bMax)
       ]
       run commandSet
     ]
@@ -370,6 +382,15 @@ to visualization-set-label-actor [actorSelected labelNew]
   ]
 end
 
+to visualization-set-label-friendship [linkSelected labelNew] 
+  ask linkSelected[
+    set visual-link-label labelNew
+    if(Visualization-show-friendship-labels)[
+      set label labelNew
+    ]
+  ]
+end
+
 to visualization-set-state-friendship [linkSelected state]
   ; show word "visualization-set-state-friendship state: " state
   let stateDesc table:get visualization-params state
@@ -393,7 +414,7 @@ to visualization-set-state-friendship [linkSelected state]
 end
 
 to visualization-update-colors
-  visualize-test
+  ;visualize-test
   _visualization-show-labels
   _visualization-set-visual-corelate-actor
 
