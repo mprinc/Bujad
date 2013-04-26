@@ -82,7 +82,6 @@ to do-tick
     ]  
     
     visualization-update-colors
-
 ; finalizing tick
 ; ========================
     display

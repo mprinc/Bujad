@@ -16,16 +16,12 @@ to-report list_normalizing [vlist]
     foreach(vlist)[
       set list_nor lput (? / max_val) list_nor
     ]
-<<<<<<< HEAD
     ;print word "list_nor: " list_nor
     report list_nor 
   ]
   [
     report vlist
   ]  
-=======
-  ]   
-  report list_nor 
 end
 
 to-report scale-get-scaled-value [value valueMin valueMax]
@@ -41,5 +37,4 @@ end
 to-report scale-get-transcaled-value [value1 value1Min value1Max value2Min value2Max]
   report value2Min + (value2Max - value2Min) 
   * ((value1 - value1Min) / (value1Max - value1Min))
->>>>>>> Visualization finished
 end
