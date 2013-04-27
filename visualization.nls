@@ -92,7 +92,7 @@ to display-friendship-of-actor
       set color color + 2
     ]
     ask my-friendships [
-      ask actor-inspection-selected [show word "Thicnkess:" actor-get-turtle-link-endpoint-value myself "thicknes"]
+      ask actor-inspection-selected [show word "Thicnkess:" (word actor-get-turtle-link-endpoint-value myself "thicknes" word ". strength_non_normalized:" actor-get-turtle-link-endpoint-value myself "strength_non_normalized")] 
       set color color + 2
       set hidden? false
     ]

@@ -41,8 +41,8 @@ to set_strengths_for_actor [actor]
           ;print word "friendshipv" friendshipv
           ;print word "friendshipv is-friendship?: " is-friendship? friendshipv
           ask friendshipv[set strength (normalized_strength + thickness_other) / 2]
-          print non-normalized_strength
-          print word "non-normalized_strength_other: " non-normalized_strength_other
+          ; print non-normalized_strength
+          ; print word "non-normalized_strength_other: " non-normalized_strength_other
           ask friendshipv[set non-normalized_strength (non-normalized_strength + non-normalized_strength_other) / 2]
         ]        
       ])
