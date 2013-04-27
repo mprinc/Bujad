@@ -303,6 +303,10 @@ to visualization-set-visual-corelation-actor [visualizingParameter observingPara
   ]
   set visualization-actor-observingRangeMin observingRangeMin
   set visualization-actor-observingRangeMax observingRangeMax
+  
+  ; important if we want just to set value and not update it successively
+  _visualization-set-visual-corelate-actor
+  display
 end
 
 to _visualization-set-visual-corelate-actor
@@ -311,7 +315,7 @@ to _visualization-set-visual-corelate-actor
     let observedValueScaled 0
     let visualizedValue 0
     
-    let commandGet "calculation_actor_1"
+    let commandGet visualization-actor-observingParameter
     let commandSet word "set " word visualization-actor-visualizingParameter " visualizedValue"
 
     let rMin 0
@@ -329,11 +333,13 @@ to _visualization-set-visual-corelate-actor
       set bMax item 2 (last visualization-actor-visualizingRange)
     ]
 
+    ;show  word "visualization-actor-visualizingRangeType: " word visualization-actor-visualizingRangeType word ", commandGet: " commandGet
     ask actors[
       set observedValue runresult commandGet
       ; show word "command: " word commandGet word ", happiness: " calculation_actor_1
       set observedValueScaled (scale-get-scaled-value observedValue visualization-actor-observingRangeMin visualization-actor-observingRangeMax)
       if(visualization-actor-visualizingRangeType = "numeric-scale")[
+        ;show  word "visualizing: " word visualization-actor-visualizingRangeType word ", observedValue " word observedValue word ", observedValueScaled " observedValueScaled
         set visualizedValue scale-get-unscaled-value observedValueScaled (first visualization-actor-visualizingRange) (last visualization-actor-visualizingRange)
       ]
       if(visualization-actor-visualizingRangeType = "rgb-scale")[
@@ -428,6 +434,24 @@ to visualization-update-colors
       set thickness visual-link-thickness-old
     ]
   ]
+  
+  if(Friendship-Manage)[
+    let minTimeToLostValue 1000000000000000;
+    let  minTimeToLostLink nobody;
+    let timeToLostValue 1000000000000000;
+    foreach sort my-friendships[
+      set timeToLostValue actor-get-turtle-link-endpoint-value self "time-to-lost"
+      if(timeToLostValue < minTimeToLostValue)[
+        set minTimeToLostValue timeToLostValue
+        set minTimeToLostLink self
+      ]
+    ]
+    ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
+    if(minTimeToLostValue <= Friendship-Triger-On-Time)[
+      set actorReceiver minTimeToLostLink
+    ]
+  ]
+  
 end
 
 ; testing purpose

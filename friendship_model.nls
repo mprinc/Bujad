@@ -70,6 +70,9 @@ friendships-own
   thicknes-end2
   manual-attractiveness-end1
   manual-attractiveness-end2
+  time-to-lost-end1
+  time-to-lost-end2
+  
   calculation_fs_1                ; callculations relative to each actor that we want to save and later export to Gephi etc ...
   calculation_fs_1-end1           ; --||--
   calculation_fs_1-end2           ; --||--

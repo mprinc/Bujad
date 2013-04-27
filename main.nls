@@ -22,6 +22,8 @@ globals
   iamwhat-inspection-selected
   mouse-was-up?
   last-activity
+  micro-ticks
+  plot-pen-color-current
  ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -32,6 +34,7 @@ to setup
   ;clear-all-plots
   clear-all
   reset-ticks
+  set micro-ticks 0
   ; random-seed Random-generator-initial 47822
   if(Random-generator-initial != 0)[random-seed Random-generator-initial]
   
@@ -49,6 +52,7 @@ to setup
   
   setup-end-sasha
   setup-end-sinisha
+  set plot-pen-color-current 5
 end
 
 ;; spring layout of infection tree while in tree mode
@@ -59,36 +63,43 @@ end
 
 ; responsible for executing one time tick in the model
 to do-tick
-  tick
-; =========================
-; initializing tick
-; =========================
-  ; random-seed Random-generator-initial 47822
-  ;show word Max-activities-num word ", " activities-num-emitted
-  if((Max-activities-num = 0) or (Max-activities-num > activities-num-emitted))[
-    do-tick-sasha-start
-    do-tick-sinisha-start
-    
-; =========================
-; sending activities
-; =========================
-    ; type "\n\nDifussing activities:\n"
-    let activities-per-tick (count actors) * Activities-number-per-tick
-    repeat activities-per-tick[
-      set last-activity diffuse-activity
-      if last-activity != nobody [
-        ;affect-relatinships-by-activity last-activity
-      ]
-    ]  
-    
-    visualization-update-colors
-; finalizing tick
-; ========================
-    display
-    recover-energies
-    
-    do-tick-sasha-end
-    do-tick-sinisha-end
+  ;show word micro-ticks word ", " Micro-ticks-per-tick
+  ifelse(micro-ticks >= Micro-ticks-per-tick - 1)[
+    tick
+    ; =========================
+    ; initializing tick
+    ; =========================
+    ; random-seed Random-generator-initial 47822
+    ;show word Max-activities-num word ", " activities-num-emitted
+    if((Max-activities-num = 0) or (Max-activities-num > activities-num-emitted))[
+      do-tick-sasha-start
+      do-tick-sinisha-start
+      
+      ; =========================
+      ; sending activities
+      ; =========================
+      ; type "\n\nDifussing activities:\n"
+      let activities-per-tick (count actors) * Activities-number-per-tick
+      repeat activities-per-tick[
+        set last-activity diffuse-activity
+        if last-activity != nobody [
+          ;affect-relatinships-by-activity last-activity
+        ]
+      ]  
+      
+      visualization-update-colors
+      ; finalizing tick
+      ; ========================
+      display
+      recover-energies
+      
+      do-tick-sasha-end
+      do-tick-sinisha-end
+      set micro-ticks 0
+    ]
+  ][
+   set micro-ticks micro-ticks + 1
+   wait 0.1
   ]
 end
 
@@ -110,12 +121,31 @@ to rest-history
   ask iamwhat-activities[die]
   set activities-num-emitted 0
   set activities-list []
-  clear-all-plots
   set global_calculation_1 0
   set global_calculation_2 0
   set global_calculation_3 0
-  rest-history-sasha
-  rest-history-sinisha
+  
+  ask actors[
+    set calculation_actor_1 0
+    set calculation_actor_2 0
+    set calculation_actor_3 0
+  ]
+
+  ; clear-all-plots
+  ;plot-pen-reset
+  plot-pen-up
+  plotxy 0 0
+  plot-pen-down
+  ; error if pen penname doesn't exist
+  ; set-current-plot-pen penname
+  set plot-pen-color-current plot-pen-color-current + 20
+  set-plot-pen-color plot-pen-color-current
+  reset-history-sasha
+  reset-history-sinisha
+  ; [visualizingParameter observingParameter visualizingRangeType visualizingRange observingRangeMin observingRangeMax]
+  visualization-set-visual-corelation-actor "size" "popularity" "numeric-scale" [5 10] 0 1
+  visualization-set-visual-corelation-actor "color" "calculation_actor_1" "rgb-scale" [red blue] 0 1
+  display
 end
 
 ; This is a on-mouse-click function (we add extra guarding variable to switch mouse-down? into mouse-click behaviour

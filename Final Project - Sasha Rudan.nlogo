@@ -648,7 +648,7 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" ""
+"default" 1.0 0 -7500403 true "" ""
 
 PLOT
 921
@@ -716,7 +716,7 @@ Activity-forgetting-time
 Activity-forgetting-time
 0
 500
-350
+150
 10
 1
 NIL
@@ -740,7 +740,7 @@ SWITCH
 700
 Visualization-show-actor-labels
 Visualization-show-actor-labels
-0
+1
 1
 -1000
 
@@ -780,6 +780,57 @@ Visualization-corelate-actor-to-variables
 0
 1
 -1000
+
+SLIDER
+1515
+67
+1773
+100
+Micro-ticks-per-tick
+Micro-ticks-per-tick
+1
+50
+1
+1
+1
+NIL
+HORIZONTAL
+
+SWITCH
+674
+687
+851
+720
+Friendship-Manage
+Friendship-Manage
+1
+1
+-1000
+
+TEXTBOX
+687
+662
+837
+680
+Friendship Manager:
+14
+104.0
+1
+
+SLIDER
+673
+722
+899
+755
+Friendship-Triger-On-Time
+Friendship-Triger-On-Time
+0
+100
+50
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
