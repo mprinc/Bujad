@@ -434,24 +434,18 @@ to visualization-update-colors
       set thickness visual-link-thickness-old
     ]
   ]
-  
-  if(Friendship-Manage)[
-    let minTimeToLostValue 1000000000000000;
-    let  minTimeToLostLink nobody;
-    let timeToLostValue 1000000000000000;
-    foreach sort my-friendships[
-      set timeToLostValue actor-get-turtle-link-endpoint-value self "time-to-lost"
-      if(timeToLostValue < minTimeToLostValue)[
-        set minTimeToLostValue timeToLostValue
-        set minTimeToLostLink self
+
+  ask actors[
+    if(Friendship-Manage)[
+      let timeToLostValue 0;
+      foreach sort my-friendships[
+        set timeToLostValue actor-get-turtle-link-endpoint-value ? "time-to-lost"
+        ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
+        if(timeToLostValue <= Friendship-Triger-On-Time)[
+          visualization-set-state-friendship ? "link:friendship:critical"]
+        ]
       ]
     ]
-    ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
-    if(minTimeToLostValue <= Friendship-Triger-On-Time)[
-      set actorReceiver minTimeToLostLink
-    ]
-  ]
-  
 end
 
 ; testing purpose

@@ -803,7 +803,7 @@ SWITCH
 720
 Friendship-Manage
 Friendship-Manage
-1
+0
 1
 -1000
 
