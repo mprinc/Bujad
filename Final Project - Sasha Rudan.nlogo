@@ -1,4 +1,4 @@
-__includes["main.nls" "main_sasha.nls"]
+__includes["main.nls" "main_sasha.nls"]; "main_sinisha.nls"]
 @#$#@#$#@
 GRAPHICS-WINDOW
 331
@@ -43,10 +43,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-8
-433
-313
-466
+10
+484
+315
+517
 friendship-avg-degree
 friendship-avg-degree
 0.25
@@ -58,10 +58,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-237
-96
-321
-129
+236
+138
+320
+171
 Reset History
 rest-history
 NIL
@@ -75,10 +75,10 @@ NIL
 1
 
 BUTTON
-72
-96
-127
-129
+71
+138
+126
+171
 1 Tick
 do-tick
 NIL
@@ -92,10 +92,10 @@ NIL
 1
 
 BUTTON
-129
-96
-235
-129
+128
+138
+234
+171
 Continue Ticks
 do-tick
 T
@@ -109,10 +109,10 @@ NIL
 1
 
 BUTTON
-8
-96
-70
-129
+7
+138
+69
+171
 layout
 do-layout\ndisplay
 T
@@ -126,10 +126,10 @@ NIL
 1
 
 BUTTON
-7
-59
-322
-92
+5
+56
+320
+89
 Setup Actors, Friendships, Activities, IAmWhat
 setup
 NIL
@@ -143,10 +143,10 @@ NIL
 1
 
 TEXTBOX
-9
-410
-159
-430
+11
+461
+161
+481
 Friendships:
 16
 23.0
@@ -210,10 +210,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-8
-165
-313
-198
+7
+232
+312
+265
 actor-price-absorption-limit
 actor-price-absorption-limit
 0
@@ -225,20 +225,20 @@ NIL
 HORIZONTAL
 
 TEXTBOX
-11
-145
-161
-165
+10
+212
+160
+232
 Actors:
 16
 105.0
 1
 
 SLIDER
-9
-241
-314
-274
+8
+308
+313
+341
 actor-price-emission-limit
 actor-price-emission-limit
 0
@@ -250,10 +250,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-8
-199
-313
-232
+7
+266
+312
+299
 Actor-price-absorption-restitution
 Actor-price-absorption-restitution
 0
@@ -265,10 +265,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-276
-314
-309
+9
+343
+313
+376
 Actor-price-emission-restitution
 Actor-price-emission-restitution
 0
@@ -280,10 +280,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-10
-320
-313
-353
+9
+387
+312
+420
 Actor-iamwhat-mean
 Actor-iamwhat-mean
 0
@@ -295,10 +295,10 @@ WHATs
 HORIZONTAL
 
 SWITCH
-1059
-13
-1226
-46
+1504
+72
+1649
+105
 Links-show-extra
 Links-show-extra
 1
@@ -366,10 +366,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1592
-17
-1685
-62
+1704
+11
+1797
+56
 Activities Total
 activities-num-emitted
 0
@@ -407,10 +407,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-1242
-15
-1387
-75
+1380
+10
+1521
+70
 Random-generator-initial
 0
 1
@@ -441,16 +441,16 @@ Popularity-random-standard-deviation
 Popularity-random-standard-deviation
 0
 1
-0.38
+0.58
 0.02
 1
 NIL
 HORIZONTAL
 
 CHOOSER
-188
+185
 10
-323
+320
 55
 Friendships_generator
 Friendships_generator
@@ -458,10 +458,10 @@ Friendships_generator
 0
 
 BUTTON
-336
-617
-431
-650
+331
+614
+426
+647
 Activities/node
 measure-activities-per-node
 NIL
@@ -475,10 +475,10 @@ NIL
 1
 
 SLIDER
-11
-355
-313
-388
+10
+422
+312
+455
 Actor-iamwhat--standard-deviation
 Actor-iamwhat--standard-deviation
 0
@@ -490,10 +490,10 @@ WHATs
 HORIZONTAL
 
 BUTTON
-794
-616
-915
-649
+821
+614
+911
+647
 Finalize report
 finalize-report
 NIL
@@ -507,30 +507,30 @@ NIL
 1
 
 CHOOSER
-920
-51
-1064
-96
+6
+91
+150
+136
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
 2
 
 CHOOSER
-1065
-51
-1221
-96
+151
+91
+307
+136
 Chooser-whom-to-receive
 Chooser-whom-to-receive
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
 0
 
 SLIDER
-9
-475
-311
-508
+11
+526
+313
+559
 Relationship-Decay
 Relationship-Decay
 0
@@ -542,10 +542,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-9
-510
-311
-543
+11
+561
+313
+594
 Relationship-Treshold-Connected
 Relationship-Treshold-Connected
 0
@@ -557,10 +557,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-434
-617
-540
-650
+429
+614
+535
+647
 Happiness/node
 measure-happiness-per-node
 NIL
@@ -585,32 +585,32 @@ global_calculation_1
 11
 
 MONITOR
-922
-255
-1021
-300
-Calculation 2
+1125
+751
+1192
+796
+Calc 2
 global_calculation_2
 17
 1
 11
 
 MONITOR
-1024
-255
-1124
-300
-Calculation 3
+1121
+310
+1189
+355
+Calc 3
 global_calculation_3
 17
 1
 11
 
 INPUTBOX
-1392
-14
-1509
-74
+1527
+10
+1639
+70
 Max-activities-num
 25000
 1
@@ -651,10 +651,10 @@ PENS
 "default" 1.0 0 -7500403 true "" ""
 
 PLOT
-921
-100
-1121
-250
+919
+310
+1119
+460
 Calc 2
 ticks
 calc 2
@@ -669,10 +669,10 @@ PENS
 "default" 1.0 0 -16777216 true "" ""
 
 PLOT
-922
-304
-1122
-454
+923
+751
+1123
+901
 Calc 3
 ticks
 calc 3
@@ -687,10 +687,10 @@ PENS
 "default" 1.0 0 -16777216 true "" ""
 
 MONITOR
-1513
-16
-1590
-61
+1642
+10
+1702
+55
 Ticks
 ticks
 17
@@ -723,10 +723,10 @@ NIL
 HORIZONTAL
 
 MONITOR
-1687
-17
-1771
-62
+1799
+11
+1883
+56
 Activities Left
 length activities-list
 17
@@ -740,7 +740,7 @@ SWITCH
 700
 Visualization-show-actor-labels
 Visualization-show-actor-labels
-1
+0
 1
 -1000
 
@@ -782,10 +782,10 @@ Visualization-corelate-actor-to-variables
 -1000
 
 SLIDER
-1515
-67
-1773
-100
+1652
+57
+1789
+90
 Micro-ticks-per-tick
 Micro-ticks-per-tick
 1
@@ -797,21 +797,21 @@ NIL
 HORIZONTAL
 
 SWITCH
-674
+809
 687
-851
+899
 720
-Friendship-Manage
-Friendship-Manage
+FM?
+FM?
 0
 1
 -1000
 
 TEXTBOX
-687
-662
-837
-680
+666
+702
+816
+720
 Friendship Manager:
 14
 104.0
@@ -831,6 +831,88 @@ Friendship-Triger-On-Time
 1
 NIL
 HORIZONTAL
+
+SLIDER
+673
+758
+899
+791
+Friendship-max-inactive-time
+Friendship-max-inactive-time
+1
+100
+50
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+730
+793
+899
+826
+FM-check-every-n-ticks
+FM-check-every-n-ticks
+1
+25
+25
+5
+1
+NIL
+HORIZONTAL
+
+SWITCH
+1356
+72
+1502
+105
+Last-activity-links
+Last-activity-links
+1
+1
+-1000
+
+BUTTON
+673
+793
+728
+826
+Populate
+FM-repopulate
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+OUTPUT
+915
+51
+1189
+306
+12
+
+BUTTON
+1046
+11
+1101
+44
+Refresh
+inspect-refresh-output
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -883,6 +965,21 @@ You can start the test again with the same network topolgoy.To do that you need 
 ### System inspection
 
 Click the button **Inspect System** (top-right corner). Whiile the **Inspect System" button is pressed you can click on either actor or interest or activity (flowers to the right) and see the related entities.
+
+### Friendship Manager
+
+**Friendship Manager** stands for a special regime of our actors' behaviour, it means that actors (in the future some part of actors) will monitor friendship activities (better say, system will monitor and offer activity innitiation) and react if there is a critical low level of interactivity.
+
+#### Parameters:
+
+**FM?"** - enable/disable Friendship Management
+**Friendship-Triger-On-Time** - How close to the critical innactivity actor is about to proactively react and initiate activity with his friend
+
+**Friendship-max-inactive-time** - Defines what is the expected period of minimal activity between friends. This means, that Friendship manager will warn us if we come close to the **Friendship-max-inactive-time** time of innactivity. 
+
+In order to avoid equal inactivity times for all actors we will use **Attractiveness-manual-mean** and **Attractiveness-manual-standard-deviation**. They are also used in ***Attractiveness Manual** Friendship Strategies*, but in the FM case they are used to distribute **Friendship-max-inactive-time** according to natural distribution.
+
+**FM-check-every-n-ticks** - introduced to reduce processing demands. It will ask to FM processing every FM-check-every-n-ticks ticks.
 
 ## What is a good testing scenario?
 

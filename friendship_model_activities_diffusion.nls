@@ -33,6 +33,20 @@ to-report diffuse-activity
   ;; create activity breed that will represent the activity that just happened
   create-activities 1
   [
+    if(Last-activity-links and length activities-list > 1)[
+      let activityLast item (length activities-list - 2) activities-list  
+      ask activityLast[
+        ; equivalent to command my-out-<breeds>
+        ask my-out-activity-actors [
+          if(Links-show-extra = false)[set hidden? true]
+        ]
+        ; equivalent to command my-in-<breeds>
+        ask my-in-activity-actors [
+        if(Links-show-extra = false)[set hidden? true]
+        ]
+      ]
+    ]
+      
     set activities-list lput self activities-list
     set activity-current self
     
@@ -64,14 +78,14 @@ to-report diffuse-activity
     set activities-list but-last activities-list
   ][
     ; we add 1 since we will put overflowed activities on the first position
-    let activity-y (max-pycor - 5 * (1 + length activities-list))
+    let activity-y (max-pycor - 15 * (1 + length activities-list))
   
     ; type "activity-y = " type activity-y type ", min-pycor = " type min-pycor type "\n"
-    if(activity-y < min-pycor + 5)[
-      ask activities with [ycor < (max-pycor - 5)][
-        set ycor ycor + 5;
+    if(activity-y < min-pycor + 15)[
+      ask activities with [ycor < (max-pycor - 8)][
+        set ycor ycor + 8;
       ]
-      set activity-y min-pycor + 5
+      set activity-y min-pycor + 15
     ]
 
     ; all overflowed activites should be hidden together with their activity-actors links
@@ -112,7 +126,7 @@ to actor-diffuse-activity-from [activity-current]
     set shape "default"
     set color yellow
     set happened true
-    if(Links-show-extra = false)[set hidden? true]
+    if(not Last-activity-links and Links-show-extra = false)[set hidden? true]
   ]
   
   ; find (if any) actor that emitter is emitting activity toward
@@ -135,7 +149,7 @@ to actor-diffuse-activity-from [activity-current]
           set happened false
         ]
 
-        if(Links-show-extra = false)[set hidden? true]
+        if(not Last-activity-links and Links-show-extra = false)[set hidden? true]
       ]
     ]
     
@@ -158,16 +172,16 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
   
   ; check if we are in the Friendship Manage mode and
   ; check if there are some dying friendship
-  if(Friendship-Manage)[
+  if(FM?)[
     let minTimeToLostValue 1000000000000000;
     let  minTimeToLostLink no-links;
     let  minTimeToLostActor nobody;
     let timeToLostValue 1000000000000000;
 
     foreach sort friendship-neighbors[
-      show word "? (actor): " ?
+      ; show word "? (actor): " ?
       let friendshipSelected friendship-with ?
-      show word "friendshipSelected: " friendshipSelected
+      ; show word "friendshipSelected: " friendshipSelected
       set timeToLostValue actor-get-turtle-link-endpoint-value friendshipSelected "time-to-lost"
       if(timeToLostValue < minTimeToLostValue)[
         set minTimeToLostValue timeToLostValue
@@ -301,6 +315,14 @@ to actor-populate-activity [activity-current]
       set shape "default"
       set color brown
       if(Links-show-extra = false)[set hidden? true]
+    ]
+  ]
+end
+
+to fm-tick-update
+  ask actors[
+    foreach sort my-friendships[
+      actor-set-turtle-link-endpoint-value ? "time-to-lost" (-1 + actor-get-turtle-link-endpoint-value ? "time-to-lost")
     ]
   ]
 end

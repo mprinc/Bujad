@@ -436,16 +436,17 @@ to visualization-update-colors
   ]
 
   ask actors[
-    if(Friendship-Manage)[
+    if(FM?)[
       let timeToLostValue 0;
       foreach sort my-friendships[
         set timeToLostValue actor-get-turtle-link-endpoint-value ? "time-to-lost"
         ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
         if(timeToLostValue <= Friendship-Triger-On-Time)[
-          visualization-set-state-friendship ? "link:friendship:critical"]
+          ;visualization-set-state-friendship ? "link:friendship:critical"]
         ]
       ]
     ]
+  ]
 end
 
 ; testing purpose

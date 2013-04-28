@@ -194,7 +194,7 @@ end
 to-report actor-get-turtle-link-endpoint-value [linkContainer parameter-prefix]
   let commandStr ""
   let value 0
-  if(linkContainer != nobody)[
+  if(linkContainer != no-links)[
     ;show word "end1: " word [end1] of linkContainer word ", end2: " [end2] of linkContainer
     ;show word "manual-attractiveness-end1: " word [manual-attractiveness-end1] of linkContainer word ", manual-attractiveness-end2: " [manual-attractiveness-end2] of linkContainer
     ifelse(([end1] of linkContainer) = self)[

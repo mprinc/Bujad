@@ -197,3 +197,82 @@ to setup-actor-iamwhats
     ]
   ]
 end
+
+; ========================================================================================
+; Friendship strategies related methods
+; ========================================================================================
+
+to setup-manual-attractiveness-between-actors
+  show "setup-manual-attractiveness-between-actors"
+  ask actors[
+    let actorsOther other actors
+    foreach sort actorsOther[
+      let actorOther ?
+      let friendshipToOther friendship-with actorOther
+      if(friendshipToOther != nobody)[
+        ; file://localhost/Applications/NetLogo%205.0.3/docs/dictionary.html#random-normal
+        let manualAtract random-normal Attractiveness-manual-mean Attractiveness-manual-standard-deviation
+        if(manualAtract < 0)[set manualAtract 0]
+        if(manualAtract > 1)[set manualAtract 1]
+        
+        actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" manualAtract
+        ;let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
+        ;show word "value : " value
+        
+        ; we want bot friends have similar atractiveness
+        let manualAtractOther manualAtract + random 0.1 - 0.05
+        if(manualAtractOther < 0)[set manualAtractOther 0]
+        if(manualAtractOther > 1)[set manualAtractOther 1]
+        ask actorOther[
+          actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" manualAtract
+        ]
+      ]
+    ]
+  ]
+end
+
+to setup-random-popularity-for-actors
+  show "setup-random-popularity-for-actors"
+  ask actors[
+    let popularityVal random-normal Popularity-random-mean Popularity-random-standard-deviation
+    if(popularityVal < 0)[set popularityVal 0]
+    if(popularityVal > 1)[set popularityVal 1]
+    
+    set popularity popularityVal
+  ]
+end
+
+; populate friendship management parameters
+; like time how often we want to be active with each of our friends
+to FM-repopulate
+    show "setup - Friendship-max-inactive-time for each friendship"
+  ask actors[
+    let actorsOther other actors
+    foreach sort actorsOther[
+      let actorOther ?
+      let friendshipToOther friendship-with actorOther
+      if(friendshipToOther != nobody)[
+        ; file://localhost/Applications/NetLogo%205.0.3/docs/dictionary.html#random-normal
+        let manualAtract random-normal Attractiveness-manual-mean Attractiveness-manual-standard-deviation
+        if(manualAtract < 0)[set manualAtract 0]
+        ;if(manualAtract > 1)[set manualAtract 1]
+        let selectedFriendshipMaxInactiveTime  manualAtract * Friendship-max-inactive-time
+        
+        
+        actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" selectedFriendshipMaxInactiveTime
+        actor-set-turtle-link-endpoint-value friendshipToOther "time-to-lost" selectedFriendshipMaxInactiveTime
+        ;let value actor-get-turtle-link-endpoint-value friendshipToOther "manual-attractiveness"
+        ;show word "value : " value
+        
+        ; AT THE MOMENT I THINK WE DO NOT WANT IT (it is used in setup-manual-attractiveness-between-actors to allow happiness be balanced)
+        ; we want bot friends have similar atractiveness
+        ;let manualAtractOther manualAtract + random 0.1 - 0.05
+        ;if(manualAtractOther < 0)[set manualAtractOther 0]
+        ;if(manualAtractOther > 1)[set manualAtractOther 1]
+        ;ask actorOther[
+        ;  actor-set-turtle-link-endpoint-value friendshipToOther "manual-attractiveness" manualAtract
+        ;]
+      ]
+    ]
+  ]
+end

@@ -24,6 +24,7 @@ globals
   last-activity
   micro-ticks
   plot-pen-color-current
+  inspecting-actor
  ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;
@@ -95,6 +96,7 @@ to do-tick
       
       do-tick-sasha-end
       do-tick-sinisha-end
+      if(FM?)[fm-tick-update]
       set micro-ticks 0
     ]
   ][
@@ -159,6 +161,8 @@ to inspect-system
       [
         ask one-of nearest-actors
         [
+          set inspecting-actor self
+          inspect-refresh-output
           display-friendship-of-actor
         ]
         display
@@ -192,4 +196,20 @@ to inspect-system
   ]  
 end
 
+to inspect-refresh-output
+  clear-output
+  ask inspecting-actor[
+    output-print word "Selected actor: " self
+    output-print word "Happiness: " calculation_actor_1
+    
+    foreach sort friendship-neighbors[
+      let actorNeighbor ?
+      let friendshipSelected friendship-with actorNeighbor
+      output-print word "Actor: " actorNeighbor
+      ;output-print word "  friendshipSelected: " friendshipSelected
+      output-print word "  Manual-attractiveness: " precision actor-get-turtle-link-endpoint-value friendshipSelected "manual-attractiveness" 3
+      output-print word "  Time-to-lost: " precision actor-get-turtle-link-endpoint-value friendshipSelected "time-to-lost" 3
+    ]
+  ]
+end
 
