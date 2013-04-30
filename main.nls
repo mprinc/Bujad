@@ -77,6 +77,8 @@ to do-tick
       do-tick-sasha-start
       do-tick-sinisha-start
       
+      visualization-update-colors
+
       ; =========================
       ; sending activities
       ; =========================
@@ -89,7 +91,6 @@ to do-tick
         ]
       ]  
       
-      visualization-update-colors
       ; finalizing tick
       ; ========================
       display
@@ -149,6 +150,14 @@ to rest-history
   visualization-set-visual-corelation-actor "size" "popularity" "numeric-scale" [5 10] 0 1
   visualization-set-visual-corelation-actor "color" "calculation_actor_1" "rgb-scale" [red blue] 0 1
   display
+end
+
+to select-actor-by-who
+  ask one-of actors with [who = inspecting-actor-new][
+    set inspecting-actor self
+    inspect-refresh-output
+    display-friendship-of-actor
+  ]
 end
 
 ; This is a on-mouse-click function (we add extra guarding variable to switch mouse-down? into mouse-click behaviour

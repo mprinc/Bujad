@@ -27,9 +27,25 @@ to remove-obsolated-activities
 end
 
 to-report diffuse-activity
+  ; ask actor (actor-difuser) that is not in emittion saturation to emit an activity
+  ; it will decide if it will emit it in according to emission probability
+  let actor-difuser-potential one-of actors with [price-emitted < price-emission-limit]
+  report diffuse-activity-for-actor actor-difuser-potential
+end
+
+; command diffuses activity for specified actor: actor-difuser-potential
+; external testing: let a diffuse-activity-for-actor actor 18
+to-report diffuse-activity-for-actor [actor-difuser-potential]
   let activity-current nobody
   let actor-difuser nobody
+  
+  if(actor-difuser-potential = nobody)[
+    report nobody
+  ]
 
+  if([price-emitted] of actor-difuser-potential >= [price-emission-limit] of actor-difuser-potential)[
+    ;show word "[diffuse-activity-for-actor] Error! Selected actor has price-emitted >= than price-emission-limit. Actor: " actor-difuser-potential
+  ]
   ;; create activity breed that will represent the activity that just happened
   create-activities 1
   [
@@ -57,17 +73,13 @@ to-report diffuse-activity
     set time ticks
   ]
   
-  ; ask actor (actor-difuser) that is not in emittion saturation to emit an activity
-  ; it will decide if it will emit it in according to emission probability
-  let actor-difuser-potential one-of actors with [price-emitted < price-emission-limit]
-
   if(actor-difuser-potential != nobody)[
     ask actor-difuser-potential [
       ifelse (random-float 1 <= Activity-emission-probability)[
         set actor-difuser self
         actor-diffuse-activity-from activity-current
       ][
-      ; type "actor : " type self type "rejected to diffuse activity\n"
+        ;show word "actor : " word self " rejected to diffuse activity"
       ]
     ]
   ]
@@ -120,7 +132,7 @@ to actor-diffuse-activity-from [activity-current]
 
   ; consider emitting price
   set price-emitted price-emitted + [price-to-diffuse] of activity-type-current
-
+  
   ; create a link between actor emitter and activity
   create-activity-actor-to activity-current [
     set shape "default"
@@ -138,6 +150,21 @@ to actor-diffuse-activity-from [activity-current]
 
     ; connect activity with absorber
     ask actor-absorbers[
+
+      ; myself: emitter
+      ; self: absorber
+      ;show word " let friendshipToAbsorber... " self
+      let friendshipToAbsorber friendship ([who] of myself) ([who] of self)
+      let timeToLostValue get-turtle-link-endpoint-value myself friendshipToAbsorber "time-to-lost"
+
+      ;show word "[actor-diffuse-activity-from] actorEmitter: " word myself word ", actorAbsorber: " word self word ", friendshipToAbsorber: " word friendshipToAbsorber word ", time-to-lost: " timeToLostValue
+
+      if(timeToLostValue <= Friendship-Triger-On-Time)[
+        show word "Recovered friendship: " word myself word " -> " self
+      ]
+      let manualAttractiveness get-turtle-link-endpoint-value myself friendshipToAbsorber "manual-attractiveness"
+      set-turtle-link-endpoint-value myself friendshipToAbsorber "time-to-lost" manualAttractiveness
+
       create-activity-actor-from activity-current [
         set shape "default"
         
@@ -173,16 +200,17 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
   ; check if we are in the Friendship Manage mode and
   ; check if there are some dying friendship
   if(FM?)[
+     ;show "[actor-sender-choses-receiver-for-emitting-activity] Friendship-Manager scanning"
     let minTimeToLostValue 1000000000000000;
-    let  minTimeToLostLink no-links;
+    let  minTimeToLostLink nobody;
     let  minTimeToLostActor nobody;
     let timeToLostValue 1000000000000000;
 
     foreach sort friendship-neighbors[
-      ; show word "? (actor): " ?
+      ;show word "? (actor): " ?
       let friendshipSelected friendship-with ?
-      ; show word "friendshipSelected: " friendshipSelected
       set timeToLostValue actor-get-turtle-link-endpoint-value friendshipSelected "time-to-lost"
+      ;show word "neighbour actor: " word ? word ", friendshipSelected: " word friendshipSelected word ", time-to-lost: " timeToLostValue
       if(timeToLostValue < minTimeToLostValue)[
         set minTimeToLostValue timeToLostValue
         set minTimeToLostLink friendshipSelected
@@ -192,6 +220,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
     ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
     if(minTimeToLostValue <= Friendship-Triger-On-Time)[
       set actorReceiver minTimeToLostActor
+      show word "[actor-sender-choses-receiver-for-emitting-activity] Friendship-Manager scanning: Critical actor: " actorReceiver
     ]
   ]
 
@@ -266,15 +295,22 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
   ]
   if(actorReceiver = nobody and Chooser-whom-to-send = "environmental")[
   ]
+  ;show word "[actor-sender-choses-receiver-for-emitting-activity] actorReceiver: " actorReceiver
   report actorReceiver
 end
 
 to-report actor-receiver-decides-on-absorption-of-activity [actorSender actorReceiver activity-current]
   let shouldAccept false
   
-  if([price-absorbed] of actorReceiver >= [price-absorption-limit] of actorReceiver) [report false]
+  if([price-absorbed] of actorReceiver >= [price-absorption-limit] of actorReceiver) [
+    ;show word "[actor-receiver-decides-on-absorption-of-activity] Rejected! ActorReceiver has price-absorbed (" word ([price-absorbed] of actorReceiver) word ") >= than price-absorption-limit (" word ([price-absorption-limit] of actorReceiver) word "). actorReceiver: " actorReceiver
+    report false
+  ]
 
-  if(random-float 1 > Activity-absorption-probability) [report false]
+  if(random-float 1 > Activity-absorption-probability) [
+    ;show word "[actor-receiver-decides-on-absorption-of-activity] Rejected! ActorReceiver decision was outside of Activity-absorption-probability.  actorReceiver: " actorReceiver
+    report false
+  ]
 
   if(Chooser-whom-to-receive = "anyone")[ ; IMPLEMENTED!
     set shouldAccept true
@@ -292,6 +328,7 @@ to-report actor-receiver-decides-on-absorption-of-activity [actorSender actorRec
   ]
   if(Chooser-whom-to-receive = "environmental")[
   ]
+  ;show word "[actor-receiver-decides-on-absorption-of-activity] ActorReceiver (" word actorReceiver word ") decission on acceptance: " shouldAccept
   report shouldAccept
 end
 

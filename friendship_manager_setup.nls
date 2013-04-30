@@ -152,9 +152,9 @@ to setup-friendships
         ;show word myself self
         ;if(myself = self) [show word myself (word " = " self)]
         let attractiveness (actors-attractiveness-IamWhats myself self)
-        ; show attractiveness
+        ;show attractiveness
         if(attractiveness > 0)[ ;if actors share interests
-          ; show word myself self
+          ;show word myself self
           set attractiveness attractiveness + actor-attractiveness-preference self
           ifelse(friendship-neighbor? myself)
           [
@@ -162,9 +162,9 @@ to setup-friendships
            ; print "already exists:"
             ask frl[
               set thicknes-end2 INITIAL_STRENGTH; //attractiveness
-             ; show word "thicknes-end1:" (word thicknes-end1 (word "; thicknes-end2:" thicknes-end2))              
+             ;show word "thicknes-end1:" (word thicknes-end1 (word "; thicknes-end2:" thicknes-end2))              
             ]
-           ; show [end1] of frl = self
+           ;show [end1] of frl = self
           ]
           [
             ask myself [
@@ -254,7 +254,7 @@ to FM-repopulate
       if(friendshipToOther != nobody)[
         ; file://localhost/Applications/NetLogo%205.0.3/docs/dictionary.html#random-normal
         let manualAtract random-normal Attractiveness-manual-mean Attractiveness-manual-standard-deviation
-        if(manualAtract < 0)[set manualAtract 0]
+        if(manualAtract < 1)[set manualAtract 1]
         ;if(manualAtract > 1)[set manualAtract 1]
         let selectedFriendshipMaxInactiveTime  manualAtract * Friendship-max-inactive-time
         

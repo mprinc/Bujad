@@ -1,6 +1,7 @@
 globals[
   selected_last
   selected_next2last
+
   visualization-params
   
   visualization-actor-visualizingParameter
@@ -337,7 +338,7 @@ to _visualization-set-visual-corelate-actor
     ;show  word "visualization-actor-visualizingRangeType: " word visualization-actor-visualizingRangeType word ", commandGet: " commandGet
     ask actors[
       set observedValue runresult commandGet
-      ; show word "command: " word commandGet word ", happiness: " calculation_actor_1
+      ;show word "command: " word commandGet word ", happiness: " calculation_actor_1
       set observedValueScaled (scale-get-scaled-value observedValue visualization-actor-observingRangeMin visualization-actor-observingRangeMax)
       if(visualization-actor-visualizingRangeType = "numeric-scale")[
         ;show  word "visualizing: " word visualization-actor-visualizingRangeType word ", observedValue " word observedValue word ", observedValueScaled " observedValueScaled
@@ -373,9 +374,9 @@ to _visualization-show-labels
 end
 
 to visualization-set-state-actor [actorSelected state]
-  show word "visualization-set-state-actor state: " state
+  ;show word "visualization-set-state-actor state: " state
   let stateDesc table:get visualization-params state
-  show word "visualization-set-state-actor stateDesc: " stateDesc
+  ;show word "visualization-set-state-actor stateDesc: " stateDesc
 
   ask actorSelected[
     set visual-actor-state state
@@ -407,16 +408,20 @@ to visualization-set-label-friendship [linkSelected labelNew]
 end
 
 to visualization-set-state-friendship [linkSelected state]
-  ; show word "visualization-set-state-friendship state: " state
+  ;show word "visualization-set-state-friendship state: " state
   let stateDesc table:get visualization-params state
-  ; show word "visualization-set-state-friendship stateDesc: " stateDesc
+  ;show word "visualization-set-state-friendship stateDesc: " stateDesc
 
   ask linkSelected[
-    ifelse(visual-link-state != 0)[
-      if(visual-link-state = state)[
+    ifelse(visual-link-state = state)[
         set visual-link-timer item 0 stateDesc
-      ]
     ][
+      if(visual-link-state != 0)[
+        ;show word "Old state: " word visual-link-state word ", new state: " state
+        ; recover original link state first
+        visualization-reset-state-friendship self visual-link-state
+        ; then apply new state
+      ]
       set visual-link-state state
       set visual-link-color-old color
       set visual-link-thickness-old thickness
@@ -424,6 +429,18 @@ to visualization-set-state-friendship [linkSelected state]
       if(item 1 stateDesc >= 0)[set color item 1 stateDesc]
       set color color + item 2 stateDesc
       set thickness thickness + item 3 stateDesc
+    ]
+  ]
+end
+
+to visualization-reset-state-friendship [linkSelected state]
+  ask linkSelected[
+    if(visual-link-state = state)[
+      set visual-link-state 0
+      set visual-link-timer 0
+      
+      set color visual-link-color-old
+      set thickness visual-link-thickness-old
     ]
   ]
 end
@@ -449,9 +466,12 @@ to visualization-update-colors
       let timeToLostValue 0;
       foreach sort my-friendships[
         set timeToLostValue actor-get-turtle-link-endpoint-value ? "time-to-lost"
+        
         ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
-        if(timeToLostValue <= Friendship-Triger-On-Time)[
-          ;visualization-set-state-friendship ? "link:friendship:critical"]
+        ifelse(timeToLostValue <= Friendship-Triger-On-Time)[
+          visualization-set-state-friendship ? "link:friendship:critical"
+        ][
+          ;visualization-reset-state-friendship ? "link:friendship:critical"
         ]
       ]
     ]

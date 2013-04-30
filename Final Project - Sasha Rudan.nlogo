@@ -153,11 +153,11 @@ Friendships:
 1
 
 BUTTON
-921
-12
-1045
-45
-Inspect System
+915
+14
+983
+47
+Inspect
 inspect-system
 T
 1
@@ -178,7 +178,7 @@ Activity-emission-probability
 Activity-emission-probability
 0
 1
-0.14
+0.63
 0.01
 1
 NIL
@@ -514,7 +514,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-2
+1
 
 CHOOSER
 151
@@ -672,7 +672,7 @@ PLOT
 923
 751
 1123
-901
+875
 Calc 3
 ticks
 calc 3
@@ -790,7 +790,7 @@ Micro-ticks-per-tick
 Micro-ticks-per-tick
 1
 50
-1
+4
 1
 1
 NIL
@@ -826,7 +826,7 @@ Friendship-Triger-On-Time
 Friendship-Triger-On-Time
 0
 100
-50
+10
 1
 1
 NIL
@@ -840,9 +840,9 @@ SLIDER
 Friendship-max-inactive-time
 Friendship-max-inactive-time
 1
-100
-50
-1
+500
+21
+10
 1
 NIL
 HORIZONTAL
@@ -869,7 +869,7 @@ SWITCH
 105
 Last-activity-links
 Last-activity-links
-1
+0
 1
 -1000
 
@@ -898,12 +898,40 @@ OUTPUT
 12
 
 BUTTON
-1046
-11
-1101
-44
+984
+14
+1039
+47
 Refresh
 inspect-refresh-output
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+INPUTBOX
+1192
+10
+1242
+70
+inspecting-actor-new
+33
+1
+0
+Number
+
+BUTTON
+1135
+10
+1190
+43
+Select
+select-actor-by-who
 NIL
 1
 T

@@ -188,6 +188,16 @@ end
 ; Accessing XXX-end1 XXX-end2 parameters of undirected links
 ; ========================================================================================
 
+; this reporter returns value of parameter stored in the link between master turtle and slave turtle, but from perspective of master turtle
+; therefore in link we should have two variables starting with value of variable parameter-prefix but ending with "-end1" and "-end2"
+to-report get-turtle-link-endpoint-value [actorCaller linkContainer parameter-prefix]
+  let value 0
+  ask actorCaller[
+    set value actor-get-turtle-link-endpoint-value linkContainer parameter-prefix
+  ]
+  report value
+end
+
 ; called from the context of master turtle
 ; this reporter returns value of parameter stored in the link between master turtle and slave turtle, but from perspective of master turtle
 ; therefore in link we should have two variables starting with value of variable parameter-prefix but ending with "-end1" and "-end2"
@@ -209,6 +219,14 @@ to-report actor-get-turtle-link-endpoint-value [linkContainer parameter-prefix]
   set value runresult commandStr
   ;show word "value=" value
   report value
+end
+
+; this command sets the value of parameter stored in the link between master turtle and slave turtle, but from perspective of master turtle
+; therefore in link we should have two variables starting with value of variable parameter-prefix but ending with "-end1" and "-end2"
+to set-turtle-link-endpoint-value [actorCaller linkContainer parameter-prefix value]
+  ask actorCaller[
+    actor-set-turtle-link-endpoint-value linkContainer parameter-prefix value
+  ]
 end
 
 ; called from the context of master turtle
