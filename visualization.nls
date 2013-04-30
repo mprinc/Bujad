@@ -288,6 +288,7 @@ to visualization-setup
   ; 3 size change
   table:put visualization-params "link:activity:sent" [2 -1 2 0.1]
   table:put visualization-params "link:friendship:critical" [2 red 2 0.2]
+  show-shared-iamwhats_for_friendship
 end
 
 to visualization-set-visual-corelation-actor [visualizingParameter observingParameter visualizingRangeType visualizingRange observingRangeMin observingRangeMax]
@@ -347,6 +348,14 @@ to _visualization-set-visual-corelate-actor
       ]
       run commandSet
     ]
+  ]
+end
+
+to show-shared-iamwhats_for_friendship
+  ;print word "friendships size:" count friendships
+  ask friendships[
+    ;print label
+    visualization-set-label-friendship self (count get-shared-iamwhats_for_friendship self)
   ]
 end
 

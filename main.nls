@@ -25,6 +25,7 @@ globals
   micro-ticks
   plot-pen-color-current
   inspecting-actor
+  ;counter
  ]
 
 ;;;;;;;;;;;;;;;;;;;;;;;

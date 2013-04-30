@@ -32,3 +32,25 @@ to-report get-shared-iamwhats [n1 n2]
   
   report shared_iamwhats
 end
+
+to-report get-shared-iamwhats_for_friendship [friendship]  
+  let s_iamwhats []
+  let s_actors []
+  ask friendship[
+    ask one-of both-ends [
+      ask friendship[        
+        set s_iamwhats get-shared-iamwhats myself other-end
+       ; print word counter (word ": get-shared-iamwhats_for_friendship (" (word [label] of myself (word " - " (word [label] of other-end (word "): " count s_iamwhats)))))
+      ]
+    ]
+  ]
+  ;print word "actors count: " length s_actors
+  ;ask first sort s_actors[
+  ; ask friendship[        
+  ;   set s_iamwhats get-shared-iamwhats myself other-end
+  ;   print word "get-shared-iamwhats_for_friendship (" (word [label] of myself (word " - " (word [label] of other-end (word "): " count s_iamwhats))))
+  ;  ]
+  ;]
+  ;set counter counter + 1
+  report s_iamwhats
+end
