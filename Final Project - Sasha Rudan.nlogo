@@ -178,7 +178,7 @@ Activity-emission-probability
 Activity-emission-probability
 0
 1
-0.7
+0.33
 0.01
 1
 NIL
@@ -203,7 +203,7 @@ Activity-absorption-probability
 Activity-absorption-probability
 0
 1
-0.7
+0.33
 0.01
 1
 NIL
@@ -803,7 +803,7 @@ SWITCH
 720
 FM?
 FM?
-1
+0
 1
 -1000
 
@@ -841,7 +841,7 @@ Friendship-max-inactive-time
 Friendship-max-inactive-time
 1
 500
-151
+21
 10
 1
 NIL
