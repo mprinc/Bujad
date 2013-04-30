@@ -4,12 +4,13 @@ globals[
 
   visualization-params
   
-  visualization-actor-visualizingParameter
-  visualization-actor-observingParameter
-  visualization-actor-visualizingRangeType
-  visualization-actor-visualizingRange
-  visualization-actor-observingRangeMin
-  visualization-actor-observingRangeMax
+  visualizations-actor     ; list of visualizations for actors. Each item is a list that contains a set of parameters listed bellow
+  ; 0 visualizingParameter
+  ; 1 observingParameter
+  ; 2 visualizingRangeType
+  ; 3 visualizingRange
+  ; 4 observingRangeMin
+  ; 5 observingRangeMax
 ]
 
 to select-actor [actor]
@@ -279,6 +280,7 @@ end
 
 to visualization-setup
   show "visualization-setup started"
+  set visualizations-actor []
   ;set visualization-params 
   set visualization-params table:make
 
@@ -286,39 +288,81 @@ to visualization-setup
   ; 0 time that visualization is live
   ; 1 color (-1 means no change)
   ; 2 color offset (0 means no change)
-  ; 3 size change
-  table:put visualization-params "link:activity:sent" [2 -1 2 0.1]
-  table:put visualization-params "link:friendship:critical" [2 red 2 0.2]
+  ; 3 size change (0 means no change)
+  table:put visualization-params "link:activity:sent" [2 -1 2 0.5]
+  table:put visualization-params "link:friendship:critical" [1 red 1 0.5]
   show-shared-iamwhats_for_friendship
 end
 
+; visualizingRangeType:
+;     "numeric-scale"
+;     "rgb-scale"
+;     "value-list"
 to visualization-set-visual-corelation-actor [visualizingParameter observingParameter visualizingRangeType visualizingRange observingRangeMin observingRangeMax]
-  set visualization-actor-visualizingParameter visualizingParameter
-  set visualization-actor-observingParameter observingParameter
-  set visualization-actor-visualizingRangeType visualizingRangeType
-  ifelse(visualization-actor-visualizingRangeType = "rgb-scale")[
+  ; 0 visualizingParameter
+  ; 1 observingParameter
+  ; 2 visualizingRangeType
+  ; 3 visualizingRange
+  ; 4 observingRangeMin
+  ; 5 observingRangeMax
+  let _visualizingParameter 0
+  let _observingParameter ""
+  let _visualizingRangeType "numeric-scale"
+  let _visualizingRange []
+  let _observingRangeMin 0
+  let _observingRangeMax 1
+
+  set _visualizingParameter visualizingParameter
+  set _observingParameter observingParameter
+  set _visualizingRangeType visualizingRangeType
+  ifelse(_visualizingRangeType = "rgb-scale")[
     let colorFirst extract-rgb first visualizingRange
     let colorLast extract-rgb last visualizingRange
-    set visualization-actor-visualizingRange lput colorLast lput colorFirst []
+    set _visualizingRange lput colorLast lput colorFirst []
   ][
-    set visualization-actor-visualizingRange visualizingRange
+    set _visualizingRange visualizingRange
   ]
-  set visualization-actor-observingRangeMin observingRangeMin
-  set visualization-actor-observingRangeMax observingRangeMax
+  set _observingRangeMin observingRangeMin
+  set _observingRangeMax observingRangeMax
+  
+  let visualizingItem []
+  set visualizingItem fput _visualizingParameter fput _observingParameter fput _visualizingRangeType fput _visualizingRange fput _observingRangeMin fput _observingRangeMax visualizingItem
+  set visualizations-actor lput visualizingItem visualizations-actor
   
   ; important if we want just to set value and not update it successively
-  _visualization-set-visual-corelate-actor
+  _visualization-set-visual-corelate-actor visualizingItem
   display
 end
 
-to _visualization-set-visual-corelate-actor
-  if(Visualization-corelate-actor-to-variables and visualization-actor-visualizingRangeType != 0 and visualization-actor-visualizingRangeType != "" and visualization-actor-visualizingRangeType != "none")[
+to _visualization-set-visuals-corelate-actor
+  foreach visualizations-actor[
+    _visualization-set-visual-corelate-actor ?
+  ]
+end
+
+to _visualization-set-visual-corelate-actor [visualizingItem]
+   
+  ; 0 visualizingParameter
+  ; 1 observingParameter
+  ; 2 visualizingRangeType
+  ; 3 visualizingRange
+  ; 4 observingRangeMin
+  ; 5 observingRangeMax
+  let _visualizingParameter item 0 visualizingItem
+  let _observingParameter item 1 visualizingItem
+  let _visualizingRangeType item 2 visualizingItem
+  let _visualizingRange item 3 visualizingItem
+  let _observingRangeMin item 4 visualizingItem
+  let _observingRangeMax item 5 visualizingItem
+  
+  if(Visualization-corelate-actor-to-variables and _visualizingRangeType != 0 and _visualizingRangeType != "" and _visualizingRangeType != "none")[
     let observedValue 0
     let observedValueScaled 0
+    let observedValueIndexed 0
     let visualizedValue 0
     
-    let commandGet visualization-actor-observingParameter
-    let commandSet word "set " word visualization-actor-visualizingParameter " visualizedValue"
+    let commandGet _observingParameter
+    let commandSet word "set " word _visualizingParameter " visualizedValue"
 
     let rMin 0
     let gMin 0
@@ -326,26 +370,32 @@ to _visualization-set-visual-corelate-actor
     let rMax 0
     let gMax 0
     let bMax 0
-    if(visualization-actor-visualizingRangeType = "rgb-scale")[
-      set rMin item 0 (first visualization-actor-visualizingRange)
-      set gMin item 1 (first visualization-actor-visualizingRange)
-      set bMin item 2 (first visualization-actor-visualizingRange)
-      set rMax item 0 (last visualization-actor-visualizingRange)
-      set gMax item 1 (last visualization-actor-visualizingRange)
-      set bMax item 2 (last visualization-actor-visualizingRange)
+    if(_visualizingRangeType = "rgb-scale")[
+      set rMin item 0 (first _visualizingRange)
+      set gMin item 1 (first _visualizingRange)
+      set bMin item 2 (first _visualizingRange)
+      set rMax item 0 (last _visualizingRange)
+      set gMax item 1 (last _visualizingRange)
+      set bMax item 2 (last _visualizingRange)
     ]
 
-    ;show  word "visualization-actor-visualizingRangeType: " word visualization-actor-visualizingRangeType word ", commandGet: " commandGet
+    ;show  word "_visualizingRangeType: " word _visualizingRangeType word ", commandGet: " commandGet
     ask actors[
       set observedValue runresult commandGet
       ;show word "command: " word commandGet word ", happiness: " calculation_actor_1
-      set observedValueScaled (scale-get-scaled-value observedValue visualization-actor-observingRangeMin visualization-actor-observingRangeMax)
-      if(visualization-actor-visualizingRangeType = "numeric-scale")[
-        ;show  word "visualizing: " word visualization-actor-visualizingRangeType word ", observedValue " word observedValue word ", observedValueScaled " observedValueScaled
-        set visualizedValue scale-get-unscaled-value observedValueScaled (first visualization-actor-visualizingRange) (last visualization-actor-visualizingRange)
+      set observedValueScaled (scale-get-scaled-value observedValue _observingRangeMin _observingRangeMax)
+      if(_visualizingRangeType = "numeric-scale")[
+        ;show  word "visualizing: " word _visualizingRangeType word ", observedValue " word observedValue word ", observedValueScaled " observedValueScaled
+        set visualizedValue scale-get-unscaled-value observedValueScaled (first _visualizingRange) (last _visualizingRange)
       ]
-      if(visualization-actor-visualizingRangeType = "rgb-scale")[
+      if(_visualizingRangeType = "rgb-scale")[
         set visualizedValue approximate-rgb (scale-get-unscaled-value observedValueScaled rMin rMax) (scale-get-unscaled-value observedValueScaled gMin gMax) (scale-get-unscaled-value observedValueScaled bMin bMax)
+      ]
+      if(_visualizingRangeType = "value-list")[
+        set observedValueIndexed round (observedValueScaled * (length _visualizingRange) - 0.5)
+        if(observedValueIndexed < 0)[set observedValueIndexed 0]
+        if(observedValueIndexed >= length _visualizingRange)[set observedValueIndexed length _visualizingRange - 1]
+        set visualizedValue item observedValueIndexed _visualizingRange
       ]
       run commandSet
     ]
@@ -448,7 +498,7 @@ end
 to visualization-update-colors
   ;visualize-test
   _visualization-show-labels
-  _visualization-set-visual-corelate-actor
+  _visualization-set-visuals-corelate-actor
 
   ask friendships with [visual-link-state != 0][
     set visual-link-timer visual-link-timer - 1

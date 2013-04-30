@@ -139,7 +139,7 @@ to setup-friendships
       ask one-of actors [
         create-friendship-with one-of other actors[
           set color blue
-          set thickness 1
+          set thickness 0.5
           set manual-attractiveness-end1 1
           set manual-attractiveness-end2 2
         ]

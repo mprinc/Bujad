@@ -6,23 +6,25 @@ globals[
 
 ; we iterate through activities and remove obsolated ones together with their links
 to remove-obsolated-activities
-  let activitySelected first activities-list
-  let lastValidTime ticks - Activity-forgetting-time
-
-  while [[time] of activitySelected < lastValidTime][
-    set activities-list but-first activities-list
-    ask activitySelected[
-      ; kill all links
-      
-      ; equivalent to command my-out-<breeds>
-      ask my-out-activity-actors [die]
-      ; equivalent to command my-in-<breeds>
-      ask my-in-activity-actors [die]
-      ask my-iamwhat-activities [die]
-      ask my-activity-type-activities [die] 
+  if(length activities-list > 0)[
+    let activitySelected first activities-list
+    let lastValidTime ticks - Activity-forgetting-time
+    
+    while [[time] of activitySelected < lastValidTime][
+      set activities-list but-first activities-list
+      ask activitySelected[
+        ; kill all links
+        
+        ; equivalent to command my-out-<breeds>
+        ask my-out-activity-actors [die]
+        ; equivalent to command my-in-<breeds>
+        ask my-in-activity-actors [die]
+        ask my-iamwhat-activities [die]
+        ask my-activity-type-activities [die] 
+      ]
+      ask activitySelected[die]
+      set activitySelected first activities-list
     ]
-    ask activitySelected[die]
-    set activitySelected first activities-list
   ]
 end
 

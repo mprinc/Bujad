@@ -61,6 +61,12 @@ end
 ;; otherwise, layout all nodes and friendships
 to do-layout
     repeat 5 [layout-spring actors friendships 0.03 20 20]
+    ask actors[
+      if(xcor < min-pxcor + 12)[set xcor min-pxcor + 12]
+      if(xcor > max-pxcor - 12)[set xcor max-pxcor - 12]
+      if(ycor < min-pycor + 12)[set ycor min-pycor + 12]
+      if(ycor > max-pycor - 12)[set ycor max-pycor - 12]
+    ]
 end
 
 ; responsible for executing one time tick in the model
@@ -146,9 +152,6 @@ to rest-history
   set-plot-pen-color plot-pen-color-current
   reset-history-sasha
   reset-history-sinisha
-  ; [visualizingParameter observingParameter visualizingRangeType visualizingRange observingRangeMin observingRangeMax]
-  visualization-set-visual-corelation-actor "size" "popularity" "numeric-scale" [5 10] 0 1
-  visualization-set-visual-corelation-actor "color" "calculation_actor_1" "rgb-scale" [red blue] 0 1
   display
 end
 

@@ -178,7 +178,7 @@ Activity-emission-probability
 Activity-emission-probability
 0
 1
-0.63
+0.7
 0.01
 1
 NIL
@@ -203,7 +203,7 @@ Activity-absorption-probability
 Activity-absorption-probability
 0
 1
-0.5
+0.7
 0.01
 1
 NIL
@@ -218,7 +218,7 @@ actor-price-absorption-limit
 actor-price-absorption-limit
 0
 5
-5
+4.9
 0.1
 1
 NIL
@@ -740,7 +740,7 @@ SWITCH
 700
 Visualization-show-actor-labels
 Visualization-show-actor-labels
-0
+1
 1
 -1000
 
@@ -790,7 +790,7 @@ Micro-ticks-per-tick
 Micro-ticks-per-tick
 1
 50
-4
+1
 1
 1
 NIL
@@ -856,7 +856,7 @@ FM-check-every-n-ticks
 FM-check-every-n-ticks
 1
 25
-25
+6
 5
 1
 NIL
