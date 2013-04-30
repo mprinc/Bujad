@@ -38,6 +38,9 @@ end
 ; command diffuses activity for specified actor: actor-difuser-potential
 ; external testing: let a diffuse-activity-for-actor actor 18
 to-report diffuse-activity-for-actor [actor-difuser-potential]
+  type "\n"
+  type "\n"
+  ;show word "[diffuse-activity-for-actor] actor-difuser-potential: " actor-difuser-potential
   let activity-current nobody
   let actor-difuser nobody
   
@@ -162,7 +165,7 @@ to actor-diffuse-activity-from [activity-current]
       ;show word "[actor-diffuse-activity-from] actorEmitter: " word myself word ", actorAbsorber: " word self word ", friendshipToAbsorber: " word friendshipToAbsorber word ", time-to-lost: " timeToLostValue
 
       if(timeToLostValue <= Friendship-Triger-On-Time)[
-        show word "Recovered friendship: " word myself word " -> " self
+        ;show word "Recovered friendship: " word myself word " -> " self
       ]
       let manualAttractiveness get-turtle-link-endpoint-value myself friendshipToAbsorber "manual-attractiveness"
       set-turtle-link-endpoint-value myself friendshipToAbsorber "time-to-lost" manualAttractiveness
@@ -187,6 +190,7 @@ to actor-diffuse-activity-from [activity-current]
         ; consider absorbtion price
         set price-absorbed price-absorbed + [price-to-absorb] of activity-type-current
         let friendship-absorber friendship-with myself
+        ;show word "[actor-diffuse-activity-from] \"link:activity:sent\" for friendship: " friendship-absorber
         visualization-set-state-friendship friendship-absorber "link:activity:sent"
       ]
       ; affect-relatinships-by-activity activity-current ; DEPRICATED-OLD-MODEL
@@ -222,17 +226,17 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
     ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
     if(minTimeToLostValue <= Friendship-Triger-On-Time)[
       set actorReceiver minTimeToLostActor
-      show word "[actor-sender-choses-receiver-for-emitting-activity] Friendship-Manager scanning: Critical actor: " actorReceiver
+      ;show word "[actor-sender-choses-receiver-for-emitting-activity] Friendship-Manager scanning: Critical actor: " actorReceiver
     ]
   ]
 
-  if(actorReceiver != nobody and Chooser-whom-to-send = "anyone")[ ; IMPLEMENTED!
+  if(actorReceiver = nobody and Chooser-whom-to-send = "anyone")[ ; IMPLEMENTED!
     set actorReceiver one-of other actors with [price-absorbed < price-absorption-limit];
   ]
-  if(actorReceiver != nobody and Chooser-whom-to-send = "friends")[ ; IMPLEMENTED!
+  if(actorReceiver = nobody and Chooser-whom-to-send = "friends")[ ; IMPLEMENTED!
     set actorReceiver one-of friendship-neighbors with [price-absorbed < price-absorption-limit];
   ]
-  if(actorReceiver != nobody and Chooser-whom-to-send = "popularity")[
+  if(actorReceiver = nobody and Chooser-whom-to-send = "popularity")[
     ;let actorsSorted sort actors
     let actorsSorted sort friendship-neighbors
     let popularitySum 0

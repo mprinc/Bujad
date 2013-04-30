@@ -803,7 +803,7 @@ SWITCH
 720
 FM?
 FM?
-0
+1
 1
 -1000
 
@@ -826,7 +826,7 @@ Friendship-Triger-On-Time
 Friendship-Triger-On-Time
 0
 100
-10
+12
 1
 1
 NIL
@@ -841,7 +841,7 @@ Friendship-max-inactive-time
 Friendship-max-inactive-time
 1
 500
-21
+151
 10
 1
 NIL
