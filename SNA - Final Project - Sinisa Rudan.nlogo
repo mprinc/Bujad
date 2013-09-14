@@ -153,10 +153,10 @@ Friendships:
 1
 
 BUTTON
-878
-11
-995
-44
+881
+12
+976
+45
 Inspect System
 inspect-system
 T
@@ -250,10 +250,10 @@ NIL
 HORIZONTAL
 
 BUTTON
-877
-50
-1000
-83
+880
+51
+941
+84
 test-sinisa
 test-sinisa
 NIL
@@ -466,7 +466,7 @@ CHOOSER
 Friendships_generator
 Friendships_generator
 "ER" "Attractiveness"
-0
+1
 
 PLOT
 879
@@ -769,6 +769,17 @@ Friendship-Triger-On-Time
 1
 NIL
 HORIZONTAL
+
+INPUTBOX
+977
+21
+1086
+81
+inspecting-actor-new
+0
+1
+0
+Number
 
 @#$#@#$#@
 ## WHAT IS IT?
