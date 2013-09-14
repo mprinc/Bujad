@@ -37,9 +37,10 @@ end
 
 ; command diffuses activity for specified actor: actor-difuser-potential
 ; external testing: let a diffuse-activity-for-actor actor 18
+; it reports activity (or nobody) that is diffused (emitted)
 to-report diffuse-activity-for-actor [actor-difuser-potential]
-  type "\n"
-  type "\n"
+  ; type "\n"
+  ; type "\n"
   ;show word "[diffuse-activity-for-actor] actor-difuser-potential: " actor-difuser-potential
   let activity-current nobody
   let actor-difuser nobody
@@ -48,12 +49,15 @@ to-report diffuse-activity-for-actor [actor-difuser-potential]
     report nobody
   ]
 
+  ; 
   if([price-emitted] of actor-difuser-potential >= [price-emission-limit] of actor-difuser-potential)[
-    ;show word "[diffuse-activity-for-actor] Error! Selected actor has price-emitted >= than price-emission-limit. Actor: " actor-difuser-potential
+    show word "[diffuse-activity-for-actor] Error! Selected actor has price-emitted >= than price-emission-limit. Actor: " actor-difuser-potential
+    report nobody
   ]
   ;; create activity breed that will represent the activity that just happened
   create-activities 1
   [
+    ; hide links between 
     if(Last-activity-links and length activities-list > 1)[
       let activityLast item (length activities-list - 2) activities-list  
       ask activityLast[
@@ -82,6 +86,8 @@ to-report diffuse-activity-for-actor [actor-difuser-potential]
     ask actor-difuser-potential [
       ifelse (random-float 1 <= Activity-emission-probability)[
         set actor-difuser self
+        ; ask actor actor-difuser to diffuse the activity activity-current
+        ; ----------------------------------------------------------------
         actor-diffuse-activity-from activity-current
       ][
         ;show word "actor : " word self " rejected to diffuse activity"
@@ -94,6 +100,9 @@ to-report diffuse-activity-for-actor [actor-difuser-potential]
     ask activity-current [die]
     set activities-list but-last activities-list
   ][
+    ; we move activities along the activity line and hide those that left the visible area
+    ; ------------------------------------------------------------------------------------------------
+
     ; we add 1 since we will put overflowed activities on the first position
     let activity-y (max-pycor - 15 * (1 + length activities-list))
   
@@ -123,6 +132,7 @@ to-report diffuse-activity-for-actor [actor-difuser-potential]
       set ycor activity-y
     ]
   ]
+
   report activity-current
 end
 
@@ -343,17 +353,21 @@ to actor-populate-activity [activity-current]
   set activities-num-emitted activities-num-emitted + 1
   ; select one iamwhat from actor's iamwhats
   let selected-iamwhat one-of iamwhat-actor-neighbors
+  ; select random activity-type
   let selected-activity-type one-of activity-types;
   
-                                                  ; create a link between activity and iamwhat
   ask activity-current[
     set intensity ([intensity] of selected-activity-type)
     set shape ([shape] of selected-activity-type)
+
+    ; create link between activity and iamwhat
     create-iamwhat-activity-with selected-iamwhat [
       set shape "default"
       set color brown
       if(Links-show-extra = false)[set hidden? true]
     ]
+
+    ; create link between activity-type and activity
     create-activity-type-activity-with selected-activity-type [
       set shape "default"
       set color brown

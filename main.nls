@@ -93,7 +93,7 @@ to do-tick
       repeat activities-per-tick[
         set last-activity diffuse-activity
         if last-activity != nobody [
-          ;affect-relatinships-by-activity last-activity
+          affect-relatinships-by-activity last-activity
         ]
       ]  
       

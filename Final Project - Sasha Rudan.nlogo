@@ -917,7 +917,7 @@ NIL
 INPUTBOX
 1192
 10
-1242
+1314
 70
 inspecting-actor-new
 33
@@ -975,7 +975,7 @@ Finally, chosen actor decides if he wants to accept activity and participate. Th
 ## HOW TO USE IT
 
 1. **actor-num** (top-left corner): Choose the number of actors.
-1. **Friendshi-generator**: Choose a type of friendship generation
+1. **Friendship-generator**: Choose a type of friendship generation
 1. **Chooser-whom-to-send** (top-right corner):
 	1. popularity
 	1. attractiveness_manual
