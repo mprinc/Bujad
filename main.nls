@@ -71,7 +71,7 @@ end
 
 ; responsible for executing one time tick in the model
 to do-tick
-  ;show word micro-ticks word ", " Micro-ticks-per-tick
+  ; show word micro-ticks word ", " Micro-ticks-per-tick
   ifelse(micro-ticks >= Micro-ticks-per-tick - 1)[
     tick
     ; =========================
