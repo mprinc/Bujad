@@ -86,11 +86,13 @@ to do-tick
       visualization-update-colors
 
       ; =========================
-      ; sending activities
+      ; difusing activities
       ; =========================
       ; type "\n\nDifussing activities:\n"
+      ; calculate number activities to be difused
       let activities-per-tick (count actors) * Activities-number-per-tick
       repeat activities-per-tick[
+        ; difuse one activity and retrieves it in the last-activity
         set last-activity diffuse-activity
         if last-activity != nobody [
           affect-relatinships-by-activity last-activity
