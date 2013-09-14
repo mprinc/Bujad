@@ -97,7 +97,7 @@ to do-tick
         if last-activity != nobody [
           affect-relatinships-by-activity last-activity
         ]
-      ]  
+      ]
       
       ; finalizing tick
       ; ========================
