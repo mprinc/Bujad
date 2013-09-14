@@ -4,6 +4,9 @@ to change-relationship-through-time [actor1 actor2]
   
 end
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;       ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to set_strengths_for_actor [actor]
   ; print word "tick @ set_strengths_for_actor:" ticks
   let friends_list []
@@ -19,7 +22,7 @@ to set_strengths_for_actor [actor]
     ]
     
     set normalized_strengths list_normalizing non-normalized_strengths
-   ; show word length friends_list (word " vs " length normalized_strengths)
+    ; show word length friends_list (word " vs " length normalized_strengths)
     (foreach friends_list normalized_strengths non-normalized_strengths
       [
         let mean_thickness 0;
@@ -180,13 +183,19 @@ to affect-relatinships-by-activity [activity]
   ]
 end
 
-;;;;;;;;; attractiveness_realization ;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;; attractiveness_realization ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; returnes attractiveness_realization: 0: min, 1: max-attractiveness_realization
 ; expects that relationship thicknesses are normalized to [0,1]
 ;;;;;;;;;
 to-report attractiveness_realization [actor]
   let ar 0
+  let strengths []
+  let attrs []
+  let attrs_norm []
   ; print word [label] of actor " attractivenesses:"
-  ask actors with [friendship-neighbor? myself]
+  
+  ; set strength and attractivness lists for all actor's neighbors:
+  ask actors with [friendship-neighbor? myself] ; all neighbors
   [
     let actorTo self
     let f nobody
@@ -196,19 +205,44 @@ to-report attractiveness_realization [actor]
     if(f != nobody)[
       ; type word "f:" f;
       ask actor[ ; we need to be in its context so that 'actor-get-turtle-link-endpoint-value' returns its thickness
-        ;get old thickness
-        let f_thickness actor-get-turtle-link-endpoint-value f "thicknes"          
-        ; show word "f_thickness: " f_thickness
-        
-        set ar (actors-attractiveness actor self) * f_thickness
-        
-        ; show word " - " ar
+                 ;get old thickness
+        set strengths lput (actor-get-turtle-link-endpoint-value f "thicknes") strengths ; thicnknesses are normalized already
+        set attrs lput (actors-attractiveness actor actorTo) attrs
       ]
     ]   
-  ]
+  ] ; all neighbors
+  
+  print word [label] of actor ": (attractiveness_realization): "
+  
+  
+  set attrs_norm list_normalizing attrs
+  (foreach strengths attrs_norm
+    [
+      let strength_n ?1
+      let attr ?2
+      let ratio 1
+      
+      ifelse(strength_n  <= STRENGTH_MIN and attr <= ATTRACTIVNESS_MIN)
+      [
+        set ratio 1
+      ]
+      [
+        ifelse(strength_n > attr) ; we want to add deviations between attractivness and strength as numbers in range [0,1]
+        [
+          set ratio attr / strength_n
+        ]
+        [
+          set ratio strength_n / attr
+        ]
+      ]
+      
+      set ar ar + ratio
+      ; type word attr (word " % " (word strength (word " - " (word ratio "; "))))
+    ])
+  set ar ar / length strengths
+  print word "ar: " ar
   report ar
 end
-
 
 
 to-report attractiveness_realization-OLD [actor]

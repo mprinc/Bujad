@@ -18,6 +18,9 @@ globals
   ACTOR_SHAPE_NEUTRAL         ;; shapes of actor breed
   ACTOR_SHAPE_SAD
   ACTOR_SHAPE_HAPPY
+  
+  STRENGTH_MIN                ;
+  ATTRACTIVNESS_MIN           ;
 
   INTERESTS_LIST              ;; list of all possible interests
 
@@ -181,6 +184,8 @@ to friendship_model_setup
   set ACTOR_SHAPE_HAPPY "face happy"
   
   set INTERESTS_LIST (list "salsa" "capoeira" "SNA" "guitar" "poetry")
+  set STRENGTH_MIN 0
+  set ATTRACTIVNESS_MIN 0
 end
 
 
