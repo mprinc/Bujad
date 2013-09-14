@@ -15,6 +15,9 @@ __includes["friendship_model.nls" "friendship_manager_setup.nls" "friendship_mod
 ; Actor-iamwhat-num                               ; number of IAmWhats that each actor is interested in
 ; Links-show-extra                                ; indicates if we should have extra links (activity-actor, iamwhat-actor, ...) always visible
 
+
+;test comment - Sinisa
+
 globals
 [
   actor-inspection-selected
