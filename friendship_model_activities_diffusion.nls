@@ -246,7 +246,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
   if(actorReceiver = nobody and Chooser-whom-to-send = "friends")[ ; IMPLEMENTED!
     set actorReceiver one-of friendship-neighbors with [price-absorbed < price-absorption-limit];
   ]
-  if(actorReceiver = nobody and Chooser-whom-to-send = "popularity")[
+  if(actorReceiver = nobody and Chooser-whom-to-send = "popularity")[ ; IMPLEMENTED!
     ;let actorsSorted sort actors
     let actorsSorted sort friendship-neighbors
     let popularitySum 0
@@ -266,7 +266,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
       ]
     ]
   ]
-  if(actorReceiver = nobody and Chooser-whom-to-send = "attractiveness_manual")[
+  if(actorReceiver = nobody and Chooser-whom-to-send = "attractiveness_manual")[ ; IMPLEMENTED!
     let actorsSorted sort friendship-neighbors
     let attractivenessManualSum 0
     foreach actorsSorted[
@@ -328,7 +328,7 @@ to-report actor-receiver-decides-on-absorption-of-activity [actorSender actorRec
     report false
   ]
 
-  if(Chooser-whom-to-receive = "anyone")[ ; IMPLEMENTED!
+  if(Chooser-whom-to-receive = "anyone")[ ; IMPLEMENTED! 
     set shouldAccept true
   ]
   if(Chooser-whom-to-receive = "friends")[ ; IMPLEMENTED!
