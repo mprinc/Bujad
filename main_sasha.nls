@@ -13,7 +13,6 @@ to do-tick-sinisha-start
 end
 
 to do-tick-sasha-end
-  remove-obsolated-activities
   ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
   ; every 100 activities
   if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[

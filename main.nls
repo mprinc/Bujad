@@ -109,7 +109,11 @@ to do-tick
       
       do-tick-sasha-end
       do-tick-sinisha-end
+
+      remove-obsolated-activities
+
       do-plotting
+
       if(FM?)[fm-tick-update]
       set micro-ticks 0
     ]
