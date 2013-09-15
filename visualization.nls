@@ -1,16 +1,16 @@
 globals[
   selected_last
   selected_next2last
-
+  
   visualization-params
   
   visualizations-actor     ; list of visualizations for actors. Each item is a list that contains a set of parameters listed bellow
-  ; 0 visualizingParameter
-  ; 1 observingParameter
-  ; 2 visualizingRangeType
-  ; 3 visualizingRange
-  ; 4 observingRangeMin
-  ; 5 observingRangeMax
+                           ; 0 visualizingParameter
+                           ; 1 observingParameter
+                           ; 2 visualizingRangeType
+                           ; 3 visualizingRange
+                           ; 4 observingRangeMin
+                           ; 5 observingRangeMax
 ]
 
 to select-actor [actor]
@@ -27,24 +27,49 @@ to display_relationship_strength_statistics
   ;histogram [thicknes-end2] of friendships
   ;plot friendships-thicknes-plot
   ;;print word "min % max thicknes-end1:" word max-one-of friendships [thicknes-end1]
- ; print word "max thicknes-end2:" max-one-of friendships [thicknes-end2]
+  ; print word "max thicknes-end2:" max-one-of friendships [thicknes-end2]
   ;show count patches with-max [pxcor]
 end
 
-
 to do-plotting
-     ;; plot the number of infected individuals at each step
-     set-current-plot "friendships strength"
-     set-current-plot-pen "thicknes"
-     let thicnkesses [thicknes-end1] of friendships
-     let mean_thicnkesses (mean thicnkesses)
-     ; print mean_thicnkesses
-     plot mean_thicnkesses
-     
-     set-current-plot "attractiveness realization"
-     set-current-plot-pen "ar"     
-     ; print word "mean_attractiveness_realization: " mean_attractiveness_realization
-     plot mean_attractiveness_realization
+  ifelse(MeasuringCase = "default")
+  [
+    plotting-default
+  ]
+  [
+    ifelse(MeasuringCase = "sasha")
+    [
+      do-plotting-sasha
+    ]
+    [
+      ifelse(MeasuringCase = "sinisha")
+      [
+        do-plotting-sinisa
+      ]
+      [
+        do-plotting-measurement
+      ]  
+    ]
+  ] 
+end
+
+to plotting-default
+  
+end
+
+to do-plotting-sinisa
+  ;; plot the number of infected individuals at each step
+  set-current-plot "friendships strength"
+  set-current-plot-pen "thicknes"
+  let thicnkesses [thicknes-end1] of friendships
+  let mean_thicnkesses (mean thicnkesses)
+  ; print mean_thicnkesses
+  plot mean_thicnkesses
+  
+  set-current-plot "attractiveness realization"
+  set-current-plot-pen "ar"     
+  ; print word "mean_attractiveness_realization: " mean_attractiveness_realization
+  plot mean_attractiveness_realization
 end
 
 
@@ -129,7 +154,7 @@ end
 to display-links-of-iamwhat
   ; type "iamwhat-inspection-selected = " type iamwhat-inspection-selected type "\n"
   if(iamwhat-inspection-selected = 0) [set iamwhat-inspection-selected nobody]
-
+  
   ; type "checking if iamwhat-inspection-selected is nobody. It is " type iamwhat-inspection-selected type "\n"
   if(iamwhat-inspection-selected != nobody)[
     ; type "restoring  iamwhat-inspection-selected = " type iamwhat-inspection-selected type "\n"
@@ -151,18 +176,18 @@ to display-links-of-iamwhat
     ; type "resetting iamwhat-inspection-selected = " type iamwhat-inspection-selected type " to nobody\n"
     set iamwhat-inspection-selected nobody
   ][
-    ; type "setting iamwhat-inspection-selected = " type self type "\n"
-    set iamwhat-inspection-selected self
+  ; type "setting iamwhat-inspection-selected = " type self type "\n"
+  set iamwhat-inspection-selected self
+  set color color + 2
+  set size size + 2
+  ask iamwhat-actor-neighbors[
     set color color + 2
     set size size + 2
-    ask iamwhat-actor-neighbors[
-      set color color + 2
-      set size size + 2
-    ]
-    ask my-iamwhat-actors [
+  ]
+  ask my-iamwhat-actors [
     set color color + 2
     set hidden? false
-    ]
+  ]
   ]
 end
 
@@ -195,7 +220,7 @@ to display-selected-activity
         set color color - 2
         if(Links-show-extra = false)[set hidden? true]
       ]
-
+      
       ; links to iamwhats
       ask iamwhat-activity-neighbors[
         set color color - 2
@@ -205,7 +230,7 @@ to display-selected-activity
         set color color - 2
         if(Links-show-extra = false)[set hidden? true]
       ]
-
+      
       ; links to activity-types
       ask activity-type-activity-neighbors[
         set color color - 2
@@ -251,7 +276,7 @@ to display-selected-activity
       set color color + 2
       set hidden? false
     ]
-
+    
     ; links to activities
     ask iamwhat-activity-neighbors[
       set color color + 2
@@ -261,7 +286,7 @@ to display-selected-activity
       set color color + 2
       set hidden? false
     ]
-
+    
     ; links to activity-types
     ask activity-type-activity-neighbors[
       set color color + 2
@@ -283,7 +308,7 @@ to visualization-setup
   set visualizations-actor []
   ;set visualization-params 
   set visualization-params table:make
-
+  
   ; parameters:
   ; 0 time that visualization is live
   ; 1 color (-1 means no change)
@@ -311,7 +336,7 @@ to visualization-set-visual-corelation-actor [visualizingParameter observingPara
   let _visualizingRange []
   let _observingRangeMin 0
   let _observingRangeMax 1
-
+  
   set _visualizingParameter visualizingParameter
   set _observingParameter observingParameter
   set _visualizingRangeType visualizingRangeType
@@ -320,7 +345,7 @@ to visualization-set-visual-corelation-actor [visualizingParameter observingPara
     let colorLast extract-rgb last visualizingRange
     set _visualizingRange lput colorLast lput colorFirst []
   ][
-    set _visualizingRange visualizingRange
+  set _visualizingRange visualizingRange
   ]
   set _observingRangeMin observingRangeMin
   set _observingRangeMax observingRangeMax
@@ -341,7 +366,7 @@ to _visualization-set-visuals-corelate-actor
 end
 
 to _visualization-set-visual-corelate-actor [visualizingItem]
-   
+  
   ; 0 visualizingParameter
   ; 1 observingParameter
   ; 2 visualizingRangeType
@@ -363,7 +388,7 @@ to _visualization-set-visual-corelate-actor [visualizingItem]
     
     let commandGet _observingParameter
     let commandSet word "set " word _visualizingParameter " visualizedValue"
-
+    
     let rMin 0
     let gMin 0
     let bMin 0
@@ -378,7 +403,7 @@ to _visualization-set-visual-corelate-actor [visualizingItem]
       set gMax item 1 (last _visualizingRange)
       set bMax item 2 (last _visualizingRange)
     ]
-
+    
     ;show  word "_visualizingRangeType: " word _visualizingRangeType word ", commandGet: " commandGet
     ask actors[
       set observedValue runresult commandGet
@@ -414,12 +439,12 @@ to _visualization-show-labels
   ifelse(Visualization-show-actor-labels)[
     ask actors[set label visual-actor-label]
   ][
-    ask actors[set label ""]
+  ask actors[set label ""]
   ]
   ifelse(Visualization-show-friendship-labels)[
     ask friendships[set label visual-link-label]
   ][
-    ask friendships[set label ""]
+  ask friendships[set label ""]
   ]
 end
 
@@ -427,7 +452,7 @@ to visualization-set-state-actor [actorSelected state]
   ;show word "visualization-set-state-actor state: " state
   let stateDesc table:get visualization-params state
   ;show word "visualization-set-state-actor stateDesc: " stateDesc
-
+  
   ask actorSelected[
     set visual-actor-state state
     set visual-actor-color-old color
@@ -461,24 +486,24 @@ to visualization-set-state-friendship [linkSelected state]
   ;show word "visualization-set-state-friendship state: " state
   let stateDesc table:get visualization-params state
   ;show word "visualization-set-state-friendship stateDesc: " stateDesc
-
+  
   ask linkSelected[
     ifelse(visual-link-state = state)[
-        set visual-link-timer item 0 stateDesc
-    ][
-      if(visual-link-state != 0)[
-        ;show word "Old state: " word visual-link-state word ", new state: " state
-        ; recover original link state first
-        visualization-reset-state-friendship self visual-link-state
-        ; then apply new state
-      ]
-      set visual-link-state state
-      set visual-link-color-old color
-      set visual-link-thickness-old thickness
       set visual-link-timer item 0 stateDesc
-      if(item 1 stateDesc >= 0)[set color item 1 stateDesc]
-      set color color + item 2 stateDesc
-      set thickness thickness + item 3 stateDesc
+    ][
+    if(visual-link-state != 0)[
+      ;show word "Old state: " word visual-link-state word ", new state: " state
+      ; recover original link state first
+      visualization-reset-state-friendship self visual-link-state
+      ; then apply new state
+    ]
+    set visual-link-state state
+    set visual-link-color-old color
+    set visual-link-thickness-old thickness
+    set visual-link-timer item 0 stateDesc
+    if(item 1 stateDesc >= 0)[set color item 1 stateDesc]
+    set color color + item 2 stateDesc
+    set thickness thickness + item 3 stateDesc
     ]
   ]
 end
@@ -499,18 +524,18 @@ to visualization-update-colors
   ;visualize-test
   _visualization-show-labels
   _visualization-set-visuals-corelate-actor
-
+  
   ask friendships with [visual-link-state != 0][
     set visual-link-timer visual-link-timer - 1
     if(visual-link-timer <= 0)[
       set visual-link-state 0
       set visual-link-timer 0
-
+      
       set color visual-link-color-old
       set thickness visual-link-thickness-old
     ]
   ]
-
+  
   ask actors[
     if(FM?)[
       let timeToLostValue 0;
@@ -521,7 +546,7 @@ to visualization-update-colors
         ifelse(timeToLostValue <= Friendship-Triger-On-Time)[
           visualization-set-state-friendship ? "link:friendship:critical"
         ][
-          ;visualization-reset-state-friendship ? "link:friendship:critical"
+        ;visualization-reset-state-friendship ? "link:friendship:critical"
         ]
       ]
     ]
@@ -532,7 +557,7 @@ end
 ; =========================
 to visualize-test
   ask actors  with [effect-left > 0 ][set effect-left effect-left - 1]
-   
+  
   reset-actors-test
   if(count actors >= 3)[
     ask n-of 3 actors[

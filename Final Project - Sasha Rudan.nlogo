@@ -966,7 +966,7 @@ CHOOSER
 217
 MeasuringCase
 MeasuringCase
-"HappinessByPopularity" "HappinessByWayOfActivitySelection"
+"default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection"
 1
 
 @#$#@#$#@

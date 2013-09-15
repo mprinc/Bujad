@@ -28,7 +28,7 @@ end
 
 to do-tick-sinisha-end
   ; decay_relationsips ;USED IN OLD MODEL
-  do-plotting
+  do-plotting-sinisa
   
   ifelse( (ticks mod Time-for-activity-velocity) = 0)
   [  

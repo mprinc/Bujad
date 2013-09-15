@@ -22,7 +22,7 @@ to do-tick-sasha-end
 
     measure-happiness-per-node
   ]
-  do-plotting-sasha
+  ; do-plotting-sasha
 end
 
 ; should not be used

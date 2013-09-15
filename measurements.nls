@@ -1,13 +1,33 @@
 to do_measurement
+  if(MeasuringCase = "default")
+  [
+    
+  ]
+  
+  if(MeasuringCase = "sasha")
+  [
+    
+  ]
+  
+  if(MeasuringCase = "sinisha")
+  [
+    
+  ]
+  
   if(MeasuringCase = "HappinessByPopularity")
   [
     measure_HappinessByPopularity
   ]
-
+  
   if(MeasuringCase = "HappinessByWayOfActivitySelection")
   [
     measure_HappinessByWayOfActivitySelection
   ]  
+  
+end
+
+
+to do-plotting-measurement
   
 end
 
@@ -24,9 +44,30 @@ end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to measure_HappinessByWayOfActivitySelection
   ; 
+  let limit 20
   set Chooser-whom-to-send "popularity"
-    
-
-  set Chooser-whom-to-send "shared_interest"
+  reset-ticks; ??? DO we do this?
+  while [ticks <= limit]
+  [
+    do-tick
+  ]
   
+  set Chooser-whom-to-send "shared_interest"
+  reset-ticks; ??? DO we do this?
+  while [ticks <= limit]
+  [
+    do-tick
+  ]
+end
+
+to do-plotting-HappinessByWayOfActivitySelection
+  ;; plot the number of infected individuals at each step
+  set-current-plot "Calc 1"
+  set-current-plot-pen "default"
+  ;set-plot-pen-interval
+  plotxy activities-num-emitted global_calculation_1
+  
+  
+  set-current-plot-pen "blues"; histogram-from turtles with [ true ] [int assets]
+  set-current-plot-pen "reds"; histogram-from turtles with [ color = red ] [ int assets ]
 end
