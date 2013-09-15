@@ -28,7 +28,15 @@ end
 
 
 to do-plotting-measurement
+  if(MeasuringCase = "HappinessByPopularity")
+  [
+    do-plotting-HappinessByPopularity
+  ]
   
+  if(MeasuringCase = "HappinessByWayOfActivitySelection")
+  [
+    do-plotting-HappinessByWayOfActivitySelection
+  ]  
 end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -67,6 +75,10 @@ to measure_HappinessByPopularity
   
 end
 
+to do-plotting-HappinessByPopularity
+  
+end
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; measuring mean happiness based on choosing activities by popularity or shared interests
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -82,6 +94,7 @@ to measure_HappinessByWayOfActivitySelection
     do-tick
   ]
   
+  ; TODO: reset activities
   set-current-plot-pen "pen-2"
   set Chooser-whom-to-send "shared_interest"
   reset-ticks; ??? DO we do this?
