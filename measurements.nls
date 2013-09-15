@@ -3,9 +3,30 @@ to do_measurement
   [
     measure_HappinessByPopularity
   ]
+
+  if(MeasuringCase = "HappinessByWayOfActivitySelection")
+  [
+    measure_HappinessByWayOfActivitySelection
+  ]  
+  
 end
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; measuring mean happiness based on popularity distribution
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to measure_HappinessByPopularity
   ;set popularity
+  
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; measuring mean happiness based on choosing activities by popularity or shared interests
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+to measure_HappinessByWayOfActivitySelection
+  ; 
+  set Chooser-whom-to-send "popularity"
+    
+
+  set Chooser-whom-to-send "shared_interest"
   
 end

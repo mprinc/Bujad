@@ -51,7 +51,7 @@ friendship-avg-degree
 friendship-avg-degree
 0.25
 5.0
-2.65
+2.2
 0.05
 1
 NIL
@@ -329,7 +329,7 @@ Attractiveness-sociable-Ponder
 Attractiveness-sociable-Ponder
 0
 1
-0.5
+0.6
 .05
 1
 NIL
@@ -514,7 +514,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-1
+4
 
 CHOOSER
 151
@@ -943,9 +943,9 @@ NIL
 1
 
 BUTTON
-197
+149
 173
-252
+204
 206
 Measure
 do_measurement
@@ -962,12 +962,12 @@ NIL
 CHOOSER
 6
 172
-195
+146
 217
 MeasuringCase
 MeasuringCase
-"HappinessByPopularity"
-0
+"HappinessByPopularity" "HappinessByWayOfActivitySelection"
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
