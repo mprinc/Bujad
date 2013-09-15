@@ -39,6 +39,24 @@ to do-plotting-measurement
   ]  
 end
 
+to reset-history-measurement
+  if(MeasuringCase = "default")
+  [
+  ]
+  
+  if(MeasuringCase = "sasha")
+  [
+    reset-history-sasha
+  ]
+  
+  if(MeasuringCase = "sinisha")
+  [
+    reset-history-sinisha
+  ]
+end
+
+  
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; measuring mean happiness based on popularity distribution
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -83,21 +101,21 @@ end
 ;; measuring mean happiness based on choosing activities by popularity or shared interests
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to measure_HappinessByWayOfActivitySelection
-  ; 
+  reset-history 
   let limit 20
   
   set-current-plot-pen "default"
   set Chooser-whom-to-send "popularity"
-  reset-ticks; ??? DO we do this?
+  reset-ticks;
   while [ticks <= limit]
   [
     do-tick
   ]
   
-  ; TODO: reset activities
+  reset-history
   set-current-plot-pen "pen-2"
-  set Chooser-whom-to-send "shared_interest"
-  reset-ticks; ??? DO we do this?
+  ; set Chooser-whom-to-send "shared_interest"
+  reset-ticks;
   while [ticks <= limit]
   [
     do-tick
@@ -106,11 +124,7 @@ end
 
 to do-plotting-HappinessByWayOfActivitySelection
   ;; plot the number of infected individuals at each step
-  set-current-plot "Calc 1"  
+  set-current-plot "Calc 1"
   ;set-plot-pen-interval
-  plotxy activities-num-emitted global_calculation_1
-  
-  
-  set-current-plot-pen "blues"; histogram-from turtles with [ true ] [int assets]
-  set-current-plot-pen "reds"; histogram-from turtles with [ color = red ] [ int assets ]
+  plotxy ticks global_calculation_1
 end

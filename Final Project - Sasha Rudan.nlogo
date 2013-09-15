@@ -63,7 +63,7 @@ BUTTON
 320
 171
 Reset History
-rest-history
+reset-history
 NIL
 1
 T
@@ -218,7 +218,7 @@ actor-price-absorption-limit
 actor-price-absorption-limit
 0
 5
-4.9
+5
 0.1
 1
 NIL
@@ -514,7 +514,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-4
+2
 
 CHOOSER
 151

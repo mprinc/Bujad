@@ -109,11 +109,7 @@ to do-tick
       
       do-tick-sasha-end
       do-tick-sinisha-end
-
-      remove-obsolated-activities
-
       do-plotting
-
       if(FM?)[fm-tick-update]
       set micro-ticks 0
     ]
@@ -134,7 +130,7 @@ to recover-energies
 end
 
 ; this function resets the history of the model and starts everything from the beginning but without changin structure or any randomly choosen initial parameters
-to rest-history
+to reset-history
   ask activities[die]
   ask activity-type-activities[die]
   ask activity-actors[die]
@@ -160,8 +156,7 @@ to rest-history
   ; set-current-plot-pen penname
   set plot-pen-color-current plot-pen-color-current + 20
   set-plot-pen-color plot-pen-color-current
-  reset-history-sasha
-  reset-history-sinisha
+  reset-history-measurement
   display
 end
 
