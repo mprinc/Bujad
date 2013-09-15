@@ -177,9 +177,15 @@ to actor-diffuse-activity-from [activity-current]
       if(timeToLostValue <= Friendship-Triger-On-Time)[
         ;show word "Recovered friendship: " word myself word " -> " self
       ]
+
+      ; TODO: this code should be probable corrected
+      ; It seems it sets the life of friendship (time-to-lost) equal to manual-attractiveness
+      ; which later should be set separatelly
+      ; I guess it is set as it is just to simplify simulation and chance to have time-to-lost non uniformly set
       let manualAttractiveness get-turtle-link-endpoint-value myself friendshipToAbsorber "manual-attractiveness"
       set-turtle-link-endpoint-value myself friendshipToAbsorber "time-to-lost" manualAttractiveness
 
+      ; create links between actors and activity
       create-activity-actor-from activity-current [
         set shape "default"
         
@@ -290,7 +296,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
       ]
     ]
   ]
-  if(actorReceiver = nobody and Chooser-whom-to-send = "shared_interest")[
+  if(actorReceiver = nobody and Chooser-whom-to-send = "shared_interest")[ ; IMPLEMENTED!
     let actorsSorted sort friendship-neighbors
     let sharedInterestSum 0
     foreach actorsSorted[
@@ -315,6 +321,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
   report actorReceiver
 end
 
+; absorber answers if (s)he is willing to absorb
 to-report actor-receiver-decides-on-absorption-of-activity [actorSender actorReceiver activity-current]
   let shouldAccept false
   

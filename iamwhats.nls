@@ -12,7 +12,7 @@ to-report get-linked-IamWhats [node]
   report linked-IamWhats
 end
 
-;calculating shared IamWhats/interests:
+;calculating and returning shared IamWhats/interests:
 ; n1, n2 can be of breed actor or activity
 to-report get-shared-iamwhats [n1 n2]
   let shared_iamwhats []
