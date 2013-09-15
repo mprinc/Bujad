@@ -40,7 +40,7 @@ to-report activitiesForFriendship [actorMaster actorSlave]
   report factivities  
 end
 
-;;; sum the price of all activities that happened between actorMaster and actorSlave ;;;
+;;; sums the price of all activities that happened between actorMaster and actorSlave ;;;
 to-report price_last_activities [actorMaster actorSlave period]
   ; IMPORTANT: for now, we count price of all activities to be = 1
   let price 0

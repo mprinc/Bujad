@@ -17,12 +17,15 @@ to set_strengths_for_actor [actor]
       set friends_list lput self friends_list
     ]
     
+    ; sets non-normalized_strengths for all relationships
     foreach(friends_list)[
       set non-normalized_strengths lput (non-normalized-strength_for_friendship myself ?) non-normalized_strengths
     ]
     
-    set normalized_strengths list_normalizing non-normalized_strengths
+    set normalized_strengths list_normalizing non-normalized_strengths ; sets normalized_strengths based on non-normalized_strengths
     ; show word length friends_list (word " vs " length normalized_strengths)
+    
+    ; setting strengths (mean value) and one-directional ones ("thicknes") to normalized_strength:
     (foreach friends_list normalized_strengths non-normalized_strengths
       [
         let mean_thickness 0;
@@ -43,7 +46,7 @@ to set_strengths_for_actor [actor]
           ]
           ;print word "friendshipv" friendshipv
           ;print word "friendshipv is-friendship?: " is-friendship? friendshipv
-          ask friendshipv[set strength (normalized_strength + thickness_other) / 2]
+          ask friendshipv[set strength (normalized_strength + thickness_other) / 2] ; streght is mean value of one-directional strengths (thicknesses)
           ; print non-normalized_strength
           ; print word "non-normalized_strength_other: " non-normalized_strength_other
           ask friendshipv[set non-normalized_strength (non-normalized_strength + non-normalized_strength_other) / 2]

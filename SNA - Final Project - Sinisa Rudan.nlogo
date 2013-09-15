@@ -626,7 +626,7 @@ Time-for-activity-velocity
 Time-for-activity-velocity
 0
 Activity-forgetting-time
-100
+105
 5
 1
 NIL
