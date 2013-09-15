@@ -211,9 +211,9 @@ HORIZONTAL
 
 SLIDER
 7
-232
+237
 312
-265
+270
 actor-price-absorption-limit
 actor-price-absorption-limit
 0
@@ -226,9 +226,9 @@ HORIZONTAL
 
 TEXTBOX
 10
-212
+218
 160
-232
+238
 Actors:
 16
 105.0
@@ -236,9 +236,9 @@ Actors:
 
 SLIDER
 8
-308
 313
-341
+313
+346
 actor-price-emission-limit
 actor-price-emission-limit
 0
@@ -251,9 +251,9 @@ HORIZONTAL
 
 SLIDER
 7
-266
+271
 312
-299
+304
 Actor-price-absorption-restitution
 Actor-price-absorption-restitution
 0
@@ -266,9 +266,9 @@ HORIZONTAL
 
 SLIDER
 9
-343
+348
 313
-376
+381
 Actor-price-emission-restitution
 Actor-price-emission-restitution
 0
@@ -281,9 +281,9 @@ HORIZONTAL
 
 SLIDER
 9
-387
+392
 312
-420
+425
 Actor-iamwhat-mean
 Actor-iamwhat-mean
 0
@@ -476,9 +476,9 @@ NIL
 
 SLIDER
 10
-422
+427
 312
-455
+460
 Actor-iamwhat--standard-deviation
 Actor-iamwhat--standard-deviation
 0
@@ -941,6 +941,33 @@ NIL
 NIL
 NIL
 1
+
+BUTTON
+197
+173
+252
+206
+Measure
+do_measurement
+NIL
+1
+T
+OBSERVER
+NIL
+M
+NIL
+NIL
+1
+
+CHOOSER
+6
+172
+195
+217
+MeasuringCase
+MeasuringCase
+"HappinessByPopularity"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
