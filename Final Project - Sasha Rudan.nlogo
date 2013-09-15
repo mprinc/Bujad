@@ -648,7 +648,8 @@ true
 false
 "" ""
 PENS
-"default" 1.0 0 -7500403 true "" ""
+"default" 1.0 0 -2674135 true "" ""
+"pen-2" 1.0 0 -13345367 true "" ""
 
 PLOT
 919
@@ -967,7 +968,7 @@ CHOOSER
 MeasuringCase
 MeasuringCase
 "default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection"
-1
+4
 
 @#$#@#$#@
 ## WHAT IS IT?

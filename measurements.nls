@@ -1,17 +1,17 @@
 to do_measurement
   if(MeasuringCase = "default")
   [
-    
+    loop [do-tick]
   ]
   
   if(MeasuringCase = "sasha")
   [
-    
+    loop [do-tick]
   ]
   
   if(MeasuringCase = "sinisha")
   [
-    
+    loop [do-tick]
   ]
   
   if(MeasuringCase = "HappinessByPopularity")
@@ -45,6 +45,8 @@ end
 to measure_HappinessByWayOfActivitySelection
   ; 
   let limit 20
+  
+  set-current-plot-pen "default"
   set Chooser-whom-to-send "popularity"
   reset-ticks; ??? DO we do this?
   while [ticks <= limit]
@@ -52,6 +54,7 @@ to measure_HappinessByWayOfActivitySelection
     do-tick
   ]
   
+  set-current-plot-pen "pen-2"
   set Chooser-whom-to-send "shared_interest"
   reset-ticks; ??? DO we do this?
   while [ticks <= limit]
@@ -62,8 +65,7 @@ end
 
 to do-plotting-HappinessByWayOfActivitySelection
   ;; plot the number of infected individuals at each step
-  set-current-plot "Calc 1"
-  set-current-plot-pen "default"
+  set-current-plot "Calc 1"  
   ;set-plot-pen-interval
   plotxy activities-num-emitted global_calculation_1
   
