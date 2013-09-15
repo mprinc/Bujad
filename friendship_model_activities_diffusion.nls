@@ -157,7 +157,7 @@ to actor-diffuse-activity-from [activity-current]
   ]
   
   ; find (if any) actor that emitter is emitting activity toward
-  let actor-absorbers actor-sender-choses-receiver-for-emitting-activity activity-current
+  let actor-absorbers actor-sender-chooses-receiver-for-emitting-activity activity-current
   if(actor-absorbers != nobody)[
 
     ; ask absorber if he is willing to absorb
@@ -216,13 +216,13 @@ end
 
 ; in the context of actor-sender
 ; it returns the most appropriate actor
-to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
+to-report actor-sender-chooses-receiver-for-emitting-activity [activity-current]
   let actorReceiver nobody
   
   ; check if we are in the Friendship Manage mode and
   ; check if there are some dying friendship
   if(FM?)[
-     ;show "[actor-sender-choses-receiver-for-emitting-activity] Friendship-Manager scanning"
+     ;show "[actor-sender-chooses-receiver-for-emitting-activity] Friendship-Manager scanning"
     let minTimeToLostValue 1000000000000000;
     let  minTimeToLostLink nobody;
     let  minTimeToLostActor nobody;
@@ -242,7 +242,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
     ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
     if(minTimeToLostValue <= Friendship-Triger-On-Time)[
       set actorReceiver minTimeToLostActor
-      ;show word "[actor-sender-choses-receiver-for-emitting-activity] Friendship-Manager scanning: Critical actor: " actorReceiver
+      ;show word "[actor-sender-chooses-receiver-for-emitting-activity] Friendship-Manager scanning: Critical actor: " actorReceiver
     ]
   ]
 
@@ -317,7 +317,7 @@ to-report actor-sender-choses-receiver-for-emitting-activity [activity-current]
   ]
   if(actorReceiver = nobody and Chooser-whom-to-send = "environmental")[
   ]
-  ;show word "[actor-sender-choses-receiver-for-emitting-activity] actorReceiver: " actorReceiver
+  ;show word "[actor-sender-chooses-receiver-for-emitting-activity] actorReceiver: " actorReceiver
   report actorReceiver
 end
 

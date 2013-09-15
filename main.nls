@@ -98,7 +98,7 @@ to do-tick
         ; difuse one activity and retrieves it in the last-activity
         set last-activity diffuse-activity
         if last-activity != nobody [
-          affect-relatinships-by-activity last-activity
+          ; affect-relatinships-by-activity last-activity
         ]
       ]
       
