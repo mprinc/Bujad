@@ -545,7 +545,7 @@ Activity-atract-relationship-ponder
 Activity-atract-relationship-ponder
 0
 1
-0.2
+0.19
 0.01
 1
 NIL

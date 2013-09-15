@@ -136,11 +136,11 @@ end
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; DEPRICATED-USED-BY-OLD-MODEL: changes closeness of al actors that took part in the activity    ;;;
+;;; DEPRICATED-USED-BY-OLD-MODEL: changes closeness of all the actors that took part in the activity    ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 to affect-relatinships-by-activity [activity]
-  ; in this version of model we check if there is link between actors, we don't create new ones 
+  ; in this version of model we check if there is a link between actors, we don't create new ones 
   
   ;getting activity actors
   let activity_actors []
@@ -160,8 +160,9 @@ to affect-relatinships-by-activity [activity]
       if(? != actorFrom)[
         let actorTo ?
         ;  print (word [label] of actorFrom (word " -> " [label] of actorTo))
-        let activity_attract Activity-atract-relationship-ponder * (actors-attractiveness actorFrom actorTo) * calculate-activity-payoff activity
+        let activity_attract Activity-atract-relationship-ponder * (actors-attractiveness actorFrom actorTo) * calculate-activity-payoff activity; calculates changes in attractivness, based on activity
         
+        ; adds to thickness (closeness) new change in attractivnes
         let f nobody
         ask actorFrom[
           set f friendship-with actorTo
