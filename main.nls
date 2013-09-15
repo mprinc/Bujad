@@ -135,10 +135,13 @@ end
 
 ; this function resets the history of the model and starts everything from the beginning but without changin structure or any randomly choosen initial parameters
 to rest-history
+  ; turtles
   ask activities[die]
+  ; links
   ask activity-type-activities[die]
   ask activity-actors[die]
   ask iamwhat-activities[die]
+
   set activities-num-emitted 0
   set activities-list []
   set global_calculation_1 0
@@ -149,7 +152,9 @@ to rest-history
     set calculation_actor_1 0
     set calculation_actor_2 0
     set calculation_actor_3 0
+    ; TODO: Should we clean something else?
   ]
+  ; TODO: Should we clean friendship parameters?
 
   ; clear-all-plots
   ;plot-pen-reset

@@ -50,29 +50,39 @@ to measure_HappinessByPopularity
   set Popularity-random-standard-deviation 4
   
   let ticksNo 50
-  repeat ticksNo[
-    do-tick
+  
+  let deviationSet (list 0 0.25 0.5)
+  show word "deviationSet: " deviationSet
 
-    ; from: to do-tick-sasha-end
-    ; ---------------
-    ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
-    ; every 100 activities
-    if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
-      show word "Plotting, activities-num-emitted = " activities-num-emitted
-      set ploted-on-activity-number activities-num-emitted
-      
-      measure-happiness-per-node
+
+  set global_calculation_1 0
+  foreach deviationSet[
+    let deviation ?
+    show word "measuring for deviation = " deviation
+
+    repeat ticksNo[
+      do-tick
+
+      ; from: to do-tick-sasha-end
+      ; ---------------
+      ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
+      ; every 100 activities
+      if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
+        show word "Plotting, activities-num-emitted = " activities-num-emitted
+        set ploted-on-activity-number activities-num-emitted
+        
+        measure-happiness-per-node
+      ]
     ]
+
     ; from: to do-plotting-sasha
     ; ---------------
-     ;; plot the number of infected individuals at each step
-     set-current-plot "Calc 1"
-     set-current-plot-pen "default"
-     ;set-plot-pen-interval
-     plotxy activities-num-emitted global_calculation_1
-
+    ;; plot the number of infected individuals at each step
+    set-current-plot "Calc 1"
+    set-current-plot-pen "default"
+    ;set-plot-pen-interval
+    plotxy deviation global_calculation_1
   ]
-  
 end
 
 to do-plotting-HappinessByPopularity

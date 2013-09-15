@@ -258,7 +258,7 @@ Actor-price-absorption-restitution
 Actor-price-absorption-restitution
 0
 10
-2.64
+3.16
 0.02
 1
 NIL
@@ -426,7 +426,7 @@ Popularity-random-mean
 Popularity-random-mean
 0
 1
-0.6
+0.5
 0.02
 1
 NIL
@@ -441,7 +441,7 @@ Popularity-random-standard-deviation
 Popularity-random-standard-deviation
 0
 1
-0.58
+4
 0.02
 1
 NIL
@@ -514,7 +514,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-4
+2
 
 CHOOSER
 151
@@ -524,7 +524,7 @@ CHOOSER
 Chooser-whom-to-receive
 Chooser-whom-to-receive
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-0
+2
 
 SLIDER
 11
@@ -550,7 +550,7 @@ Relationship-Treshold-Connected
 Relationship-Treshold-Connected
 0
 100
-50
+51
 1
 1
 NIL
@@ -968,7 +968,7 @@ CHOOSER
 MeasuringCase
 MeasuringCase
 "default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection"
-4
+3
 
 @#$#@#$#@
 ## WHAT IS IT?
