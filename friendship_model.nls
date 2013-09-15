@@ -65,12 +65,12 @@ actors-own
 undirected-link-breed [friendships friendship]
 friendships-own
 [
-  strength
-  strength_non_normalized
+  strength                          ; normalized strength - mean for both directions [ (thicknes-end1 + thicknes-end2) / 2 ]
+  strength_non_normalized           ; non-normalized strength - mean for both directions
   strength_non_normalized-end1
   strength_non_normalized-end2
-  thicknes-end1
-  thicknes-end2
+  thicknes-end1                     ; normalized strength - one-directional
+  thicknes-end2                     ; normalized strength - one-directional
   manual-attractiveness-end1
   manual-attractiveness-end2
   time-to-lost-end1
