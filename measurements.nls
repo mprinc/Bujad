@@ -1,10 +1,11 @@
 to do_measurement
-  if(MeasuringCase = ""HappinessByPopularity"")
+  if(MeasuringCase = "HappinessByPopularity")
   [
     measure_HappinessByPopularity
   ]
 end
 
 to measure_HappinessByPopularity
+  ;set popularity
   
 end
