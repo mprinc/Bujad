@@ -75,10 +75,10 @@ NIL
 1
 
 BUTTON
-7
-94
-123
-127
+4
+93
+59
+126
 One Tick
 do-tick
 NIL
@@ -92,10 +92,10 @@ NIL
 1
 
 BUTTON
-129
-94
-246
-127
+61
+93
+151
+126
 Continue Ticks
 do-tick
 T
@@ -109,10 +109,10 @@ NIL
 1
 
 BUTTON
-170
-134
-246
-167
+203
+49
+258
+82
 layout
 do-layout\ndisplay
 T
@@ -459,10 +459,10 @@ NIL
 HORIZONTAL
 
 CHOOSER
-7
-135
-156
-180
+152
+88
+270
+133
 Friendships_generator
 Friendships_generator
 "ER" "Attractiveness"
@@ -659,10 +659,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-141
-50
-244
-83
+104
+48
+194
+81
 FM?
 FM?
 1
@@ -780,6 +780,33 @@ inspecting-actor-new
 1
 0
 Number
+
+CHOOSER
+6
+140
+180
+185
+MeasuringCase
+MeasuringCase
+"HappinessByPopularity"
+0
+
+BUTTON
+188
+141
+267
+174
+Measure
+do_measurement
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
