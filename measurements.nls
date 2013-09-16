@@ -34,7 +34,12 @@ to do_measurement
   if(MeasuringCase = "HappinessByWayOfActivitySelection")
   [
     measure_HappinessByWayOfActivitySelection
-  ]  
+  ]
+  
+  if(MeasuringCase = "AttractRlzByWayOfActivitySelection  ")
+  [
+    measure_AttractRlzByWayOfActivitySelection
+  ] 
   
 end
 
@@ -210,4 +215,8 @@ to do-plotting-HappinessByWayOfActivitySelection
   set-current-plot "Calc 1"
   ;set-plot-pen-interval
   plotxy ticks global_calculation_1
+end
+
+to measure_AttractRlzByWayOfActivitySelection
+  
 end
