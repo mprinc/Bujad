@@ -6,28 +6,6 @@ globals[
   ploted-on-activity-number
 ]
 
-to do-tick-sasha-start
-end
-
-to do-tick-sinisha-start
-end
-
-to do-tick-sasha-end
-  ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
-  ; every 100 activities
-  if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
-    show word "Plotting, activities-num-emitted = " activities-num-emitted
-    set ploted-on-activity-number activities-num-emitted
-
-    measure-happiness-per-node
-  ]
-  ; do-plotting-sasha
-end
-
-; should not be used
-to do-tick-sinisha-end
-end
-
 ; ========================================================================================
 ; reset-history
 ; ========================================================================================
@@ -61,7 +39,7 @@ end
 ; ========================================================================================
 
 to setup-start-sasha
-  set plot-for-each-number-of-activities 100
+  set plot-for-each-number-of-activities 20
   set ploted-on-activity-number 0
 end
 

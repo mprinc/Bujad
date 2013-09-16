@@ -314,7 +314,7 @@ Attractiveness-IAmWhats-Ponder
 Attractiveness-IAmWhats-Ponder
 0
 1
-0.5
+0.25
 .05
 1
 NIL
@@ -944,10 +944,10 @@ NIL
 1
 
 BUTTON
-149
-173
-204
-206
+207
+174
+262
+207
 Measure
 do_measurement
 NIL
@@ -963,12 +963,29 @@ NIL
 CHOOSER
 6
 172
-146
+203
 217
 MeasuringCase
 MeasuringCase
 "default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection"
 3
+
+BUTTON
+264
+175
+319
+208
+Stop
+stop-measurement
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?

@@ -83,8 +83,8 @@ to do-tick
     ; random-seed Random-generator-initial 47822
     ;show word Max-activities-num word ", " activities-num-emitted
     if((Max-activities-num = 0) or (Max-activities-num > activities-num-emitted))[
-      do-tick-sasha-start
-      do-tick-sinisha-start
+      ;do-tick-sasha-start
+      ;do-tick-sinisha-start
       
       visualization-update-colors
 
@@ -107,8 +107,8 @@ to do-tick
       display
       recover-energies
       
-      do-tick-sasha-end
-      do-tick-sinisha-end
+      ;do-tick-sasha-end
+      ;do-tick-sinisha-end
       do-plotting
       if(FM?)[fm-tick-update]
       set micro-ticks 0

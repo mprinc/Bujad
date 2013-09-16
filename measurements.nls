@@ -1,4 +1,16 @@
+globals
+[
+  measurement_stop
+]
+
+to stop-measurement
+  set measurement_stop true
+end
+
 to do_measurement
+  reset-ticks
+  set measurement_stop false
+
   if(MeasuringCase = "default")
   [
     loop [do-tick]
@@ -63,7 +75,7 @@ end
 to measure_HappinessByPopularity
   ;set popularity
   set Chooser-whom-to-send "popularity"
-  set Chooser-whom-to-receive "popularity"
+  set Chooser-whom-to-receive "anyone"
   set Popularity-random-mean 0.5
   set Popularity-random-standard-deviation 4
   
@@ -80,16 +92,23 @@ to measure_HappinessByPopularity
 
     repeat ticksNo[
       do-tick
+      if(measurement_stop)[stop]
 
       ; from: to do-tick-sasha-end
       ; ---------------
       ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
-      ; every 100 activities
+      ; every 20 activities
       if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
         show word "Plotting, activities-num-emitted = " activities-num-emitted
         set ploted-on-activity-number activities-num-emitted
         
         measure-happiness-per-node
+
+        set-current-plot "Calc 2"
+        set-current-plot-pen "default"
+        ;set-plot-pen-interval
+        plotxy activities-num-emitted global_calculation_1
+        
       ]
     ]
 
@@ -120,6 +139,17 @@ to measure_HappinessByWayOfActivitySelection
   while [ticks <= limit]
   [
     do-tick
+    if(measurement_stop)[stop]
+    ; from: to do-tick-sasha-end
+    ; ---------------
+    ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
+    ; every 20 activities
+    if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
+      show word "Plotting, activities-num-emitted = " activities-num-emitted
+      set ploted-on-activity-number activities-num-emitted
+      
+      measure-happiness-per-node
+    ]
   ]
   
   reset-history
@@ -129,6 +159,17 @@ to measure_HappinessByWayOfActivitySelection
   while [ticks <= limit]
   [
     do-tick
+    if(measurement_stop)[stop]
+    ; from: to do-tick-sasha-end
+    ; ---------------
+    ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
+    ; every 20 activities
+    if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
+      show word "Plotting, activities-num-emitted = " activities-num-emitted
+      set ploted-on-activity-number activities-num-emitted
+      
+      measure-happiness-per-node
+    ]
   ]
 end
 
