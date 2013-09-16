@@ -39,8 +39,7 @@ to do_measurement
   if(MeasuringCase = "AttractRlzByWayOfActivitySelection")
   [
     measure_AttractRlzByWayOfActivitySelection
-  ] 
-  
+  ]  
 end
 
 
@@ -87,8 +86,19 @@ to reset-history-measurement
   
   if(MeasuringCase = "HappinessByPopularity")
   [
+    set ploted-on-activity-number 0
+
+    set plot-pen-color-current plot-pen-color-current + 10
+
     ; clear-all-plots
     ;plot-pen-reset
+    set-current-plot "Calc 2"
+    set-current-plot-pen "default"
+    
+    ; error if pen penname doesn't exist
+    ; set-current-plot-pen penname
+    set-plot-pen-color plot-pen-color-current
+
     set-current-plot "Calc 2"
     set-current-plot-pen "default"
     
@@ -98,9 +108,7 @@ to reset-history-measurement
     
     ; error if pen penname doesn't exist
     ; set-current-plot-pen penname
-    set plot-pen-color-current plot-pen-color-current + 20
     set-plot-pen-color plot-pen-color-current
-    set ploted-on-activity-number 0
   ]
 end
 
@@ -116,9 +124,21 @@ to measure_HappinessByPopularity
   set Popularity-random-mean 0.5
   set Popularity-random-standard-deviation 0
   
-  let ticksNo 250
+  set plot-pen-color-current 5
+
+  set-current-plot "Calc 1"
+  set-current-plot-pen "default"
+  set-plot-pen-mode 0 ; bar mode
+  set-plot-pen-color plot-pen-color-current
+
+  set-current-plot "Calc 2"
+  set-current-plot-pen "default"
+  set-plot-pen-mode 0 ; line mode
+  set-plot-pen-color plot-pen-color-current
+
+  let ticksNo 500
   
-  let deviationSet (list 0 0.25 0.5)
+  let deviationSet (list 0 0.125 0.25 0.375 0.5 0.625 0.75 0.875 1)
   show word "deviationSet: " deviationSet
   
   
@@ -220,6 +240,7 @@ to do-plotting-HappinessByWayOfActivitySelection
   ;set-plot-pen-interval
   plotxy ticks global_calculation_1
 end
+<<<<<<< HEAD
 
 to measure_AttractRlzByWayOfActivitySelection 
   print "measure_AttractRlzByWayOfActivitySelection"
@@ -257,3 +278,5 @@ to do-plotting-AttractRlzByWayOfActivitySelection
   ; print word "mean_attractiveness_realization: " mean_attractiveness_realization
   plot mean_attractiveness_realization
 end
+=======
+>>>>>>> 59543d4d95520c5c2c8db462f6e83aa55214c37b
