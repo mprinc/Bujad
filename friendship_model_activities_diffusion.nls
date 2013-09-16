@@ -247,8 +247,23 @@ to-report actor-sender-chooses-receiver-for-emitting-activity [activity-current]
       ]
     ]
     if(FM-type = "Happiness(FlowIn)")[
-      ;activities-in-number-for-friendship [actorMaster actorSlave]
-      ;activities-out-number-for-friendship [actorMaster actorSlave]
+      let theMostCriticalValue 1000000000000000;
+      let theMostCriticalActor nobody;
+      foreach sort friendship-neighbors[
+        let actorReceiverSelected ?
+        ;show word "? (actor): " ?
+        let flowIn activities-in-number-for-friendship self actorReceiverSelected
+        let flowOut activities-out-number-for-friendship self actorReceiverSelected
+        let flowRatio 0
+        if(flowIn > 0)[ set flowRatio (flowOut / flowIn) ]
+        if(flowRatio < theMostCriticalValue)[
+          set theMostCriticalValue flowRatio
+          set theMostCriticalActor actorReceiverSelected
+        ]
+      ]
+      if(theMostCriticalActor != nobody and random-float 1 > FM-intensity) [
+        set actorReceiver theMostCriticalActor
+      ]
     ]
   ]
 

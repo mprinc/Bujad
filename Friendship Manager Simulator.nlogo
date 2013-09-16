@@ -798,10 +798,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-809
-675
-899
-708
+805
+681
+895
+714
 FM?
 FM?
 1
@@ -810,9 +810,9 @@ FM?
 
 TEXTBOX
 674
-655
+661
 824
-673
+679
 Friendship Manager:
 14
 104.0
@@ -820,9 +820,9 @@ Friendship Manager:
 
 SLIDER
 673
-722
+763
 899
-755
+796
 Friendship-Triger-On-Time
 Friendship-Triger-On-Time
 0
@@ -835,9 +835,9 @@ HORIZONTAL
 
 SLIDER
 673
-758
+799
 899
-791
+832
 Friendship-max-inactive-time
 Friendship-max-inactive-time
 1
@@ -850,9 +850,9 @@ HORIZONTAL
 
 SLIDER
 730
-793
+834
 899
-826
+867
 FM-check-every-n-ticks
 FM-check-every-n-ticks
 1
@@ -876,9 +876,9 @@ Last-activity-links
 
 BUTTON
 673
-793
+834
 728
-826
+867
 Populate
 FM-repopulate
 NIL
@@ -1007,13 +1007,28 @@ PENS
 
 CHOOSER
 673
-675
+681
 806
-720
+726
 FM-type
 FM-type
 "TimeToLoose" "Happiness(FlowIn)"
 0
+
+SLIDER
+673
+728
+899
+761
+FM-intensity
+FM-intensity
+0
+1
+0.34
+0.01
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
