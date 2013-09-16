@@ -197,6 +197,7 @@ to measure_HappinessByWayOfActivitySelection
   
   set-current-plot-pen "default"
   set Chooser-whom-to-send "popularity"
+  set Chooser-whom-to-receive "anyone"
   reset-ticks;
   while [ticks <= limit]
   [
@@ -216,7 +217,7 @@ to measure_HappinessByWayOfActivitySelection
   
   reset-history
   set-current-plot-pen "pen-2"
-  ; set Chooser-whom-to-send "shared_interest"
+  set Chooser-whom-to-send "shared_interest"
   reset-ticks;
   while [ticks <= limit]
   [
