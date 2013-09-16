@@ -23,9 +23,9 @@ to set_strengths_for_actor [actor]
     ]
     
     set normalized_strengths list_normalizing non-normalized_strengths ; sets normalized_strengths based on non-normalized_strengths
-    ; show word length friends_list (word " vs " length normalized_strengths)
+                                                                       ; show word length friends_list (word " vs " length normalized_strengths)
     
-    ; setting strengths (mean value) and one-directional ones ("thicknes") to normalized_strength:
+                                                                       ; setting strengths (mean value) and one-directional ones ("thicknes") to normalized_strength:
     (foreach friends_list normalized_strengths non-normalized_strengths
       [
         let mean_thickness 0;
@@ -47,8 +47,8 @@ to set_strengths_for_actor [actor]
           ;print word "friendshipv" friendshipv
           ;print word "friendshipv is-friendship?: " is-friendship? friendshipv
           ask friendshipv[set strength (normalized_strength + thickness_other) / 2] ; streght is mean value of one-directional strengths (thicknesses)
-          ; print non-normalized_strength
-          ; print word "non-normalized_strength_other: " non-normalized_strength_other
+                                                                                    ; print non-normalized_strength
+                                                                                    ; print word "non-normalized_strength_other: " non-normalized_strength_other
           ask friendshipv[set non-normalized_strength (non-normalized_strength + non-normalized_strength_other) / 2]
         ]        
       ])
@@ -165,7 +165,7 @@ to affect-relatinships-by-activity [activity]
         ;  print (word [label] of actorFrom (word " -> " [label] of actorTo))
         let activity_attract Activity-atract-relationship-ponder * (actors-attractiveness actorFrom actorTo) * calculate-activity-payoff activity; calculates changes in attractivness, based on activity
         
-        ; adds to thickness (closeness) new change in attractivnes
+                                                                                                                                                 ; adds to thickness (closeness) new change in attractivnes
         let f nobody
         ask actorFrom[
           set f friendship-with actorTo
@@ -190,6 +190,7 @@ end
 ;;;;;;;;; attractiveness_realization ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; returnes attractiveness_realization: 0: min, 1: max-attractiveness_realization
 ; expects that relationship thicknesses are normalized to [0,1]
+; if actor doesn't have connections AR = 0 
 ;;;;;;;;;
 to-report attractiveness_realization [actor]
   let ar 0
@@ -243,7 +244,13 @@ to-report attractiveness_realization [actor]
       set ar ar + ratio
       ; type word attr (word " % " (word strength (word " - " (word ratio "; "))))
     ])
-  set ar ar / length strengths
+  ifelse(length strengths = 0)
+  [
+    set ar 0
+  ]
+  [
+    set ar ar / length strengths
+  ]
   print word "ar: " ar
   report ar
 end
