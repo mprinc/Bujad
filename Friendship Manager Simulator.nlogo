@@ -441,7 +441,7 @@ Popularity-random-standard-deviation
 Popularity-random-standard-deviation
 0
 1
-1
+0
 0.02
 1
 NIL
@@ -799,9 +799,9 @@ HORIZONTAL
 
 SWITCH
 809
-687
+675
 899
-720
+708
 FM?
 FM?
 1
@@ -809,10 +809,10 @@ FM?
 -1000
 
 TEXTBOX
-666
-702
-816
-720
+674
+655
+824
+673
 Friendship Manager:
 14
 104.0
@@ -968,7 +968,7 @@ CHOOSER
 MeasuringCase
 MeasuringCase
 "default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection" "AttractRlzByWayOfActivitySelection"
-5
+3
 
 BUTTON
 264
@@ -1004,6 +1004,16 @@ false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" ""
+
+CHOOSER
+673
+675
+806
+720
+FM-type
+FM-type
+"TimeToLoose" "Happiness(FlowIn)"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?

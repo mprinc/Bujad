@@ -119,6 +119,7 @@ end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to measure_HappinessByPopularity
   ;set popularity
+  set FM? false
   set Chooser-whom-to-send "popularity"
   set Chooser-whom-to-receive "anyone"
   set Popularity-random-mean 0.5

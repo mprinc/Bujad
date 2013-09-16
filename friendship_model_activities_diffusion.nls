@@ -222,27 +222,33 @@ to-report actor-sender-chooses-receiver-for-emitting-activity [activity-current]
   ; check if we are in the Friendship Manage mode and
   ; check if there are some dying friendship
   if(FM?)[
-     ;show "[actor-sender-chooses-receiver-for-emitting-activity] Friendship-Manager scanning"
-    let minTimeToLostValue 1000000000000000;
-    let  minTimeToLostLink nobody;
-    let  minTimeToLostActor nobody;
-    let timeToLostValue 1000000000000000;
-
-    foreach sort friendship-neighbors[
-      ;show word "? (actor): " ?
-      let friendshipSelected friendship-with ?
-      set timeToLostValue actor-get-turtle-link-endpoint-value friendshipSelected "time-to-lost"
-      ;show word "neighbour actor: " word ? word ", friendshipSelected: " word friendshipSelected word ", time-to-lost: " timeToLostValue
-      if(timeToLostValue < minTimeToLostValue)[
-        set minTimeToLostValue timeToLostValue
-        set minTimeToLostLink friendshipSelected
-        set minTimeToLostActor ?
+    if(FM-type = "TimeToLoose")[
+      ;show "[actor-sender-chooses-receiver-for-emitting-activity] Friendship-Manager scanning"
+      let minTimeToLostValue 1000000000000000;
+      let  minTimeToLostLink nobody;
+      let  minTimeToLostActor nobody;
+      let timeToLostValue 1000000000000000;
+      
+      foreach sort friendship-neighbors[
+        ;show word "? (actor): " ?
+        let friendshipSelected friendship-with ?
+        set timeToLostValue actor-get-turtle-link-endpoint-value friendshipSelected "time-to-lost"
+        ;show word "neighbour actor: " word ? word ", friendshipSelected: " word friendshipSelected word ", time-to-lost: " timeToLostValue
+        if(timeToLostValue < minTimeToLostValue)[
+          set minTimeToLostValue timeToLostValue
+          set minTimeToLostLink friendshipSelected
+          set minTimeToLostActor ?
+        ]
+      ]
+      ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
+      if(minTimeToLostValue <= Friendship-Triger-On-Time)[
+        set actorReceiver minTimeToLostActor
+        ;show word "[actor-sender-chooses-receiver-for-emitting-activity] Friendship-Manager scanning: Critical actor: " actorReceiver
       ]
     ]
-    ; do not react if the minimum lost time over all nodes is higher than time on what we should triger reaction
-    if(minTimeToLostValue <= Friendship-Triger-On-Time)[
-      set actorReceiver minTimeToLostActor
-      ;show word "[actor-sender-chooses-receiver-for-emitting-activity] Friendship-Manager scanning: Critical actor: " actorReceiver
+    if(FM-type = "Happiness(FlowIn)")[
+      ;activities-in-number-for-friendship [actorMaster actorSlave]
+      ;activities-out-number-for-friendship [actorMaster actorSlave]
     ]
   ]
 

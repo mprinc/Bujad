@@ -585,10 +585,10 @@ global_calculation_1
 11
 
 MONITOR
-1479
-710
-1546
-755
+1199
+813
+1266
+858
 Calc 2
 global_calculation_2
 17
@@ -596,10 +596,10 @@ global_calculation_2
 11
 
 MONITOR
-1479
-757
-1547
-802
+1199
+860
+1267
+905
 Calc 3
 global_calculation_3
 17
@@ -670,10 +670,10 @@ PENS
 "default" 1.0 0 -16777216 true "" ""
 
 PLOT
-1477
-536
-1728
-705
+922
+807
+1184
+956
 Calc 3
 ticks
 calc 3
@@ -967,8 +967,8 @@ CHOOSER
 217
 MeasuringCase
 MeasuringCase
-"default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection" "AttractRlzByWayOfActivitySelection"
-5
+"default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection"
+3
 
 BUTTON
 264
@@ -986,24 +986,6 @@ NIL
 NIL
 NIL
 1
-
-PLOT
-1187
-533
-1475
-805
-attractiveness realization
-time
-attractiveness realization
-0.0
-10.0
-0.0
-10.0
-true
-false
-"" ""
-PENS
-"default" 1.0 0 -16777216 true "" ""
 
 @#$#@#$#@
 ## WHAT IS IT?
