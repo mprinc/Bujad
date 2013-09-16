@@ -10,7 +10,7 @@ end
 to do_measurement
   reset-ticks
   set measurement_stop false
-
+  
   if(MeasuringCase = "default")
   [
     loop [do-tick]
@@ -36,7 +36,7 @@ to do_measurement
     measure_HappinessByWayOfActivitySelection
   ]
   
-  if(MeasuringCase = "AttractRlzByWayOfActivitySelection  ")
+  if(MeasuringCase = "AttractRlzByWayOfActivitySelection")
   [
     measure_AttractRlzByWayOfActivitySelection
   ] 
@@ -53,7 +53,11 @@ to do-plotting-measurement
   if(MeasuringCase = "HappinessByWayOfActivitySelection")
   [
     do-plotting-HappinessByWayOfActivitySelection
-  ]  
+  ]
+  if(MeasuringCase = "AttractRlzByWayOfActivitySelection")
+  [
+    do-plotting-AttractRlzByWayOfActivitySelection
+  ]
 end
 
 to reset-history-measurement
@@ -80,7 +84,7 @@ to reset-history-measurement
     plotxy 0 0
     plot-pen-down
   ]
-
+  
   if(MeasuringCase = "HappinessByPopularity")
   [
     ; clear-all-plots
@@ -100,7 +104,7 @@ to reset-history-measurement
   ]
 end
 
-  
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; measuring mean happiness based on popularity distribution
@@ -116,8 +120,8 @@ to measure_HappinessByPopularity
   
   let deviationSet (list 0 0.25 0.5)
   show word "deviationSet: " deviationSet
-
-
+  
+  
   reset-history
   foreach deviationSet[
     let deviation ?
@@ -129,7 +133,7 @@ to measure_HappinessByPopularity
     repeat ticksNo[
       do-tick
       if(measurement_stop)[stop]
-
+      
       ; from: to do-tick-sasha-end
       ; ---------------
       ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
@@ -139,7 +143,7 @@ to measure_HappinessByPopularity
         set ploted-on-activity-number activities-num-emitted
         
         measure-happiness-per-node
-
+        
         set-current-plot "Calc 2"
         set-current-plot-pen "default"
         ;set-plot-pen-interval
@@ -147,7 +151,7 @@ to measure_HappinessByPopularity
         
       ]
     ]
-
+    
     ; from: to do-plotting-sasha
     ; ---------------
     ;; plot the number of infected individuals at each step
@@ -217,6 +221,39 @@ to do-plotting-HappinessByWayOfActivitySelection
   plotxy ticks global_calculation_1
 end
 
-to measure_AttractRlzByWayOfActivitySelection
+to measure_AttractRlzByWayOfActivitySelection 
+  print "measure_AttractRlzByWayOfActivitySelection"
+  reset-history
+  let limit 20
+  while [ticks <= limit]
+  [
+    do-tick
+    if(measurement_stop)[stop]
+    ifelse( (ticks mod Time-for-activity-velocity) = 0)
+    [  
+      print word "calling 'set_strengths_for_actor' at tick " ticks   
+      ask actors[
+        set_strengths_for_actor self
+      ]
+      let ar mean_attractiveness_realization
+    ]
+    [
+      ;print word "nonmod:" ticks   
+    ]
+  ]
+end
+
+to do-plotting-AttractRlzByWayOfActivitySelection
+  ;; plot the number of infected individuals at each step
+  set-current-plot "friendships strength"
+  set-current-plot-pen "thicknes"
+  let thicnkesses [thicknes-end1] of friendships
+  let mean_thicnkesses (mean thicnkesses)
+  ; print mean_thicnkesses
+  plot mean_thicnkesses
   
+  set-current-plot "attractiveness realization"
+  set-current-plot-pen "ar"     
+  ; print word "mean_attractiveness_realization: " mean_attractiveness_realization
+  plot mean_attractiveness_realization
 end

@@ -968,7 +968,7 @@ CHOOSER
 MeasuringCase
 MeasuringCase
 "default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection" "AttractRlzByWayOfActivitySelection"
-3
+5
 
 BUTTON
 264
