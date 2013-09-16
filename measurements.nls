@@ -240,7 +240,6 @@ to do-plotting-HappinessByWayOfActivitySelection
   ;set-plot-pen-interval
   plotxy ticks global_calculation_1
 end
-<<<<<<< HEAD
 
 to measure_AttractRlzByWayOfActivitySelection 
   print "measure_AttractRlzByWayOfActivitySelection"
@@ -278,5 +277,3 @@ to do-plotting-AttractRlzByWayOfActivitySelection
   ; print word "mean_attractiveness_realization: " mean_attractiveness_realization
   plot mean_attractiveness_realization
 end
-=======
->>>>>>> 59543d4d95520c5c2c8db462f6e83aa55214c37b
