@@ -307,9 +307,9 @@ Links-show-extra
 
 SLIDER
 921
-490
+545
 1182
-523
+578
 Attractiveness-IAmWhats-Ponder
 Attractiveness-IAmWhats-Ponder
 0
@@ -322,9 +322,9 @@ HORIZONTAL
 
 SLIDER
 922
-525
+580
 1183
-558
+613
 Attractiveness-sociable-Ponder
 Attractiveness-sociable-Ponder
 0
@@ -337,9 +337,9 @@ HORIZONTAL
 
 SLIDER
 922
-560
+615
 1183
-593
+648
 Attractiveness-Preference-Ponder
 Attractiveness-Preference-Ponder
 0
@@ -378,9 +378,9 @@ activities-num-emitted
 
 SLIDER
 922
-604
+659
 1184
-637
+692
 Attractiveness-manual-mean
 Attractiveness-manual-mean
 0
@@ -393,9 +393,9 @@ HORIZONTAL
 
 SLIDER
 922
-639
+694
 1185
-672
+727
 Attractiveness-manual-standard-deviation
 Attractiveness-manual-standard-deviation
 0
@@ -419,9 +419,9 @@ Number
 
 SLIDER
 923
-681
+736
 1186
-714
+769
 Popularity-random-mean
 Popularity-random-mean
 0
@@ -434,14 +434,14 @@ HORIZONTAL
 
 SLIDER
 923
-715
+770
 1186
-748
+803
 Popularity-random-standard-deviation
 Popularity-random-standard-deviation
 0
 1
-4
+1
 0.02
 1
 NIL
@@ -524,7 +524,7 @@ CHOOSER
 Chooser-whom-to-receive
 Chooser-whom-to-receive
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-2
+0
 
 SLIDER
 11
@@ -585,10 +585,10 @@ global_calculation_1
 11
 
 MONITOR
-1125
-751
-1192
-796
+1199
+813
+1266
+858
 Calc 2
 global_calculation_2
 17
@@ -596,10 +596,10 @@ global_calculation_2
 11
 
 MONITOR
-1121
-310
-1189
-355
+1199
+860
+1267
+905
 Calc 3
 global_calculation_3
 17
@@ -633,13 +633,13 @@ NIL
 HORIZONTAL
 
 PLOT
-1192
-117
-1885
-873
+1343
+172
+1726
+527
 Calc 1
-ticks
-calc 1
+popularity standard deviation
+happiness
 0.0
 1.0
 0.0
@@ -652,13 +652,13 @@ PENS
 "pen-2" 1.0 0 -13345367 true "" ""
 
 PLOT
-919
-310
-1119
-460
+913
+172
+1337
+526
 Calc 2
-ticks
-calc 2
+activities no
+happiness
 0.0
 1.0
 0.0
@@ -670,10 +670,10 @@ PENS
 "default" 1.0 0 -16777216 true "" ""
 
 PLOT
-923
-751
-1123
-875
+922
+807
+1184
+956
 Calc 3
 ticks
 calc 3
@@ -700,9 +700,9 @@ ticks
 
 TEXTBOX
 922
-468
+523
 1072
-488
+543
 Attractiveness:
 16
 15.0
@@ -804,7 +804,7 @@ SWITCH
 720
 FM?
 FM?
-0
+1
 1
 -1000
 
@@ -895,7 +895,7 @@ OUTPUT
 915
 51
 1189
-306
+168
 12
 
 BUTTON
@@ -967,7 +967,7 @@ CHOOSER
 217
 MeasuringCase
 MeasuringCase
-"default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection" "AttractRlzByWayOfActivitySelection"
+"default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection"
 3
 
 BUTTON
