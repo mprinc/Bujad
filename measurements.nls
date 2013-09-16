@@ -110,6 +110,10 @@ to reset-history-measurement
     ; set-current-plot-pen penname
     set-plot-pen-color plot-pen-color-current
   ]
+  if(MeasuringCase = "HappinessByWayOfActivitySelection")
+  [
+    set ploted-on-activity-number 0
+  ]
 end
 
 
