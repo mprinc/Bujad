@@ -7,22 +7,6 @@ globals[
 ]
 
 ; ========================================================================================
-; reset-history
-; ========================================================================================
-
-to reset-history-sasha
-  set ploted-on-activity-number 0
-
-  ; [visualizingParameter observingParameter visualizingRangeType visualizingRange observingRangeMin observingRangeMax]
-  ; visualization-set-visual-corelation-actor "size" "popularity" "numeric-scale" [5 10] 0 1
-  ; visualization-set-visual-corelation-actor "color" "calculation_actor_1" "rgb-scale" [red blue] 0 1
-  ; visualization-set-visual-corelation-actor "shape" "calculation_actor_1" "value-list" ["face sad" "face neutral" "face happy"] 0 1
-end
-
-to reset-history-sinisha
-end
-
-; ========================================================================================
 ; Visualization of calculations
 ; ========================================================================================
 to do-plotting-sasha

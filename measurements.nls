@@ -58,12 +58,40 @@ to reset-history-measurement
   
   if(MeasuringCase = "sasha")
   [
-    reset-history-sasha
+    set-current-plot "Calc 1"
+    set-current-plot-pen "default"
+    
+    plot-pen-up
+    plotxy 0 0
+    plot-pen-down
   ]
   
   if(MeasuringCase = "sinisha")
   [
-    reset-history-sinisha
+    set-current-plot "Calc 1"
+    set-current-plot-pen "default"
+    
+    plot-pen-up
+    plotxy 0 0
+    plot-pen-down
+  ]
+
+  if(MeasuringCase = "HappinessByPopularity")
+  [
+    ; clear-all-plots
+    ;plot-pen-reset
+    set-current-plot "Calc 2"
+    set-current-plot-pen "default"
+    
+    plot-pen-up
+    plotxy 0 0
+    plot-pen-down
+    
+    ; error if pen penname doesn't exist
+    ; set-current-plot-pen penname
+    set plot-pen-color-current plot-pen-color-current + 20
+    set-plot-pen-color plot-pen-color-current
+    set ploted-on-activity-number 0
   ]
 end
 
@@ -77,19 +105,22 @@ to measure_HappinessByPopularity
   set Chooser-whom-to-send "popularity"
   set Chooser-whom-to-receive "anyone"
   set Popularity-random-mean 0.5
-  set Popularity-random-standard-deviation 4
+  set Popularity-random-standard-deviation 0
   
-  let ticksNo 50
+  let ticksNo 250
   
   let deviationSet (list 0 0.25 0.5)
   show word "deviationSet: " deviationSet
 
 
-  set global_calculation_1 0
+  reset-history
   foreach deviationSet[
     let deviation ?
     show word "measuring for deviation = " deviation
-
+    set Popularity-random-standard-deviation deviation
+    
+    setup-random-popularity-for-actors
+    
     repeat ticksNo[
       do-tick
       if(measurement_stop)[stop]
@@ -119,6 +150,7 @@ to measure_HappinessByPopularity
     set-current-plot-pen "default"
     ;set-plot-pen-interval
     plotxy deviation global_calculation_1
+    reset-history
   ]
 end
 

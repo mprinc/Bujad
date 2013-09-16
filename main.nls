@@ -139,6 +139,7 @@ to reset-history
   ask iamwhat-activities[die]
 
   set activities-num-emitted 0
+
   set activities-list []
   set global_calculation_1 0
   set global_calculation_2 0
@@ -152,15 +153,6 @@ to reset-history
   ]
   ; TODO: Should we clean friendship parameters?
 
-  ; clear-all-plots
-  ;plot-pen-reset
-  plot-pen-up
-  plotxy 0 0
-  plot-pen-down
-  ; error if pen penname doesn't exist
-  ; set-current-plot-pen penname
-  set plot-pen-color-current plot-pen-color-current + 20
-  set-plot-pen-color plot-pen-color-current
   reset-history-measurement
   display
 end
