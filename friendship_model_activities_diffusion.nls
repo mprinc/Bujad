@@ -2,6 +2,7 @@
 
 globals[
     activities-num-emitted   ; total number of activities emitted in the system from all actors cumullatively
+    FM-sugestions-num
 ]
 
 ; we iterate through activities and remove obsolated ones together with their links
@@ -247,7 +248,7 @@ to-report actor-sender-chooses-receiver-for-emitting-activity [activity-current]
       ]
     ]
     if(FM-type = "Happiness(FlowIn)")[
-      let theMostCriticalValue 1000000000000000;
+      let theMostCriticalValue 1;
       let theMostCriticalActor nobody;
       foreach sort friendship-neighbors[
         let actorReceiverSelected ?
@@ -261,8 +262,9 @@ to-report actor-sender-chooses-receiver-for-emitting-activity [activity-current]
           set theMostCriticalActor actorReceiverSelected
         ]
       ]
-      if(theMostCriticalActor != nobody and random-float 1 > FM-intensity) [
+      if(theMostCriticalActor != nobody and random-float 1 < FM-intensity) [
         set actorReceiver theMostCriticalActor
+        set FM-sugestions-num FM-sugestions-num + 1
       ]
     ]
   ]

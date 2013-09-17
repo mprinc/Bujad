@@ -123,6 +123,7 @@ to reset-history-measurement
   if(MeasuringCase = "HappinessByFriendshipManagerInfluence")
   [
     set ploted-on-activity-number 0
+    set FM-sugestions-num 0
 
     set plot-pen-color-current plot-pen-color-current + 10
 
@@ -130,7 +131,9 @@ to reset-history-measurement
     ;plot-pen-reset
     set-current-plot "Calc 2"
     set-current-plot-pen "default"
-    ; label-x: Friendship manager influence
+    ; label-x: FM (Friendship manager) influence
+    ; Calc 2: Happiness over time (one graph line for each FM-inensity)
+    ; Calc 1: Stabilized happines in function of the intensity of FM influence
     
     ; error if pen penname doesn't exist
     ; set-current-plot-pen penname
@@ -301,13 +304,13 @@ to measure_HappinessByFriendshipManagerInfluence
   set-plot-pen-mode 0 ; line mode
   set-plot-pen-color plot-pen-color-current
 
-  let ticksNo 100
+  let ticksNo 500
   
-  let FM-intensity-step 0.05
+  let FM-intensity-step 0.1
   show word "FM-intensity-step: " FM-intensity-step
 
   reset-history
-  while[FM-intensity < 1][
+  while[FM-intensity <= 1][
     show word "measuring for FM-intensity = " FM-intensity
     
     repeat ticksNo[
@@ -323,18 +326,20 @@ to measure_HappinessByFriendshipManagerInfluence
     ;set-plot-pen-interval
     plotxy FM-intensity global_calculation_1
 
+    show word "FM-sugestions-num in total = " FM-sugestions-num
+
     reset-history
 
     set FM-intensity FM-intensity + FM-intensity-step
-    if(FM-intensity > 1)[set FM-intensity 1]
   ]
+  if(FM-intensity > 1)[set FM-intensity 1]
 end
 
 to do-plotting-HappinessByFriendshipManagerInfluence
   ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
   ; every 20 activities
   if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
-    show word "Plotting, activities-num-emitted = " activities-num-emitted
+    ;show word "Plotting, activities-num-emitted = " activities-num-emitted
     set ploted-on-activity-number activities-num-emitted
     
     measure-happiness-per-node

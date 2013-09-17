@@ -426,7 +426,7 @@ Popularity-random-mean
 Popularity-random-mean
 0
 1
-0.5
+0.8
 0.02
 1
 NIL
@@ -441,7 +441,7 @@ Popularity-random-standard-deviation
 Popularity-random-standard-deviation
 0
 1
-0
+0.5
 0.02
 1
 NIL
@@ -514,7 +514,7 @@ CHOOSER
 Chooser-whom-to-send
 Chooser-whom-to-send
 "anyone" "friends" "popularity" "attractiveness_manual" "shared_interest" "environmental"
-4
+2
 
 CHOOSER
 151
@@ -633,12 +633,12 @@ NIL
 HORIZONTAL
 
 PLOT
-1343
+1339
 172
-1726
-527
-Calc 1
-popularity standard deviation
+1736
+526
+Stabilized happines in function of the intensity of FM influence
+FM (Friendship manager) influence
 happiness
 0.0
 1.0
@@ -656,7 +656,7 @@ PLOT
 172
 1337
 526
-Calc 2
+Happiness over time (one graph line for each FM-inensity)
 activities no
 happiness
 0.0
@@ -699,10 +699,10 @@ ticks
 11
 
 TEXTBOX
-922
-523
-1072
-543
+923
+525
+1073
+545
 Attractiveness:
 16
 15.0
@@ -804,7 +804,7 @@ SWITCH
 708
 FM?
 FM?
-1
+0
 1
 -1000
 
@@ -968,7 +968,7 @@ CHOOSER
 MeasuringCase
 MeasuringCase
 "default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection" "HappinessByFriendshipManagerInfluence" "AttractRlzByWayOfActivitySelection"
-4
+5
 
 BUTTON
 265
@@ -1014,7 +1014,7 @@ CHOOSER
 FM-type
 FM-type
 "TimeToLoose" "Happiness(FlowIn)"
-0
+1
 
 SLIDER
 203
@@ -1040,7 +1040,7 @@ FM-intensity
 FM-intensity
 0
 1
-0.3
+1
 0.01
 1
 NIL
