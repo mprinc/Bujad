@@ -36,7 +36,7 @@ actors-num
 actors-num
 0
 100
-36
+30
 1
 1
 NIL
@@ -51,7 +51,7 @@ friendship-avg-degree
 friendship-avg-degree
 0.25
 5.0
-5
+2.2
 0.05
 1
 NIL

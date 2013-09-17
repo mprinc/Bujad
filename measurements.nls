@@ -213,7 +213,7 @@ to measure_HappinessByWayOfActivitySelection
     ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
     ; every 20 activities
     if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
-      show word "Plotting, activities-num-emitted = " activities-num-emitted
+      ;show word "Plotting, activities-num-emitted = " activities-num-emitted
       set ploted-on-activity-number activities-num-emitted
       
       measure-happiness-per-node
@@ -233,7 +233,7 @@ to measure_HappinessByWayOfActivitySelection
     ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
     ; every 20 activities
     if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
-      show word "Plotting, activities-num-emitted = " activities-num-emitted
+      ;show word "Plotting, activities-num-emitted = " activities-num-emitted
       set ploted-on-activity-number activities-num-emitted
       
       measure-happiness-per-node
