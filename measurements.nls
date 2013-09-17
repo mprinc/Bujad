@@ -36,6 +36,11 @@ to do_measurement
     measure_HappinessByWayOfActivitySelection
   ]
   
+  if(MeasuringCase = "HappinessByFriendshipManagerInfluence")
+  [
+    measure_HappinessByFriendshipManagerInfluence
+  ]
+  
   if(MeasuringCase = "AttractRlzByWayOfActivitySelection")
   [
     measure_AttractRlzByWayOfActivitySelection
@@ -52,6 +57,10 @@ to do-plotting-measurement
   if(MeasuringCase = "HappinessByWayOfActivitySelection")
   [
     do-plotting-HappinessByWayOfActivitySelection
+  ]
+  if(MeasuringCase = "HappinessByFriendshipManagerInfluence")
+  [
+    do-plotting-HappinessByFriendshipManagerInfluence
   ]
   if(MeasuringCase = "AttractRlzByWayOfActivitySelection")
   [
@@ -94,6 +103,34 @@ to reset-history-measurement
     ;plot-pen-reset
     set-current-plot "Calc 2"
     set-current-plot-pen "default"
+    ; label-x: popularity standard deviation
+    ; error if pen penname doesn't exist
+    ; set-current-plot-pen penname
+    set-plot-pen-color plot-pen-color-current
+
+    set-current-plot "Calc 2"
+    set-current-plot-pen "default"
+    
+    plot-pen-up
+    plotxy 0 0
+    plot-pen-down
+    
+    ; error if pen penname doesn't exist
+    ; set-current-plot-pen penname
+    set-plot-pen-color plot-pen-color-current
+  ]
+  
+  if(MeasuringCase = "HappinessByFriendshipManagerInfluence")
+  [
+    set ploted-on-activity-number 0
+
+    set plot-pen-color-current plot-pen-color-current + 10
+
+    ; clear-all-plots
+    ;plot-pen-reset
+    set-current-plot "Calc 2"
+    set-current-plot-pen "default"
+    ; label-x: Friendship manager influence
     
     ; error if pen penname doesn't exist
     ; set-current-plot-pen penname
@@ -110,6 +147,7 @@ to reset-history-measurement
     ; set-current-plot-pen penname
     set-plot-pen-color plot-pen-color-current
   ]
+
   if(MeasuringCase = "HappinessByWayOfActivitySelection")
   [
     set ploted-on-activity-number 0
@@ -141,7 +179,7 @@ to measure_HappinessByPopularity
   set-plot-pen-mode 0 ; line mode
   set-plot-pen-color plot-pen-color-current
 
-  let ticksNo 500
+  let ticksNo 25
   
   let deviationSet (list 0 0.125 0.25 0.375 0.5 0.625 0.75 0.875 1)
   show word "deviationSet: " deviationSet
@@ -158,23 +196,6 @@ to measure_HappinessByPopularity
     repeat ticksNo[
       do-tick
       if(measurement_stop)[stop]
-      
-      ; from: to do-tick-sasha-end
-      ; ---------------
-      ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
-      ; every 20 activities
-      if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
-        show word "Plotting, activities-num-emitted = " activities-num-emitted
-        set ploted-on-activity-number activities-num-emitted
-        
-        measure-happiness-per-node
-        
-        set-current-plot "Calc 2"
-        set-current-plot-pen "default"
-        ;set-plot-pen-interval
-        plotxy activities-num-emitted global_calculation_1
-        
-      ]
     ]
     
     ; from: to do-plotting-sasha
@@ -189,7 +210,20 @@ to measure_HappinessByPopularity
 end
 
 to do-plotting-HappinessByPopularity
-  
+  ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
+  ; every 20 activities
+  if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
+    show word "Plotting, activities-num-emitted = " activities-num-emitted
+    set ploted-on-activity-number activities-num-emitted
+    
+    measure-happiness-per-node
+    
+    set-current-plot "Calc 2"
+    set-current-plot-pen "default"
+    ;set-plot-pen-interval
+    plotxy activities-num-emitted global_calculation_1
+    
+  ]
 end
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -197,8 +231,9 @@ end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to measure_HappinessByWayOfActivitySelection
   reset-history 
-  let limit 20
+  let limit 300
   
+  set FM? false
   set-current-plot-pen "default"
   set Chooser-whom-to-send "popularity"
   set Chooser-whom-to-receive "anyone"
@@ -207,16 +242,6 @@ to measure_HappinessByWayOfActivitySelection
   [
     do-tick
     if(measurement_stop)[stop]
-    ; from: to do-tick-sasha-end
-    ; ---------------
-    ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
-    ; every 20 activities
-    if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
-      show word "Plotting, activities-num-emitted = " activities-num-emitted
-      set ploted-on-activity-number activities-num-emitted
-      
-      measure-happiness-per-node
-    ]
   ]
   
   reset-history
@@ -227,6 +252,10 @@ to measure_HappinessByWayOfActivitySelection
   [
     do-tick
     if(measurement_stop)[stop]
+  ]
+end
+
+to do-plotting-HappinessByWayOfActivitySelection
     ; from: to do-tick-sasha-end
     ; ---------------
     ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
@@ -236,15 +265,85 @@ to measure_HappinessByWayOfActivitySelection
       set ploted-on-activity-number activities-num-emitted
       
       measure-happiness-per-node
+   
+      ;; plot the number of infected individuals at each step
+      set-current-plot "Calc 1"
+      ;set-plot-pen-interval
+      plotxy ticks global_calculation_1
     ]
+end
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; measuring mean happiness based on the influence of friendship manager suggestions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+to measure_HappinessByFriendshipManagerInfluence
+  ;set popularity
+
+  set FM? true
+  set FM-type "Happiness(FlowIn)"
+  set FM-intensity 0
+
+  set Chooser-whom-to-send "popularity"
+  set Chooser-whom-to-receive "anyone"
+  set Popularity-random-mean 0.8
+  set Popularity-random-standard-deviation 0.5
+  
+  set plot-pen-color-current 5
+
+  set-current-plot "Calc 1"
+  set-current-plot-pen "default"
+  set-plot-pen-mode 0 ; bar mode
+  set-plot-pen-color plot-pen-color-current
+
+  set-current-plot "Calc 2"
+  set-current-plot-pen "default"
+  set-plot-pen-mode 0 ; line mode
+  set-plot-pen-color plot-pen-color-current
+
+  let ticksNo 100
+  
+  let FM-intensity-step 0.05
+  show word "FM-intensity-step: " FM-intensity-step
+
+  reset-history
+  while[FM-intensity < 1][
+    show word "measuring for FM-intensity = " FM-intensity
+    
+    repeat ticksNo[
+      do-tick
+      if(measurement_stop)[stop]
+    ]
+    
+    ; from: to do-plotting-sasha
+    ; ---------------
+    ;; plot the number of infected individuals at each step
+    set-current-plot "Calc 1"
+    set-current-plot-pen "default"
+    ;set-plot-pen-interval
+    plotxy FM-intensity global_calculation_1
+
+    reset-history
+
+    set FM-intensity FM-intensity + FM-intensity-step
+    if(FM-intensity > 1)[set FM-intensity 1]
   ]
 end
 
-to do-plotting-HappinessByWayOfActivitySelection
-  ;; plot the number of infected individuals at each step
-  set-current-plot "Calc 1"
-  ;set-plot-pen-interval
-  plotxy ticks global_calculation_1
+to do-plotting-HappinessByFriendshipManagerInfluence
+  ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
+  ; every 20 activities
+  if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
+    show word "Plotting, activities-num-emitted = " activities-num-emitted
+    set ploted-on-activity-number activities-num-emitted
+    
+    measure-happiness-per-node
+    
+    set-current-plot "Calc 2"
+    set-current-plot-pen "default"
+    ;set-plot-pen-interval
+    plotxy activities-num-emitted global_calculation_1
+    
+  ]
 end
 
 to measure_AttractRlzByWayOfActivitySelection 

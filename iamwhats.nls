@@ -12,6 +12,15 @@ to-report get-linked-IamWhats [node]
   report linked-IamWhats
 end
 
+;calculating and returning count of shared IamWhats/interests:
+; n1, n2 can be of breed actor or activity
+; NOTE: TODO: 0.5 is in the case when there
+to-report get-shared-iamwhats-count-incremented-zero [n1 n2]
+  let iamwhats-count count get-shared-iamwhats n1 n2
+  if(iamwhats-count = 0)[set iamwhats-count 0.5]
+  report iamwhats-count
+end
+
 ;calculating and returning shared IamWhats/interests:
 ; n1, n2 can be of breed actor or activity
 to-report get-shared-iamwhats [n1 n2]

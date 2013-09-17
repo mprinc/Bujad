@@ -321,7 +321,7 @@ to-report actor-sender-chooses-receiver-for-emitting-activity [activity-current]
     let actorsSorted sort friendship-neighbors
     let sharedInterestSum 0
     foreach actorsSorted[
-      set sharedInterestSum sharedInterestSum + count get-shared-iamwhats self ?
+      set sharedInterestSum sharedInterestSum + get-shared-iamwhats-count-incremented-zero self ?
     ]
 
     let probabilityAdopted random-float sharedInterestSum
@@ -329,7 +329,7 @@ to-report actor-sender-chooses-receiver-for-emitting-activity [activity-current]
 
     set sharedInterestSum 0
     foreach actorsSorted[
-      set sharedInterestSum sharedInterestSum + count get-shared-iamwhats self ?
+      set sharedInterestSum sharedInterestSum + get-shared-iamwhats-count-incremented-zero self ?
       if(actorReceiver = nobody and sharedInterestSum > probabilityAdopted)[
         set actorReceiver ?
         ;show word "actorReceiver : " actorReceiver
