@@ -211,9 +211,9 @@ HORIZONTAL
 
 SLIDER
 7
-237
+241
 312
-270
+274
 actor-price-absorption-limit
 actor-price-absorption-limit
 0
@@ -226,9 +226,9 @@ HORIZONTAL
 
 TEXTBOX
 10
-218
+222
 160
-238
+242
 Actors:
 16
 105.0
@@ -251,9 +251,9 @@ HORIZONTAL
 
 SLIDER
 7
-271
+275
 312
-304
+308
 Actor-price-absorption-restitution
 Actor-price-absorption-restitution
 0
@@ -765,7 +765,7 @@ Time-for-activity-velocity
 Time-for-activity-velocity
 0
 Activity-forgetting-time
-60
+5
 5
 1
 NIL
@@ -798,10 +798,10 @@ NIL
 HORIZONTAL
 
 SWITCH
-805
-681
-895
-714
+809
+675
+899
+708
 FM?
 FM?
 1
@@ -810,19 +810,19 @@ FM?
 
 TEXTBOX
 674
-661
+655
 824
-679
+673
 Friendship Manager:
 14
 104.0
 1
 
 SLIDER
-673
-763
-899
-796
+676
+758
+902
+791
 Friendship-Triger-On-Time
 Friendship-Triger-On-Time
 0
@@ -834,10 +834,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-673
-799
-899
-832
+676
+794
+902
+827
 Friendship-max-inactive-time
 Friendship-max-inactive-time
 1
@@ -849,10 +849,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-730
-834
-899
-867
+733
+829
+902
+862
 FM-check-every-n-ticks
 FM-check-every-n-ticks
 1
@@ -875,10 +875,10 @@ Last-activity-links
 -1000
 
 BUTTON
-673
-834
-728
-867
+676
+829
+731
+862
 Populate
 FM-repopulate
 NIL
@@ -945,9 +945,9 @@ NIL
 
 BUTTON
 207
-174
+173
 262
-207
+206
 Measure
 do_measurement
 NIL
@@ -961,20 +961,20 @@ NIL
 1
 
 CHOOSER
-6
+7
 172
-203
+201
 217
 MeasuringCase
 MeasuringCase
-"default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection" "AttractRlzByWayOfActivitySelection"
+"default" "sasha" "sinisha" "HappinessByPopularity" "HappinessByWayOfActivitySelection" "HappinessByFriendshipManagerInfluence" "AttractRlzByWayOfActivitySelection"
 4
 
 BUTTON
-264
-175
-319
-208
+265
+173
+320
+206
 Stop
 stop-measurement
 NIL
@@ -998,33 +998,49 @@ attractiveness realization
 0.0
 10.0
 0.0
-10.0
+1.0
 true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" ""
+"default" 1.0 0 -2674135 true "" ""
+"pen-2" 1.0 0 -13345367 true "" ""
 
 CHOOSER
 673
-681
+675
 806
-726
+720
 FM-type
 FM-type
 "TimeToLoose" "Happiness(FlowIn)"
 0
 
 SLIDER
-673
-728
-899
-761
+203
+207
+319
+240
+Measuring_ticks
+Measuring_ticks
+0
+500
+500
+10
+1
+NIL
+HORIZONTAL
+
+SLIDER
+676
+722
+902
+755
 FM-intensity
 FM-intensity
 0
 1
-0.34
+0.3
 0.01
 1
 NIL
