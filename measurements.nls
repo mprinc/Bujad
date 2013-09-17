@@ -231,7 +231,8 @@ end
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 to measure_HappinessByWayOfActivitySelection
   reset-history 
-  let limit 300
+  set Chooser-whom-to-receive "anyone"
+  let limit Measuring_ticks; 50
   
   set FM? false
   set-current-plot-pen "default"
@@ -261,7 +262,7 @@ to do-plotting-HappinessByWayOfActivitySelection
     ; show word "Testing for plotting , activities-num-emitted = " word activities-num-emitted word ", " word (activities-num-emitted / 100) word " =? " floor (activities-num-emitted / 100) 
     ; every 20 activities
     if( (activities-num-emitted - ploted-on-activity-number) >= plot-for-each-number-of-activities)[
-      show word "Plotting, activities-num-emitted = " activities-num-emitted
+      ;show word "Plotting, activities-num-emitted = " activities-num-emitted
       set ploted-on-activity-number activities-num-emitted
       
       measure-happiness-per-node
@@ -348,8 +349,36 @@ end
 
 to measure_AttractRlzByWayOfActivitySelection 
   print "measure_AttractRlzByWayOfActivitySelection"
+  
   reset-history
-  let limit 20
+  set Chooser-whom-to-receive "anyone"
+  
+  let limit Measuring_ticks; 50
+  
+  set-current-plot-pen "default"
+  set Chooser-whom-to-send "popularity"
+  while [ticks <= limit]
+  [
+    do-tick
+    if(measurement_stop)[stop]
+    ifelse( (ticks mod Time-for-activity-velocity) = 0)
+    [  
+      print word "calling 'set_strengths_for_actor' at tick " ticks   
+      ask actors[
+        set_strengths_for_actor self
+      ]
+      let ar mean_attractiveness_realization
+    ]
+    [
+      ;print word "nonmod:" ticks   
+    ]
+  ]
+  
+  set Chooser-whom-to-send "shared_interest"
+  
+  reset-history
+  set-current-plot-pen "pen-2"
+  reset-ticks;
   while [ticks <= limit]
   [
     do-tick
@@ -380,5 +409,7 @@ to do-plotting-AttractRlzByWayOfActivitySelection
   set-current-plot "attractiveness realization"
 ;  set-current-plot-pen "ar"     
   ; print word "mean_attractiveness_realization: " mean_attractiveness_realization
-  plot mean_attractiveness_realization
+  let mar mean_attractiveness_realization
+  plot mar
+  set global_calculation_2 mar
 end

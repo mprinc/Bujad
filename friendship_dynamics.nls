@@ -95,6 +95,7 @@ to-report actors-attractiveness-IamWhats-preference [actorFrom actorTo]
   report  actors-attractiveness-IamWhats actorFrom actorTo + actor-attractiveness-preference actorTo
 end
 
+; calculates attractiveness based on level of actors perception of importance of shared interests ;
 to-report actors-attractiveness-IamWhats [actorFrom actorTo]
   let attractiveness 0
   let actorIamWhatsBetween get-shared-iamwhats actorFrom actorTo
@@ -190,9 +191,10 @@ end
 ;;;;;;;;; attractiveness_realization ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; returnes attractiveness_realization: 0: min, 1: max-attractiveness_realization
 ; expects that relationship thicknesses are normalized to [0,1]
-; if actor doesn't have connections AR = 0 
+; if actor doesn't have connections/friends, then AR = 0 (can be changed by changing AR_FOR_FRIENDLESS_ACTORS)
 ;;;;;;;;;
 to-report attractiveness_realization [actor]
+  let AR_FOR_FRIENDLESS_ACTORS 0
   let ar 0
   let strengths []
   let attrs []
@@ -217,10 +219,13 @@ to-report attractiveness_realization [actor]
     ]   
   ] ; all neighbors
   
-  print word [label] of actor ": (attractiveness_realization): "
+    ;  print word [label] of actor ": (attractiveness_realization): "
+    ;print word "attrs: " attrs
+;print word "strengths: " strengths
   
   
   set attrs_norm list_normalizing attrs
+;print word "attrs_norm: " attrs_norm
   (foreach strengths attrs_norm
     [
       let strength_n ?1
@@ -244,14 +249,15 @@ to-report attractiveness_realization [actor]
       set ar ar + ratio
       ; type word attr (word " % " (word strength (word " - " (word ratio "; "))))
     ])
-  ifelse(length strengths = 0)
+  ifelse(length attrs = 0) ;if actor doesn't have friends
   [
-    set ar 0
+    set ar AR_FOR_FRIENDLESS_ACTORS
   ]
   [
-    set ar ar / length strengths
+    set ar ar / (length attrs)
   ]
-  print word "ar: " ar
+;print word "length attrs: " length attrs
+;print word "ar: " ar
   report ar
 end
 
