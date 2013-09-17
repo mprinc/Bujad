@@ -36,7 +36,7 @@ actors-num
 actors-num
 0
 100
-30
+36
 1
 1
 NIL
@@ -51,7 +51,7 @@ friendship-avg-degree
 friendship-avg-degree
 0.25
 5.0
-2.2
+5
 0.05
 1
 NIL
@@ -765,7 +765,7 @@ Time-for-activity-velocity
 Time-for-activity-velocity
 0
 Activity-forgetting-time
-60
+5
 5
 1
 NIL
@@ -945,9 +945,9 @@ NIL
 
 BUTTON
 207
-174
+173
 262
-207
+206
 Measure
 do_measurement
 NIL
@@ -971,10 +971,10 @@ MeasuringCase
 4
 
 BUTTON
-264
-175
-319
-208
+265
+173
+320
+206
 Stop
 stop-measurement
 NIL
@@ -998,12 +998,13 @@ attractiveness realization
 0.0
 10.0
 0.0
-10.0
+1.0
 true
 false
 "" ""
 PENS
-"default" 1.0 0 -16777216 true "" ""
+"default" 1.0 0 -2674135 true "" ""
+"pen-2" 1.0 0 -13345367 true "" ""
 
 CHOOSER
 673
@@ -1014,6 +1015,21 @@ FM-type
 FM-type
 "TimeToLoose" "Happiness(FlowIn)"
 0
+
+SLIDER
+205
+205
+321
+238
+Measuring_ticks
+Measuring_ticks
+0
+500
+500
+10
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?

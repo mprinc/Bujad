@@ -51,7 +51,7 @@ to-report happinessForSystem
     ;show word "globalHappiness = " word globalHappiness word ", actorHappiness = " actorHappiness
   ]
   set globalHappiness globalHappiness / (count actors)
-  show word "globalHappiness = " globalHappiness
+  ;show word "globalHappiness = " globalHappiness
   report globalHappiness
 end
 
